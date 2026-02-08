@@ -3,7 +3,7 @@ import { config, fields, collection, singleton } from "@keystatic/core";
 
 export default config({
   cloud: {
-    project: "ivancarrillovela/talento-para-el-desarrollo",
+    project: "ivancarrillovela/talento-desarrollo",
   },
   storage: import.meta.env.DEV ? { kind: "local" } : { kind: "cloud" },
 
