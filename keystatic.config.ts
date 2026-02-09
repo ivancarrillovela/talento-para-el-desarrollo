@@ -64,6 +64,54 @@ export default config({
         textoBoton: fields.text({ label: "Texto del Botón Enviar" }),
       },
     }),
+    // 4. QUIENES SOMOS (Nueva Sección)
+    quienesSomos: singleton({
+      label: 'Sección Quiénes Somos',
+      path: 'src/content/quienes-somos/datos',
+      schema: {
+        titulo: fields.text({ label: 'Título (ej: Nuestra Historia)' }),
+        descripcion: fields.text({ label: 'Texto principal', multiline: true }),
+        imagen: fields.image({
+          label: 'Imagen del equipo o fundadores',
+          directory: 'public/images/about',
+          publicPath: '/images/about/',
+        }),
+        stats: fields.object({
+          label: 'Estadísticas de Impacto',
+          fields: {
+            stat1_numero: fields.text({ label: 'Dato 1: Número (ej: +50)' }),
+            stat1_label: fields.text({ label: 'Dato 1: Texto (ej: Proyectos)' }),
+            stat2_numero: fields.text({ label: 'Dato 2: Número' }),
+            stat2_label: fields.text({ label: 'Dato 2: Texto' }),
+            stat3_numero: fields.text({ label: 'Dato 3: Número' }),
+            stat3_label: fields.text({ label: 'Dato 3: Texto' }),
+          }
+        })
+      },
+    }),
+
+    // 5. CONFIGURACIÓN GLOBAL (Navbar y Footer)
+    global: singleton({
+      label: 'Configuración Web (Logo, Redes, Footer)',
+      path: 'src/content/global/datos',
+      schema: {
+        nombreSitio: fields.text({ label: 'Nombre de la ONG' }),
+        logo: fields.image({
+          label: 'Logo Principal',
+          directory: 'public/images/global',
+          publicPath: '/images/global/',
+        }),
+        redes: fields.object({
+          label: 'Redes Sociales',
+          fields: {
+            instagram: fields.text({ label: 'URL Instagram' }),
+            linkedin: fields.text({ label: 'URL LinkedIn' }),
+            twitter: fields.text({ label: 'URL Twitter/X' }),
+          }
+        }),
+        footerTexto: fields.text({ label: 'Texto pie de página (Copyright)' }),
+      },
+    }),
   },
 
   // Las colecciones se quedan igual

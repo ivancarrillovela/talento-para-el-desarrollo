@@ -1,14 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro'; // <--- NUEVO
 import Hero from '../components/Hero.astro';
+import QuienesSomos from '../components/QuienesSomos.astro'; // <--- NUEVO
 import Pilares from '../components/Pilares.astro';
 import Contacto from '../components/Contacto.astro';
+import Footer from '../components/Footer.astro'; // <--- NUEVO
 ---
 
-<Layout title="Talento para el desarrollo | Capital Humano en África">
+<Layout title="Talento para el Desarrollo - Fundación">
+  
+  <Navbar />
+  
   <main>
     <Hero />
+    <QuienesSomos />
     <Pilares />
     <Contacto />
   </main>
+
+  <Footer />
+
 </Layout>
