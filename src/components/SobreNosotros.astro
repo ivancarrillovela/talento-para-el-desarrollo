@@ -1,0 +1,101 @@
+---
+// src/components/SobreNosotros.astro
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../keystatic.config";
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const data = await reader.singletons.sobreNosotros.read();
+
+const titulo = data?.titulo || "Nuestra Historia";
+const descripcion =
+  data?.descripcion ||
+  "Somos una organización nacida de la convicción de que el talento está universalmente distribuido, pero las oportunidades no.";
+const imagen = data?.imagen || ""; // Idealmente poner una por defecto
+const stats = data?.stats || {
+  stat1_numero: "+5",
+  stat1_label: "Años de experiencia",
+  stat2_numero: "150",
+  stat2_label: "Voluntarios",
+  stat3_numero: "2k",
+  stat3_label: "Vidas impactadas",
+};
+---
+
+<section id="sobre-nosotros" class="relative py-32 bg-zinc-50 overflow-hidden">
+  {/* Pattern Decorativo */}
+  <div
+    class="absolute inset-0 opacity-[0.03] pointer-events-none"
+    style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 32px 32px;"
+  >
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10">
+    <div class="flex flex-col lg:flex-row gap-20 items-center">
+      {/* Columna de Texto (Izquierda) - 55% */}
+      <div class="w-full lg:w-7/12 space-y-12">
+        <div class="space-y-8">
+          <div class="max-w-xl">
+            <h2
+              class="text-terracotta-500 font-bold tracking-widest uppercase text-sm mb-4"
+            >
+              Sobre Nosotros
+            </h2>
+            <h3
+              class="text-4xl md:text-5xl font-bold leading-tight text-balance"
+            >
+              {titulo}
+            </h3>
+          </div>
+
+          <p class="text-xl text-zinc-600 leading-relaxed max-w-2xl font-light">
+            {descripcion}
+          </p>
+        </div>
+      </div>
+
+      {/* Columna de Estadísticas (Derecha) - 45% */}
+      <div class="w-full lg:w-5/12 relative">
+        <div
+          class="relative bg-white p-10 lg:p-14 rounded-[2px] shadow-2xl shadow-zinc-200 border-l-4 border-terracotta-500 flex flex-col justify-center divide-y divide-zinc-200"
+        >
+          <div class="space-y-2 pb-10">
+            <p
+              class="text-6xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
+            >
+              {stats.stat1_numero}
+            </p>
+            <p
+              class="text-sm text-zinc-500 uppercase tracking-widest font-medium mt-2"
+            >
+              {stats.stat1_label}
+            </p>
+          </div>
+          <div class="space-y-2 py-10">
+            <p
+              class="text-6xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
+            >
+              {stats.stat2_numero}
+            </p>
+            <p
+              class="text-sm text-zinc-500 uppercase tracking-widest font-medium mt-2"
+            >
+              {stats.stat2_label}
+            </p>
+          </div>
+          <div class="space-y-2 pt-10">
+            <p
+              class="text-6xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
+            >
+              {stats.stat3_numero}
+            </p>
+            <p
+              class="text-sm text-zinc-500 uppercase tracking-widest font-medium mt-2"
+            >
+              {stats.stat3_label}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

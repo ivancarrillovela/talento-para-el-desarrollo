@@ -8,40 +8,62 @@ export default config({
   storage: import.meta.env.DEV ? { kind: "local" } : { kind: "cloud" },
 
   singletons: {
-    // 1. HERO (Añadimos lo que faltaba)
+    // 1. HERO
     hero: singleton({
-      label: "Sección Hero (Portada)",
+      label: "Portada",
       path: "src/content/hero/datos",
       schema: {
-        etiquetaSuperior: fields.text({
-          label: "Etiqueta Superior (ej: Inversión en Talento)",
-        }), // NUEVO
         titulo: fields.text({ label: "Título Principal" }),
         subtitulo: fields.text({ label: "Subtítulo (parte en color)" }),
         descripcion: fields.text({ label: "Descripción", multiline: true }),
         textoBoton: fields.text({ label: "Texto Botón Principal" }),
         textoBotonSecundario: fields.text({
           label: "Texto Botón Secundario (ej: Cómo colaborar)",
-        }), // NUEVO
+        }),
         imagen: fields.image({
           label: "Imagen de portada",
           directory: "public/images/hero",
           publicPath: "/images/hero/",
         }),
-        // Datos del "Badge" flotante (La cajita blanca sobre la foto)
-        badgeTitulo: fields.text({ label: "Badge: Título (ej: +1.200 Becas)" }), // NUEVO
-        badgeDesc: fields.text({ label: "Badge: Descripción" }), // NUEVO
+        // Datos del "Badge" flotante
+        badgeTitulo: fields.text({ label: "Badge: Título (ej: +1.200 Becas)" }),
+        badgeDesc: fields.text({ label: "Badge: Descripción" }),
       },
     }),
 
-    // 2. PILARES INTRO (Nueva sección para el texto introductorio)
-    pilaresIntro: singleton({
-      label: "Sección Pilares (Intro)",
-      path: "src/content/pilares-intro/datos",
+    // 2. SOBRE NOSOTROS
+    sobreNosotros: singleton({
+      label: "Sobre Nosotros",
+      path: "src/content/sobre-nosotros/datos",
       schema: {
-        etiqueta: fields.text({
-          label: "Etiqueta pequeña (ej: Nuestro Enfoque)",
+        titulo: fields.text({ label: "Título (ej: Nuestra Historia)" }),
+        descripcion: fields.text({ label: "Texto principal", multiline: true }),
+        imagen: fields.image({
+          label: "Imagen del equipo o fundadores",
+          directory: "public/images/about",
+          publicPath: "/images/about/",
         }),
+        stats: fields.object(
+          {
+            stat1_numero: fields.text({ label: "Dato 1: Número (ej: +50)" }),
+            stat1_label: fields.text({
+              label: "Dato 1: Texto (ej: Proyectos)",
+            }),
+            stat2_numero: fields.text({ label: "Dato 2: Número" }),
+            stat2_label: fields.text({ label: "Dato 2: Texto" }),
+            stat3_numero: fields.text({ label: "Dato 3: Número" }),
+            stat3_label: fields.text({ label: "Dato 3: Texto" }),
+          },
+          { label: "Estadísticas de Impacto" },
+        ),
+      },
+    }),
+
+    // 3. LO QUE BUSCAMOS
+    valoresIntro: singleton({
+      label: " Lo que buscamos (Intro Valores)",
+      path: "src/content/valores-intro/datos",
+      schema: {
         titulo: fields.text({ label: "Título Grande" }),
         descripcion: fields.text({
           label: "Descripción Lateral",
@@ -50,12 +72,21 @@ export default config({
       },
     }),
 
-    // 3. CONTACTO (Nueva sección)
+    // 4. NUESTRO TRABAJO
+    nuestroTrabajoIntro: singleton({
+      label: "Nuestro Trabajo",
+      path: "src/content/nuestro-trabajo-intro/datos",
+      schema: {
+        titulo: fields.text({ label: "Título Grande" }),
+        descripcion: fields.text({ label: "Descripción", multiline: true }),
+      },
+    }),
+
+    // 5. CONTACTO
     contacto: singleton({
-      label: "Sección Contacto",
+      label: "Contacto",
       path: "src/content/contacto/datos",
       schema: {
-        etiqueta: fields.text({ label: "Etiqueta pequeña (ej: Hablemos)" }),
         titulo: fields.text({ label: "Título Grande" }),
         descripcion: fields.text({
           label: "Texto descriptivo",
@@ -64,62 +95,39 @@ export default config({
         textoBoton: fields.text({ label: "Texto del Botón Enviar" }),
       },
     }),
-    // 4. QUIENES SOMOS (Nueva Sección)
-    quienesSomos: singleton({
-      label: 'Sección Quiénes Somos',
-      path: 'src/content/quienes-somos/datos',
-      schema: {
-        titulo: fields.text({ label: 'Título (ej: Nuestra Historia)' }),
-        descripcion: fields.text({ label: 'Texto principal', multiline: true }),
-        imagen: fields.image({
-          label: 'Imagen del equipo o fundadores',
-          directory: 'public/images/about',
-          publicPath: '/images/about/',
-        }),
-        stats: fields.object({
-          label: 'Estadísticas de Impacto',
-          fields: {
-            stat1_numero: fields.text({ label: 'Dato 1: Número (ej: +50)' }),
-            stat1_label: fields.text({ label: 'Dato 1: Texto (ej: Proyectos)' }),
-            stat2_numero: fields.text({ label: 'Dato 2: Número' }),
-            stat2_label: fields.text({ label: 'Dato 2: Texto' }),
-            stat3_numero: fields.text({ label: 'Dato 3: Número' }),
-            stat3_label: fields.text({ label: 'Dato 3: Texto' }),
-          }
-        })
-      },
-    }),
 
-    // 5. CONFIGURACIÓN GLOBAL (Navbar y Footer)
+    // 6. CONFIGURACIÓN GLOBAL
     global: singleton({
-      label: 'Configuración Web (Logo, Redes, Footer)',
-      path: 'src/content/global/datos',
+      label: "Configuración Web (Logo, Redes, Footer)",
+      path: "src/content/global/datos",
       schema: {
-        nombreSitio: fields.text({ label: 'Nombre de la ONG' }),
+        nombreSitio: fields.text({ label: "Nombre de la ONG" }),
         logo: fields.image({
-          label: 'Logo Principal',
-          directory: 'public/images/global',
-          publicPath: '/images/global/',
+          label: "Logo Principal",
+          directory: "public/images/global",
+          publicPath: "/images/global/",
         }),
-        redes: fields.object({
-          label: 'Redes Sociales',
-          fields: {
-            instagram: fields.text({ label: 'URL Instagram' }),
-            linkedin: fields.text({ label: 'URL LinkedIn' }),
-            twitter: fields.text({ label: 'URL Twitter/X' }),
-          }
-        }),
-        footerTexto: fields.text({ label: 'Texto pie de página (Copyright)' }),
+        redes: fields.object(
+          {
+            instagram: fields.text({ label: "URL Instagram" }),
+            linkedin: fields.text({ label: "URL LinkedIn" }),
+            twitter: fields.text({ label: "URL Twitter/X" }),
+          },
+          { label: "Redes Sociales" },
+        ),
+        footerTexto: fields.text({ label: "Texto pie de página (Copyright)" }),
       },
     }),
   },
 
-  // Las colecciones se quedan igual
+  // COLECCIONES
+
+  // 1. VALORES
   collections: {
-    pilares: collection({
-      label: "Pilares (Tarjetas)",
+    valores: collection({
+      label: "Valores (Tarjetas)",
       slugField: "titulo",
-      path: "src/content/pilares/*",
+      path: "src/content/valores/*",
       schema: {
         titulo: fields.slug({ name: { label: "Título del Pilar" } }),
         descripcion: fields.text({
@@ -127,6 +135,34 @@ export default config({
           multiline: true,
         }),
         icono: fields.text({ label: "Emoji o Icono (ej: 🎓)" }),
+      },
+    }),
+
+    // 2. PROYECTOS
+    proyectos: collection({
+      label: "Proyectos (Nuestro Trabajo)",
+      slugField: "titulo",
+      path: "src/content/proyectos/*",
+      schema: {
+        titulo: fields.slug({ name: { label: "Título del Proyecto" } }),
+        fecha: fields.date({
+          label: "Fecha de publicación",
+          validation: { isRequired: true },
+        }), // NUEVO
+        imagen: fields.image({
+          label: "Imagen del Proyecto",
+          directory: "public/images/proyectos",
+          publicPath: "/images/proyectos/",
+        }),
+        descripcion: fields.text({
+          label: "Descripción breve",
+          multiline: true,
+        }),
+        pdf: fields.file({
+          label: "Archivo PDF",
+          directory: "public/pdfs/proyectos",
+          publicPath: "/pdfs/proyectos/",
+        }),
       },
     }),
   },

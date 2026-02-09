@@ -1,8 +1,8 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
-// 1. Colección de PILARES (Tarjetas)
-const pilares = defineCollection({
-  type: 'data', 
+// 1. Colección de VALORES
+const valores = defineCollection({
+  type: "data",
   schema: z.object({
     titulo: z.string(),
     descripcion: z.string(),
@@ -10,9 +10,9 @@ const pilares = defineCollection({
   }),
 });
 
-// 2. Colección de HERO (Actualizada con los campos nuevos)
+// 2. Colección de HERO
 const hero = defineCollection({
-  type: 'data',
+  type: "data",
   schema: z.object({
     etiquetaSuperior: z.string().optional(),
     titulo: z.string().optional(),
@@ -26,9 +26,9 @@ const hero = defineCollection({
   }),
 });
 
-// 3. Colección de PILARES INTRO (Nueva)
-const pilaresIntro = defineCollection({
-  type: 'data',
+// 3. Colección de VALORES INTRO
+const valoresIntro = defineCollection({
+  type: "data",
   schema: z.object({
     etiqueta: z.string().optional(),
     titulo: z.string().optional(),
@@ -36,9 +36,9 @@ const pilaresIntro = defineCollection({
   }),
 });
 
-// 4. Colección de CONTACTO (Nueva)
+// 4. Colección de CONTACTO
 const contacto = defineCollection({
-  type: 'data',
+  type: "data",
   schema: z.object({
     etiqueta: z.string().optional(),
     titulo: z.string().optional(),
@@ -47,9 +47,33 @@ const contacto = defineCollection({
   }),
 });
 
+// 5. Colección de NUESTRO TRABAJO INTRO
+const nuestroTrabajoIntro = defineCollection({
+  type: "data",
+  schema: z.object({
+    etiqueta: z.string().optional(),
+    titulo: z.string().optional(),
+    descripcion: z.string().optional(),
+  }),
+});
+
+// 6. Colección de PROYECTOS
+const proyectos = defineCollection({
+  type: "data",
+  schema: z.object({
+    titulo: z.string(),
+    fecha: z.coerce.date(), // Para poder ordenar
+    descripcion: z.string(),
+    imagen: z.string().optional(),
+    pdf: z.string().optional(),
+  }),
+});
+
 export const collections = {
-  pilares,
+  valores,
   hero,
-  'pilares-intro': pilaresIntro,
+  "valores-intro": valoresIntro,
   contacto,
+  "nuestro-trabajo-intro": nuestroTrabajoIntro,
+  proyectos,
 };

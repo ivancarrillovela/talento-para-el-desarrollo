@@ -1,0 +1,84 @@
+---
+// src/components/Valores.astro
+import { getCollection } from "astro:content";
+import { createReader } from "@keystatic/core/reader"; // Importamos el reader
+import keystaticConfig from "../../keystatic.config";
+
+// 1. Datos de las Tarjetas (Colección)
+const valores = await getCollection("valores");
+
+// 2. Datos de la Intro (Nuevo Singleton)
+const reader = createReader(process.cwd(), keystaticConfig);
+const introData = await reader.singletons.valoresIntro.read();
+
+// Valores por defecto por si no has rellenado el panel aún
+const titulo = introData?.titulo || "Valores fuertes que transforman el mundo.";
+const descripcion =
+  introData?.descripcion ||
+  "Nos alejamos del modelo asistencialista para centrarnos en el desarrollo de capacidades a largo plazo.";
+
+// Solo ocultamos si no hay tarjetas, el texto siempre se muestra (o el defecto)
+if (!valores || valores.length === 0) return null;
+---
+
+<section
+  id="valores"
+  class="bg-zinc-900 py-24 text-white relative overflow-hidden"
+>
+  {/* Decoración de fondo */}
+  <div
+    class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
+  >
+    <div
+      class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-terracotta-500 blur-[150px]"
+    >
+    </div>
+  </div>
+
+  <div class="container mx-auto px-6 lg:px-12 relative z-10">
+    <div
+      class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8 border-b border-zinc-800 pb-10"
+    >
+      <div class="max-w-xl">
+        <h2
+          class="text-terracotta-500 font-bold tracking-widest uppercase text-sm mb-4"
+        >
+          Lo que buscamos
+        </h2>
+        <h3 class="text-4xl md:text-5xl font-bold leading-tight text-white">
+          {titulo}
+        </h3>
+      </div>
+      <p
+        class="text-lg text-zinc-400 leading-relaxed font-light max-w-lg text-right md:text-right"
+      >
+        {descripcion}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        valores.map((valor) => (
+          <div class="group relative p-6 bg-zinc-800/50 border border-zinc-800 hover:border-terracotta-500/50 rounded-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-terracotta-500/10 flex items-start gap-4">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-terracotta-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-sm" />
+
+            <div class="relative z-10 shrink-0">
+              <div class="w-12 h-12 bg-zinc-900 border border-zinc-700 rounded-full flex items-center justify-center text-xl group-hover:border-terracotta-500 group-hover:text-terracotta-500 transition-colors duration-300 shadow-lg">
+                {valor.data.icono}
+              </div>
+            </div>
+
+            <div class="relative z-10">
+              <h4 class="text-xl font-bold mb-2 text-white group-hover:text-terracotta-500 transition-colors duration-300 leading-tight">
+                {valor.data.titulo}
+              </h4>
+              <p class="text-sm text-zinc-400 leading-relaxed group-hover:text-zinc-300 transition-colors">
+                {valor.data.descripcion}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

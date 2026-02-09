@@ -1,7 +1,7 @@
 ---
 // src/components/Navbar.astro
-import { createReader } from '@keystatic/core/reader';
-import keystaticConfig from '../../keystatic.config';
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../keystatic.config";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const globalData = await reader.singletons.global.read();
@@ -9,31 +9,71 @@ const nombre = globalData?.nombreSitio || "Talento para el Desarrollo";
 const logo = globalData?.logo || null;
 ---
 
-<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
-  <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center">
-    
-    <a href="/" class="text-2xl font-bold text-zinc-900 flex items-center gap-2">
-      {logo ? (
-        <img src={logo} alt={nombre} class="h-10 w-auto" />
-      ) : (
-        <span class="text-zinc-900 font-serif tracking-tighter">{nombre}</span>
-      )}
+<nav
+  id="navbar"
+  class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4"
+>
+  <div
+    class="container mx-auto px-6 lg:px-12 flex justify-between items-center"
+  >
+    <a
+      href="/"
+      class="text-2xl font-bold text-zinc-900 flex items-center gap-2"
+    >
+      {
+        logo ? (
+          <img src={logo} alt={nombre} class="h-10 w-auto" />
+        ) : (
+          <span class="text-zinc-900 font-serif tracking-tighter">
+            {nombre}
+          </span>
+        )
+      }
     </a>
 
     <div class="hidden md:flex items-center gap-8">
-      <a href="#quienes-somos" class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors">Quiénes Somos</a>
-      <a href="#pilares" class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors">Nuestro Trabajo</a>
-      <a href="#nuestros-valores" class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors">Nuestros Valores</a>
-      <a href="#contacto" class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors">Contacto</a>
-      
-      <a href="#contacto" class="px-5 py-2.5 bg-zinc-900 text-white text-sm font-medium rounded-sm hover:bg-terracotta-500 transition-colors">
+      <a
+        href="#sobre-nosotros"
+        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
+        >Sobre Nosotros</a
+      >
+      <a
+        href="#valores"
+        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
+        >Lo que buscamos</a
+      >
+      <a
+        href="#nuestro-trabajo"
+        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
+        >Nuestro Trabajo</a
+      >
+      <a
+        href="#contacto"
+        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
+        >Contacto</a
+      >
+
+      <a
+        href="#contacto"
+        class="px-5 py-2.5 bg-zinc-900 text-white text-sm font-medium rounded-sm hover:bg-terracotta-500 transition-colors"
+      >
         Colaborar
       </a>
     </div>
 
     <button class="md:hidden text-zinc-900">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-8 h-8"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
       </svg>
     </button>
   </div>
@@ -41,14 +81,24 @@ const logo = globalData?.logo || null;
 
 <script>
   // Efecto Scroll: Cambia fondo al bajar
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
+  const nav = document.getElementById("navbar");
+  window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
-      nav?.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-2');
-      nav?.classList.remove('bg-transparent', 'py-4');
+      nav?.classList.add(
+        "bg-white/90",
+        "backdrop-blur-md",
+        "shadow-sm",
+        "py-2",
+      );
+      nav?.classList.remove("bg-transparent", "py-4");
     } else {
-      nav?.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-2');
-      nav?.classList.add('bg-transparent', 'py-4');
+      nav?.classList.remove(
+        "bg-white/90",
+        "backdrop-blur-md",
+        "shadow-sm",
+        "py-2",
+      );
+      nav?.classList.add("bg-transparent", "py-4");
     }
   });
 </script>
