@@ -21,7 +21,10 @@ const stats = data?.stats || {
 };
 ---
 
-<section id="sobre-nosotros" class="relative py-32 bg-zinc-50 overflow-hidden">
+<section
+  id="sobre-nosotros"
+  class="relative py-20 lg:py-32 bg-zinc-50 overflow-hidden"
+>
   {/* Pattern Decorativo */}
   <div
     class="absolute inset-0 opacity-[0.03] pointer-events-none"
@@ -56,43 +59,49 @@ const stats = data?.stats || {
       {/* Columna de Estadísticas (Derecha) - 45% */}
       <div class="w-full lg:w-5/12 relative">
         <div
-          class="relative bg-white p-10 lg:p-14 rounded-[2px] shadow-2xl shadow-zinc-200 border-l-4 border-terracotta-500 flex flex-col justify-center divide-y divide-zinc-200"
+          class="relative bg-white shadow-xl shadow-zinc-200 border-l-4 border-terracotta-500 rounded-[2px] overflow-hidden"
         >
-          <div class="space-y-2 pb-10">
-            <p
-              class="text-6xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
+          <div
+            class="grid grid-cols-2 md:grid-cols-1 divide-zinc-200 divide-x md:divide-x-0 md:divide-y"
+          >
+            <div class="p-6 md:p-14 space-y-2 text-center md:text-left">
+              <p
+                class="text-4xl md:text-5xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
+              >
+                {stats.stat1_numero}
+              </p>
+              <p
+                class="text-xs md:text-sm text-zinc-500 uppercase tracking-widest font-medium"
+              >
+                {stats.stat1_label}
+              </p>
+            </div>
+            <div class="p-6 md:p-14 space-y-2 text-center md:text-left">
+              <p
+                class="text-4xl md:text-5xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
+              >
+                {stats.stat2_numero}
+              </p>
+              <p
+                class="text-xs md:text-sm text-zinc-500 uppercase tracking-widest font-medium"
+              >
+                {stats.stat2_label}
+              </p>
+            </div>
+            <div
+              class="col-span-2 md:col-span-1 p-6 md:p-14 space-y-2 text-center md:text-left border-t border-zinc-200 md:border-t-0"
             >
-              {stats.stat1_numero}
-            </p>
-            <p
-              class="text-sm text-zinc-500 uppercase tracking-widest font-medium mt-2"
-            >
-              {stats.stat1_label}
-            </p>
-          </div>
-          <div class="space-y-2 py-10">
-            <p
-              class="text-6xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
-            >
-              {stats.stat2_numero}
-            </p>
-            <p
-              class="text-sm text-zinc-500 uppercase tracking-widest font-medium mt-2"
-            >
-              {stats.stat2_label}
-            </p>
-          </div>
-          <div class="space-y-2 pt-10">
-            <p
-              class="text-6xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
-            >
-              {stats.stat3_numero}
-            </p>
-            <p
-              class="text-sm text-zinc-500 uppercase tracking-widest font-medium mt-2"
-            >
-              {stats.stat3_label}
-            </p>
+              <p
+                class="text-4xl md:text-5xl lg:text-7xl font-bold text-zinc-900 tracking-tighter"
+              >
+                {stats.stat3_numero}
+              </p>
+              <p
+                class="text-xs md:text-sm text-zinc-500 uppercase tracking-widest font-medium"
+              >
+                {stats.stat3_label}
+              </p>
+            </div>
           </div>
         </div>
       </div>

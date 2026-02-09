@@ -11,7 +11,7 @@ const logo = globalData?.logo || null;
 
 <nav
   id="navbar"
-  class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4"
+  class="fixed w-full z-50 transition-all duration-300 bg-white shadow-none py-4"
 >
   <div
     class="container mx-auto px-6 lg:px-12 flex justify-between items-center"
@@ -32,26 +32,22 @@ const logo = globalData?.logo || null;
     </a>
 
     <div class="hidden md:flex items-center gap-8">
-      <a
-        href="#sobre-nosotros"
-        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
-        >Sobre Nosotros</a
-      >
-      <a
-        href="#valores"
-        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
-        >Lo que buscamos</a
-      >
-      <a
-        href="#nuestro-trabajo"
-        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
-        >Nuestro Trabajo</a
-      >
-      <a
-        href="#contacto"
-        class="text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors"
-        >Contacto</a
-      >
+      {
+        [
+          { label: "Sobre Nosotros", href: "#sobre-nosotros" },
+          { label: "Lo que buscamos", href: "#valores" },
+          { label: "Nuestro Trabajo", href: "#nuestro-trabajo" },
+          { label: "Contacto", href: "#contacto" },
+        ].map((link) => (
+          <a
+            href={link.href}
+            class="group relative text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors py-1"
+          >
+            {link.label}
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-terracotta-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+          </a>
+        ))
+      }
 
       <a
         href="#contacto"
@@ -61,44 +57,184 @@ const logo = globalData?.logo || null;
       </a>
     </div>
 
-    <button class="md:hidden text-zinc-900">
+    <button
+      id="menu-btn"
+      class="md:hidden z-50 relative w-10 h-10 flex items-center justify-center text-zinc-900"
+      aria-label="Menu"
+    >
+      {/* Icono Hamburguesa (Normal) */}
       <svg
+        id="icon-menu"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-8 h-8"
+        class="w-8 h-8 transition-transform duration-300"
       >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
           d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
       </svg>
+
+      {/* Icono X (Cerrar) */}
+      <svg
+        id="icon-close"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-8 h-8 absolute inset-0 m-auto opacity-0 scale-75 transition-all duration-300"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
     </button>
+
+    {/* Mobile Menu Overlay - Solid White */}
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 bg-white z-40 flex flex-col px-8 pt-28 pb-10 transition-transform duration-300 translate-x-full md:hidden"
+    >
+      {/* Top CTA */}
+      <div class="mb-10">
+        <a
+          href="#contacto"
+          class="flex items-center justify-center w-full py-3.5 bg-zinc-900 text-white text-base font-medium rounded-md hover:bg-terracotta-500 transition-colors shadow-sm"
+        >
+          Colabora con nosotros
+        </a>
+      </div>
+
+      {/* Navigation Links */}
+      <nav class="flex flex-col gap-6 items-start">
+        <a
+          href="#sobre-nosotros"
+          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
+          >Sobre Nosotros</a
+        >
+        <a
+          href="#valores"
+          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
+          >Lo que buscamos</a
+        >
+        <a
+          href="#nuestro-trabajo"
+          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
+          >Nuestro Trabajo</a
+        >
+        <a
+          href="#contacto"
+          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
+          >Contacto</a
+        >
+      </nav>
+
+      {/* Menu Footer - Mirrors Footer.astro */}
+      <div class="mt-auto border-t border-zinc-100 pt-6">
+        <h4 class="text-zinc-900 font-bold text-lg mb-1">
+          {nombre}
+        </h4>
+        <p class="text-sm text-zinc-400 mb-4">
+          Construyendo puentes de oportunidad y desarrollo profesional.
+        </p>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-500">
+          <a href="#" class="hover:text-zinc-900 transition-colors"
+            >Aviso Legal</a
+          >
+          <a href="#" class="hover:text-zinc-900 transition-colors"
+            >Privacidad</a
+          >
+          {
+            globalData?.redes?.linkedin && (
+              <a
+                href={globalData.redes.linkedin}
+                target="_blank"
+                class="hover:text-zinc-900 transition-colors"
+              >
+                LinkedIn
+              </a>
+            )
+          }
+        </div>
+        <p class="text-xs text-zinc-400 mt-4">
+          &copy; {new Date().getFullYear()}
+          {globalData?.footerTexto || "Todos los derechos reservados."}
+        </p>
+      </div>
+    </div>
   </div>
 </nav>
 
 <script>
-  // Efecto Scroll: Cambia fondo al bajar
+  // Mobile Menu Logic
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileLinks = mobileMenu?.querySelectorAll("a");
+  const iconMenu = document.getElementById("icon-menu");
+  const iconClose = document.getElementById("icon-close");
+  const body = document.body;
   const nav = document.getElementById("navbar");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-      nav?.classList.add(
-        "bg-white/90",
-        "backdrop-blur-md",
-        "shadow-sm",
-        "py-2",
-      );
-      nav?.classList.remove("bg-transparent", "py-4");
+
+  function toggleMenu() {
+    const isOpen = mobileMenu?.classList.contains("translate-x-0");
+
+    if (isOpen) {
+      // CLOSE
+      mobileMenu?.classList.remove("translate-x-0");
+      mobileMenu?.classList.add("translate-x-full");
+
+      // Icon Logic: Show Hamburger
+      iconMenu?.classList.remove("opacity-0", "rotate-90", "scale-75");
+      iconClose?.classList.add("opacity-0", "scale-75");
+      iconClose?.classList.remove("rotate-90");
+
+      body.style.overflow = ""; // Enable scroll
     } else {
-      nav?.classList.remove(
-        "bg-white/90",
-        "backdrop-blur-md",
-        "shadow-sm",
-        "py-2",
-      );
-      nav?.classList.add("bg-transparent", "py-4");
+      // OPEN
+      mobileMenu?.classList.remove("translate-x-full");
+      mobileMenu?.classList.add("translate-x-0");
+
+      // Icon Logic: Show X
+      iconMenu?.classList.add("opacity-0", "rotate-90", "scale-75");
+      iconClose?.classList.remove("opacity-0", "scale-75");
+      iconClose?.classList.add("rotate-90");
+
+      body.style.overflow = "hidden"; // Disable scroll
     }
+  }
+
+  menuBtn?.addEventListener("click", toggleMenu);
+
+  // Close menu when clicking a link
+  mobileLinks?.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.remove("translate-x-0");
+      mobileMenu?.classList.add("translate-x-full");
+
+      // Reset Icons
+      iconMenu?.classList.remove("opacity-0", "rotate-90", "scale-75");
+      iconClose?.classList.add("opacity-0", "scale-75");
+      iconClose?.classList.remove("rotate-90");
+
+      body.style.overflow = "";
+    });
   });
+
+  // Scroll Animation (Desktop)
+  function updateNavScroll() {
+    if (window.scrollY > 20) {
+      nav?.classList.remove("py-4", "shadow-none");
+      nav?.classList.add("py-3", "shadow-sm");
+    } else {
+      nav?.classList.add("py-4", "shadow-none");
+      nav?.classList.remove("py-3", "shadow-sm");
+    }
+  }
+
+  window.addEventListener("scroll", updateNavScroll);
 </script>

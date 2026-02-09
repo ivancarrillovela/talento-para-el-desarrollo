@@ -34,10 +34,12 @@ if (!proyectos || proyectos.length === 0) return null;
 
 <section
   id="nuestro-trabajo"
-  class="bg-zinc-50 py-24 text-zinc-900 border-b border-zinc-200"
+  class="bg-zinc-50 py-16 md:py-24 text-zinc-900 border-b border-zinc-200"
 >
   <div class="container mx-auto px-6 lg:px-12">
-    <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+    <div
+      class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16"
+    >
       <div class="max-w-2xl">
         <h2
           class="text-terracotta-500 font-bold tracking-widest uppercase text-sm mb-2"
@@ -73,11 +75,13 @@ if (!proyectos || proyectos.length === 0) return null;
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div
+      class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide"
+    >
       {
         proyectos.map((proyecto) => (
-          <article class="group relative bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
-            <div class="aspect-[4/3] overflow-hidden bg-zinc-200">
+          <article class="min-w-[85vw] md:min-w-0 snap-center group relative bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-zinc-100 md:border-none">
+            <div class="aspect-[4/3] overflow-hidden bg-zinc-200 relative">
               {proyecto.data.imagen && (
                 <img
                   src={proyecto.data.imagen}
@@ -85,15 +89,19 @@ if (!proyectos || proyectos.length === 0) return null;
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               )}
-            </div>
-            <div class="p-8 flex flex-col flex-grow">
-              <div class="text-xs font-bold text-terracotta-500 uppercase tracking-widest mb-2">
+              {/* Badge fecha mobile overlay */}
+              <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-terracotta-500 uppercase tracking-widest rounded-sm shadow-sm md:hidden">
                 {formatDate(proyecto.data.fecha)}
               </div>
-              <h4 class="text-2xl font-bold mb-3 group-hover:text-terracotta-500 transition-colors">
+            </div>
+            <div class="p-6 md:p-8 flex flex-col flex-grow">
+              <div class="hidden md:block text-xs font-bold text-terracotta-500 uppercase tracking-widest mb-2">
+                {formatDate(proyecto.data.fecha)}
+              </div>
+              <h4 class="text-xl md:text-2xl font-bold mb-3 group-hover:text-terracotta-500 transition-colors">
                 {proyecto.data.titulo}
               </h4>
-              <p class="text-zinc-500 leading-relaxed mb-6">
+              <p class="text-zinc-500 leading-relaxed mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none">
                 {proyecto.data.descripcion}
               </p>
 
@@ -102,7 +110,7 @@ if (!proyectos || proyectos.length === 0) return null;
                 <a
                   href={proyecto.data.pdf}
                   download
-                  class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b-2 border-zinc-200 hover:border-terracotta-500 pb-1 transition-colors mt-auto"
+                  class="inline-flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest border-b-2 border-zinc-200 hover:border-terracotta-500 pb-1 transition-colors mt-auto"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +118,7 @@ if (!proyectos || proyectos.length === 0) return null;
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    class="w-5 h-5"
+                    class="w-4 h-4 md:w-5 md:h-5"
                   >
                     <path
                       stroke-linecap="round"
@@ -125,15 +133,6 @@ if (!proyectos || proyectos.length === 0) return null;
           </article>
         ))
       }
-    </div>
-
-    <div class="mt-12 md:hidden text-center">
-      <a
-        href="#contacto"
-        class="inline-block px-8 py-4 bg-zinc-900 text-white font-medium hover:bg-terracotta-500 transition-colors"
-      >
-        Colaborar con nosotros
-      </a>
     </div>
   </div>
 </section>

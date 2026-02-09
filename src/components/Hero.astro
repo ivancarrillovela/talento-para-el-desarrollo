@@ -24,7 +24,9 @@ const {
 <section
   class="relative w-full min-h-[95vh] bg-zinc-50 flex items-center overflow-hidden"
 >
-  <div class="container mx-auto px-6 lg:px-12 relative z-10 pt-20 pb-12">
+  <div
+    class="container mx-auto px-6 lg:px-12 relative z-10 pt-32 pb-12 lg:pt-20"
+  >
     <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
       <div class="w-full lg:w-1/2 space-y-8">
         <div class="flex items-center gap-3">
@@ -37,12 +39,27 @@ const {
         </div>
 
         <h1
-          class="text-6xl lg:text-7xl xl:text-8xl font-bold text-zinc-900 leading-[0.95] tracking-tighter"
+          class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-zinc-900 leading-[0.95] tracking-tighter"
         >
           {titulo}
           <br />
           <span class="italic font-serif text-terracotta-500">{subtitulo}</span>
         </h1>
+
+        {/* Mobile Image (Between Title and Desc) */}
+        <div
+          class="block lg:hidden w-full h-[40vh] relative rounded-sm overflow-hidden my-6"
+        >
+          <div
+            class="absolute top-4 right-4 w-full h-full bg-terracotta-100 z-0"
+          >
+          </div>
+          <img
+            src={imagen}
+            alt={titulo}
+            class="relative z-10 w-full h-full object-cover shadow-lg filter sepia-[10%] contrast-[105%]"
+          />
+        </div>
 
         <p
           class="text-xl text-zinc-600 max-w-lg leading-relaxed font-light border-l-2 border-zinc-200 pl-6"
@@ -50,16 +67,16 @@ const {
           {descripcion}
         </p>
 
-        <div class="flex flex-wrap gap-5 pt-6">
+        <div class="flex items-center gap-3 md:gap-5 pt-6">
           <a
             href="#nuestro-trabajo"
-            class="px-8 py-4 bg-zinc-900 text-white text-lg font-medium rounded-sm hover:bg-terracotta-500 transition-colors duration-300 shadow-xl shadow-zinc-200"
+            class="px-6 py-3 md:px-8 md:py-4 bg-zinc-900 text-white text-base md:text-lg font-medium rounded-sm hover:bg-terracotta-500 transition-colors duration-300 shadow-xl shadow-zinc-200 whitespace-nowrap"
           >
             {textoBoton}
           </a>
           <a
             href="#contacto"
-            class="group flex items-center gap-2 px-6 py-4 text-zinc-900 text-lg font-medium hover:text-terracotta-500 transition-colors duration-300"
+            class="group flex items-center gap-2 px-3 py-3 md:px-6 md:py-4 text-zinc-900 text-base md:text-lg font-medium hover:text-terracotta-500 transition-colors duration-300 whitespace-nowrap"
           >
             {textoBotonSecundario}
             <svg
@@ -68,7 +85,7 @@ const {
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-5 h-5 group-hover:translate-x-2 transition-transform"
+              class="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-2 transition-transform"
             >
               <path
                 stroke-linecap="round"
@@ -79,7 +96,9 @@ const {
         </div>
       </div>
 
-      <div class="w-full lg:w-1/2 relative h-[60vh] lg:h-[80vh]">
+      <div
+        class="hidden lg:block w-full lg:w-1/2 relative h-[60vh] lg:h-[80vh]"
+      >
         <div
           class="absolute top-10 right-10 w-full h-full bg-terracotta-100 z-0"
         >
