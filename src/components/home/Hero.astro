@@ -1,7 +1,6 @@
 ---
-// src/components/Hero.astro
 import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../keystatic.config";
+import keystaticConfig from "../../../keystatic.config";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const data = await reader.singletons.hero.read();
@@ -55,7 +54,7 @@ const {
           >
           </div>
           <img
-            src={imagen}
+            src={imagen || "/no_image.jpg"}
             alt={titulo}
             class="relative z-10 w-full h-full object-cover shadow-lg filter sepia-[10%] contrast-[105%]"
           />
@@ -104,7 +103,7 @@ const {
         >
         </div>
         <img
-          src={imagen}
+          src={imagen || "/no_image.jpg"}
           alt={titulo}
           class="relative z-10 w-full h-full object-cover shadow-2xl filter sepia-[10%] contrast-[105%]"
         />

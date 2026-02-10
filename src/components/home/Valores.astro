@@ -1,8 +1,7 @@
 ---
-// src/components/Valores.astro
 import { getCollection } from "astro:content";
-import { createReader } from "@keystatic/core/reader"; // Importamos el reader
-import keystaticConfig from "../../keystatic.config";
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../../keystatic.config";
 
 // 1. Datos de las Tarjetas (Colección)
 const valores = await getCollection("valores");

@@ -129,12 +129,12 @@ export default config({
       slugField: "titulo",
       path: "src/content/valores/*",
       schema: {
-        titulo: fields.slug({ name: { label: "Título del Pilar" } }),
+        titulo: fields.slug({ name: { label: "Título del valor" } }),
         descripcion: fields.text({
           label: "Descripción breve",
           multiline: true,
         }),
-        icono: fields.text({ label: "Emoji o Icono (ej: 🎓)" }),
+        icono: fields.text({ label: "Emoji o Icono para el valor (ej: 🎓)" }),
       },
     }),
 
@@ -144,11 +144,11 @@ export default config({
       slugField: "titulo",
       path: "src/content/proyectos/*",
       schema: {
-        titulo: fields.slug({ name: { label: "Título del Proyecto" } }),
+        titulo: fields.slug({ name: { label: "Título del Proyecto (Breve)" } }),
         fecha: fields.date({
           label: "Fecha de publicación",
           validation: { isRequired: true },
-        }), // NUEVO
+        }),
         imagen: fields.image({
           label: "Imagen del Proyecto",
           directory: "public/images/proyectos",

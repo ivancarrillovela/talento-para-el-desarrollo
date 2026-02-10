@@ -2,7 +2,6 @@ titulo: Nuestra Historia
 descripcion: >-
   Somos una organización nacida de la convicción de que el talento está
   universalmente distribuido, pero las oportunidades no.
-imagen: /images/about/imagen.avif
 stats:
   stat1_numero: '+50'
   stat1_label: Proyectos

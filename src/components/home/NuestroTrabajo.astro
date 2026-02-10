@@ -1,8 +1,7 @@
 ---
-// src/components/NuestroTrabajo.astro
 import { getCollection } from "astro:content";
 import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../keystatic.config";
+import keystaticConfig from "../../../keystatic.config";
 
 // 1. Datos de la Intro (Singleton)
 const reader = createReader(process.cwd(), keystaticConfig);
@@ -10,9 +9,9 @@ const introData = await reader.singletons.nuestroTrabajoIntro.read();
 
 // 2. Datos de los Proyectos (Colección)
 const proyectosRaw = await getCollection("proyectos");
-const proyectos = proyectosRaw.sort(
-  (a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf(),
-);
+const proyectos = proyectosRaw
+  .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf())
+  .slice(0, 6);
 
 // Helper para formatear fecha
 const formatDate = (date: Date) => {
@@ -54,8 +53,8 @@ if (!proyectos || proyectos.length === 0) return null;
 
       <div class="hidden md:block">
         <a
-          href="#contacto"
-          class="group inline-flex items-center gap-2 text-zinc-900 font-medium hover:text-terracotta-500 transition-colors"
+          href="/proyectos"
+          class="group inline-flex items-center gap-2 text-zinc-900 font-bold hover:text-terracotta-500 transition-colors"
         >
           Ver todas las iniciativas
           <svg
@@ -75,60 +74,80 @@ if (!proyectos || proyectos.length === 0) return null;
       </div>
     </div>
 
+    {/* Mobile Scroll Indicator */}
     <div
-      class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide"
+      class="flex justify-end md:hidden mb-2 items-center gap-1 text-zinc-400 px-6"
+    >
+      <span class="text-xs font-bold uppercase tracking-widest">Desliza</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        class="w-4 h-4 animate-pulse"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+      </svg>
+    </div>
+
+    <div
+      class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide items-stretch md:overflow-visible"
     >
       {
         proyectos.map((proyecto) => (
           <article class="min-w-[85vw] md:min-w-0 snap-center group relative bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-zinc-100 md:border-none">
             <div class="aspect-[4/3] overflow-hidden bg-zinc-200 relative">
-              {proyecto.data.imagen && (
-                <img
-                  src={proyecto.data.imagen}
-                  alt={proyecto.data.titulo}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              )}
+              <img
+                src={proyecto.data.imagen || "/no_image.jpg"}
+                alt={proyecto.data.titulo}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
               {/* Badge fecha mobile overlay */}
               <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-terracotta-500 uppercase tracking-widest rounded-sm shadow-sm md:hidden">
                 {formatDate(proyecto.data.fecha)}
               </div>
             </div>
-            <div class="p-6 md:p-8 flex flex-col flex-grow">
+            <div class="p-6 md:p-8 flex flex-col flex-grow min-h-[18rem]">
               <div class="hidden md:block text-xs font-bold text-terracotta-500 uppercase tracking-widest mb-2">
                 {formatDate(proyecto.data.fecha)}
               </div>
-              <h4 class="text-xl md:text-2xl font-bold mb-3 group-hover:text-terracotta-500 transition-colors">
+              <h4 class="text-xl md:text-2xl font-bold mb-3 group-hover:text-terracotta-500 transition-colors line-clamp-2 min-h-[3.5rem] md:min-h-[4rem]">
                 {proyecto.data.titulo}
               </h4>
-              <p class="text-zinc-500 leading-relaxed mb-6 text-sm md:text-base line-clamp-3 md:line-clamp-none">
+              <p class="text-zinc-500 leading-relaxed mb-6 text-sm md:text-base line-clamp-3 min-h-[4.5rem]">
                 {proyecto.data.descripcion}
               </p>
 
-              {/* Prioridad al PDF, sino Link, sino nada */}
-              {proyecto.data.pdf ? (
-                <a
-                  href={proyecto.data.pdf}
-                  download
-                  class="inline-flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest border-b-2 border-zinc-200 hover:border-terracotta-500 pb-1 transition-colors mt-auto"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-4 h-4 md:w-5 md:h-5"
+              {/* Card Footer: Always renders to ensure uniform height */}
+              <div class="mt-auto pt-4 flex items-end">
+                {proyecto.data.pdf && (
+                  <a
+                    href={proyecto.data.pdf}
+                    download
+                    class="inline-flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest border-b-2 border-zinc-200 hover:border-terracotta-500 pb-1 transition-colors"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-                    />
-                  </svg>
-                  Descargar PDF
-                </a>
-              ) : null}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-4 h-4 md:w-5 md:h-5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                      />
+                    </svg>
+                    Descargar PDF
+                  </a>
+                )}
+              </div>
             </div>
           </article>
         ))

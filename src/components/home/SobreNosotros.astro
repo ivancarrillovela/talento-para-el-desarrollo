@@ -1,7 +1,6 @@
 ---
-// src/components/SobreNosotros.astro
 import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../keystatic.config";
+import keystaticConfig from "../../../keystatic.config";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const data = await reader.singletons.sobreNosotros.read();
@@ -10,7 +9,6 @@ const titulo = data?.titulo || "Nuestra Historia";
 const descripcion =
   data?.descripcion ||
   "Somos una organización nacida de la convicción de que el talento está universalmente distribuido, pero las oportunidades no.";
-const imagen = data?.imagen || ""; // Idealmente poner una por defecto
 const stats = data?.stats || {
   stat1_numero: "+5",
   stat1_label: "Años de experiencia",
