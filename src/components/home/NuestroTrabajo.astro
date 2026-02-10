@@ -105,6 +105,7 @@ if (!proyectos || proyectos.length === 0) return null;
                 src={proyecto.data.imagen || "/no_image.jpg"}
                 alt={proyecto.data.titulo}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onerror="this.onerror=null;this.src='/no_image.jpg';"
               />
               {/* Badge fecha mobile overlay */}
               <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-terracotta-500 uppercase tracking-widest rounded-sm shadow-sm md:hidden">

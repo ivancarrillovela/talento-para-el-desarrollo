@@ -61,7 +61,7 @@ export default config({
 
     // 3. LO QUE BUSCAMOS
     valoresIntro: singleton({
-      label: " Lo que buscamos (Intro Valores)",
+      label: " Lo que buscamos (Cabecera)",
       path: "src/content/valores-intro/datos",
       schema: {
         titulo: fields.text({ label: "Título Grande" }),
@@ -74,7 +74,7 @@ export default config({
 
     // 4. NUESTRO TRABAJO
     nuestroTrabajoIntro: singleton({
-      label: "Nuestro Trabajo",
+      label: "Nuestro Trabajo (Cabecera)",
       path: "src/content/nuestro-trabajo-intro/datos",
       schema: {
         titulo: fields.text({ label: "Título Grande" }),
@@ -125,7 +125,7 @@ export default config({
   // 1. VALORES
   collections: {
     valores: collection({
-      label: "Valores (Tarjetas)",
+      label: "Valores (Lo que buscamos)",
       slugField: "titulo",
       path: "src/content/valores/*",
       schema: {

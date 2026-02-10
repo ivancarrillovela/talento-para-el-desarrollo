@@ -21,7 +21,12 @@ const logo = globalData?.logo || null;
     >
       {
         logo ? (
-          <img src={logo} alt={nombre} class="h-10 w-auto" />
+          <img
+            src={logo}
+            alt={nombre}
+            class="h-10 w-auto"
+            onerror="this.onerror=null;this.src='/no_image.jpg';"
+          />
         ) : (
           <span class="text-zinc-900 font-serif tracking-tighter">
             {nombre}
@@ -33,9 +38,9 @@ const logo = globalData?.logo || null;
     <div class="hidden md:flex items-center gap-8">
       {
         [
-          { label: "Sobre Nosotros", href: "#sobre-nosotros" },
+          { label: "Sobre nosotros", href: "#sobre-nosotros" },
           { label: "Lo que buscamos", href: "#valores" },
-          { label: "Nuestro Trabajo", href: "#nuestro-trabajo" },
+          { label: "Nuestro trabajo", href: "#nuestro-trabajo" },
           { label: "Contacto", href: "#contacto" },
         ].map((link) => (
           <a

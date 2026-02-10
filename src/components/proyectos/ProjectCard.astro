@@ -37,6 +37,7 @@ const formatDate = (date: Date) => {
       src={proyecto.data.imagen || "/no_image.jpg"}
       alt={proyecto.data.titulo}
       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out will-change-transform"
+      onerror="this.onerror=null;this.src='/no_image.jpg';"
     />
   </div>
 
