@@ -1,6 +1,7 @@
 ---
 import { createReader } from "@keystatic/core/reader";
 import keystaticConfig from "../../../keystatic.config";
+import Footer from "./Footer.astro";
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const globalData = await reader.singletons.global.read();
@@ -139,37 +140,8 @@ const logo = globalData?.logo || null;
       </nav>
 
       {/* Menu Footer - Mirrors Footer.astro */}
-      <div class="mt-auto border-t border-zinc-100 pt-6">
-        <h4 class="text-zinc-900 font-bold text-lg mb-1">
-          {nombre}
-        </h4>
-        <p class="text-sm text-zinc-400 mb-4">
-          Construyendo puentes de oportunidad y desarrollo profesional.
-        </p>
-        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-zinc-500">
-          <a href="#" class="hover:text-zinc-900 transition-colors"
-            >Aviso Legal</a
-          >
-          <a href="#" class="hover:text-zinc-900 transition-colors"
-            >Privacidad</a
-          >
-          {
-            globalData?.redes?.linkedin && (
-              <a
-                href={globalData.redes.linkedin}
-                target="_blank"
-                class="hover:text-zinc-900 transition-colors"
-              >
-                LinkedIn
-              </a>
-            )
-          }
-        </div>
-        <p class="text-xs text-zinc-400 mt-4">
-          &copy; {new Date().getFullYear()}
-          {globalData?.footerTexto || "Todos los derechos reservados."}
-        </p>
-      </div>
+      {/* Menu Footer - Mirrors Footer.astro */}
+      <Footer variant="mobile" />
     </div>
   </div>
 </nav>

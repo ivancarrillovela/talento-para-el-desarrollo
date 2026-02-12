@@ -1,0 +1,131 @@
+---
+
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 hidden bg-white border-t-4 border-terracotta-500 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-6 md:p-8 animate-slide-up"
+>
+  <div
+    class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-6 justify-between"
+  >
+    <div class="text-zinc-600 text-sm md:text-base flex-1">
+      <p class="font-bold text-zinc-900 mb-2 uppercase">Uso de Cookies</p>
+      <p class="leading-relaxed">
+        Este sitio web utiliza cookies propias y de terceros para gestionar el
+        portal, mejorar nuestros servicios y conocer tu comportamiento de
+        navegación. Puedes aceptar todas las cookies pulsando el botón "Aceptar"
+        o rechazarlas pulsando "Rechazar". Para más información, consulta
+        nuestra <a
+          href="/politica-de-cookies"
+          class="text-terracotta-500 underline hover:text-terracotta-600 font-medium"
+          >Política de Cookies</a
+        >.
+      </p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto min-w-[300px]">
+      <button
+        id="reject-cookies"
+        class="w-full px-6 py-3 bg-white text-zinc-900 font-bold rounded-sm border-2 border-zinc-200 hover:border-zinc-900 hover:bg-zinc-50 transition-colors"
+      >
+        Rechazar
+      </button>
+      <button
+        id="accept-cookies"
+        class="w-full px-6 py-3 bg-zinc-900 text-white font-bold rounded-sm hover:bg-terracotta-500 transition-colors shadow-lg"
+      >
+        Aceptar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Elements
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("accept-cookies");
+  const rejectBtn = document.getElementById("reject-cookies");
+
+  // Configuration
+  const CONSENT_KEY = "cookieConsent";
+  const TIMESTAMP_KEY = "cookieConsentTimestamp";
+  const EXPIRATION_DAYS = 180; // 6 months
+
+  // Check consent validity
+  const now = new Date().getTime();
+  const storedConsent = localStorage.getItem(CONSENT_KEY);
+  const storedTimestamp = localStorage.getItem(TIMESTAMP_KEY);
+
+  let isValid = false;
+  if (storedConsent && storedTimestamp) {
+    const daysDiff = (now - parseInt(storedTimestamp)) / (1000 * 60 * 60 * 24);
+    if (daysDiff < EXPIRATION_DAYS) {
+      isValid = true;
+    } else {
+      // Expired: clear storage
+      localStorage.removeItem(CONSENT_KEY);
+      localStorage.removeItem(TIMESTAMP_KEY);
+    }
+  }
+
+  const hasConsented = isValid && storedConsent === "true";
+  const hasRejected = isValid && storedConsent === "false";
+
+  // Show banner if no valid choice exists
+  if (!hasConsented && !hasRejected && banner) {
+    banner.classList.remove("hidden");
+    banner.classList.add("flex");
+  } else if (hasConsented) {
+    // If accepted, init Analytics here
+    // initAnalytics();
+  }
+
+  function saveConsent(value: string) {
+    localStorage.setItem(CONSENT_KEY, value);
+    localStorage.setItem(TIMESTAMP_KEY, new Date().getTime().toString());
+    hideBanner();
+  }
+
+  function hideBanner() {
+    if (!banner) return;
+    banner.classList.add(
+      "opacity-0",
+      "translate-y-full",
+      "transition-all",
+      "duration-500",
+    );
+    setTimeout(() => {
+      banner.style.display = "none";
+      banner.classList.remove("flex");
+    }, 500);
+  }
+
+  // Accept Logic
+  acceptBtn?.addEventListener("click", () => {
+    saveConsent("true");
+    // initAnalytics();
+  });
+
+  // Reject Logic
+  rejectBtn?.addEventListener("click", () => {
+    saveConsent("false");
+  });
+</script>
+
+<style>
+  /* Animación de entrada suave */
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+</style>

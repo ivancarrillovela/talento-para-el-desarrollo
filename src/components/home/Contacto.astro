@@ -115,6 +115,25 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
             placeholder="Escribe tu mensaje..."></textarea>
         </div>
 
+        <div class="flex items-start gap-3 pt-2 pb-2">
+          <div class="flex items-center h-5">
+            <input
+              id="privacidad"
+              name="privacidad"
+              type="checkbox"
+              required
+              class="w-4 h-4 border border-zinc-300 rounded bg-zinc-50 focus:ring-3 focus:ring-terracotta-500/30 text-terracotta-500 cursor-pointer"
+            />
+          </div>
+          <div class="ml-1 text-sm">
+            <label for="privacidad" class="text-zinc-500">
+              He leído y acepto la <a href="/privacidad" target="_blank" class="font-medium text-zinc-900 underline hover:text-terracotta-500">política de privacidad</a>. 
+              <br />
+              Entiendo que mis datos se usarán para gestionar esta consulta.
+            </label>
+          </div>   
+        </div>
+
         <button
           id="boton-enviar"
           type="submit"
@@ -122,10 +141,6 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
         >
           {textoBoton}
         </button>
-
-        <p class="text-xs text-center text-zinc-400 mt-4">
-          Al enviar este formulario aceptas nuestra política de privacidad.
-        </p>
       </form>
 
       <div

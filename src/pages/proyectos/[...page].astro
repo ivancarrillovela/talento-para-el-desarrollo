@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
-import ProjectHeader from "../../components/proyectos/ProjectHeader.astro";
+import PageHeader from "../../components/common/PageHeader.astro";
 import ProjectCard from "../../components/proyectos/ProjectCard.astro";
 import { getCollection } from "astro:content";
 import { createReader } from "@keystatic/core/reader";
@@ -51,7 +51,7 @@ const uniqueYears = [
     </div>
 
     {/* HEADER COMPONENT */}
-    <ProjectHeader title={titulo} description={descripcion} />
+    <PageHeader title={titulo} description={descripcion} />
 
     {/* OVERLAPPING FLOATING CONTAINER */}
     <div class="container mx-auto px-6 lg:px-12 -mt-48 relative z-20 pb-24">

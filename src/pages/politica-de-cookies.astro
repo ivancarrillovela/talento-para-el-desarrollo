@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/common/PageHeader.astro";
+---
+
+<Layout title="Política de Cookies - Talento para el Desarrollo">
+  <main class="bg-zinc-100 min-h-screen flex flex-col relative">
+    <PageHeader
+      title="Política de Cookies"
+      subtitle="Legal"
+      description="Uso de cookies y gestión del consentimiento."
+    />
+
+    <div class="container mx-auto px-6 lg:px-12 -mt-48 relative z-20 pb-24">
+      <div class="relative w-full">
+        <div
+          class="absolute top-10 -left-10 w-full h-full bg-terracotta-100 z-0 hidden md:block"
+        >
+        </div>
+
+        <div
+          class="bg-white shadow-2xl p-8 md:p-16 border border-zinc-100 relative z-10"
+        >
+          <p
+            class="text-zinc-400 mb-10 text-sm font-medium uppercase tracking-widest border-b border-zinc-100 pb-4"
+          >
+            Última actualización: {new Date().toLocaleDateString("es-ES")}
+          </p>
+
+          <div
+            class="prose prose-lg text-zinc-600 prose-headings:text-zinc-900 prose-headings:font-bold prose-a:text-terracotta-500 max-w-none"
+          >
+            <p>
+              En cumplimiento con lo dispuesto en el artículo 22.2 de la Ley
+              34/2002, de 11 de julio, de Servicios de la Sociedad de la
+              Información y de Comercio Electrónico, esta página web le informa
+              sobre la política de recogida y tratamiento de cookies.
+            </p>
+
+            <h3>¿Qué son las cookies?</h3>
+            <p>
+              Una cookie es un fichero que se descarga en su ordenador al
+              acceder a determinadas páginas web. Las cookies permiten a una
+              página web, entre otras cosas, almacenar y recuperar información
+              sobre los hábitos de navegación de un usuario o de su equipo y,
+              dependiendo de la información que contengan y de la forma en que
+              utilice su equipo, pueden utilizarse para reconocer al usuario.
+            </p>
+
+            <h3>¿Qué tipos de cookies utiliza esta página web?</h3>
+            <ul class="list-disc pl-5 space-y-2">
+              <li>
+                <strong>Cookies técnicas:</strong> Son aquellas que permiten al usuario
+                la navegación a través de la página web y la utilización de las diferentes
+                opciones o servicios que en ella existan.
+              </li>
+              <li>
+                <strong>Cookies de análisis:</strong> Son aquellas que bien tratadas
+                por nosotros o por terceros, nos permiten cuantificar el número de
+                usuarios y así realizar la medición y análisis estadístico de la utilización
+                que hacen los usuarios del servicio ofertado. Para ello se analiza
+                su navegación en nuestra página web con el fin de mejorar la oferta
+                de productos o servicios que le ofrecemos.
+              </li>
+            </ul>
+
+            <h3>Desactivación y eliminación de cookies</h3>
+            <p>
+              Tiene la posibilidad de configurar su navegador para ser avisado
+              en pantalla de la recepción de cookies y para impedir su
+              instalación en su disco duro. Por favor, consulte las
+              instrucciones y manuales de su navegador para ampliar esta
+              información.
+            </p>
+            <p>
+              También puede gestionar su consentimiento utilizando nuestro panel
+              de configuración mediante los botones del banner inferior (si está
+              visible) o a través de las herramientas de su navegador.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
