@@ -1,11 +1,10 @@
 ---
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
+import { SITE_INFO, NAV_LINKS, FOOTER_LINKS } from "../../constants";
 import Footer from "./Footer.astro";
 
-const reader = createReader(process.cwd(), keystaticConfig);
 const globalData = await reader.singletons.global.read();
-const nombre = globalData?.nombreSitio || "Talento para el Desarrollo";
+const nombre = globalData?.nombreSitio || SITE_INFO.name;
 const logo = globalData?.logo || null;
 ---
 
@@ -26,7 +25,7 @@ const logo = globalData?.logo || null;
             src={logo}
             alt={nombre}
             class="h-10 w-auto"
-            onerror="this.onerror=null;this.src='/no_image.jpg';"
+            onerror="this.onerror=null;this.src='/images/no_image.jpg';"
           />
         ) : (
           <span class="text-zinc-900 font-serif tracking-tighter">
@@ -38,12 +37,7 @@ const logo = globalData?.logo || null;
 
     <div class="hidden md:flex items-center gap-8">
       {
-        [
-          { label: "Sobre nosotros", href: "#sobre-nosotros" },
-          { label: "Lo que buscamos", href: "#valores" },
-          { label: "Nuestro trabajo", href: "#nuestro-trabajo" },
-          { label: "Contacto", href: "#contacto" },
-        ].map((link) => (
+        NAV_LINKS.map((link) => (
           <a
             href={link.href}
             class="group relative text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors py-1"
@@ -117,29 +111,18 @@ const logo = globalData?.logo || null;
 
       {/* Navigation Links */}
       <nav class="flex flex-col gap-6 items-start">
-        <a
-          href="#sobre-nosotros"
-          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
-          >Sobre Nosotros</a
-        >
-        <a
-          href="#valores"
-          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
-          >Lo que buscamos</a
-        >
-        <a
-          href="#nuestro-trabajo"
-          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
-          >Nuestro Trabajo</a
-        >
-        <a
-          href="#contacto"
-          class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
-          >Contacto</a
-        >
+        {
+          NAV_LINKS.map((link) => (
+            <a
+              href={link.href}
+              class="text-3xl font-serif text-zinc-900 hover:text-terracotta-500 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </nav>
 
-      {/* Menu Footer - Mirrors Footer.astro */}
       {/* Menu Footer - Mirrors Footer.astro */}
       <Footer variant="mobile" />
     </div>

@@ -1,13 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
 
 // 1. Datos de las Tarjetas (Colección)
 const valores = await getCollection("valores");
 
 // 2. Datos de la Intro (Nuevo Singleton)
-const reader = createReader(process.cwd(), keystaticConfig);
 const introData = await reader.singletons.valoresIntro.read();
 
 // Valores por defecto por si no has rellenado el panel aún

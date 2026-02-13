@@ -1,201 +1,118 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import PageHeader from "../components/common/PageHeader.astro";
+import LegalLayout from "../layouts/LegalLayout.astro";
 ---
 
-<Layout title="Política de Privacidad - Talento para el Desarrollo">
-  <main class="bg-zinc-100 min-h-screen flex flex-col relative">
-    <PageHeader
-      title="Política de Privacidad"
-      subtitle="Legal"
-      description="Cómo protegemos y tratamos tus datos personales."
-    />
+<LegalLayout
+  title="Política de Privacidad"
+  description="Información sobre el tratamiento de datos personales."
+>
+  <p>
+    La presente Política de Privacidad describe cómo la <strong
+      >Asociación Talento para el Desarrollo</strong
+    > (en adelante, "La Asociación") recoge y procesa los datos personales de los
+    usuarios a través de nuestro sitio web.
+  </p>
 
-    <div class="container mx-auto px-6 lg:px-12 -mt-48 relative z-20 pb-24">
-      <div class="relative w-full">
-        <div
-          class="absolute top-10 -left-10 w-full h-full bg-terracotta-100 z-0 hidden md:block"
-        >
-        </div>
+  <h3>1. Responsable del Tratamiento</h3>
+  <ul
+    class="list-disc pl-5 space-y-2 bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 text-base my-8"
+  >
+    <li><strong>Identidad:</strong> Asociación Talento para el Desarrollo</li>
+    <li><strong>NIF:</strong> [INTRODUCIR NIF AQUÍ]</li>
+    <li>
+      <strong>Dirección:</strong> [INTRODUCIR DIRECCIÓN COMPLETA AQUÍ]
+    </li>
+    <li><strong>Email:</strong> [EMAIL DE CONTACTO]</li>
+  </ul>
 
-        <div
-          class="bg-white shadow-2xl p-8 md:p-16 border border-zinc-100 relative z-10"
-        >
-          <p
-            class="text-zinc-400 mb-10 text-sm font-medium uppercase tracking-widest border-b border-zinc-100 pb-4"
-          >
-            Última actualización: {new Date().toLocaleDateString("es-ES")}
-          </p>
+  <h3>2. Finalidad del tratamiento</h3>
+  <p>
+    Tratamos la información que nos facilitan las personas interesadas para:
+  </p>
+  <ul>
+    <li>
+      <strong>Gestión de consultas:</strong> Atender las solicitudes de información
+      recibidas a través del formulario de contacto o correo electrónico.
+    </li>
+    <li>
+      <strong>Colaboración:</strong> Gestionar las propuestas de colaboración o voluntariado.
+    </li>
+    <li>
+      <strong>Cumplimiento legal:</strong> Cumplir con nuestras obligaciones legales
+      y fiscales.
+    </li>
+  </ul>
+  <p>
+    No se tomarán decisiones automatizadas con base en los perfiles de los
+    usuarios.
+  </p>
 
-          <div
-            class="prose prose-lg prose-zinc text-zinc-600 prose-headings:text-zinc-900 prose-headings:font-bold prose-a:text-terracotta-500 max-w-none"
-          >
-            <p>
-              La <strong>Asociación Talento para el Desarrollo</strong> se compromete
-              a proteger la privacidad de los usuarios que accedan a esta web y/o
-              utilicen cualquiera de sus servicios. La utilización de la web y/o de
-              cualquiera de los servicios ofrecidos por La Asociación implica la aceptación
-              por parte del usuario de las disposiciones contenidas en la presente
-              Política de Privacidad y que sus datos personales sean tratados según
-              se estipula en ella.
-            </p>
+  <h3>3. Legitimación</h3>
+  <p>La base legal para el tratamiento de sus datos es:</p>
+  <ul>
+    <li>
+      <strong>Consentimiento del interesado:</strong> Al enviar el formulario de contacto
+      o escribirnos un correo, usted acepta expresamente el tratamiento de sus datos
+      para la finalidad indicada.
+    </li>
+    <li>
+      <strong>Interés legítimo:</strong> Para la gestión administrativa interna y
+      la respuesta a consultas.
+    </li>
+  </ul>
 
-            <div
-              class="bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 my-8"
-            >
-              <h3 class="mt-0 text-xl font-bold text-zinc-900">
-                Información Básica sobre Protección de Datos
-              </h3>
-              <ul class="list-none pl-0 space-y-3 text-sm mb-0">
-                <li>
-                  <strong class="text-zinc-900">Responsable:</strong> Asociación Talento
-                  para el Desarrollo.
-                </li>
-                <li>
-                  <strong class="text-zinc-900">Finalidad:</strong> Gestionar las
-                  consultas planteadas a través del formulario de contacto y, en su
-                  caso, la gestión de socios/voluntarios.
-                </li>
-                <li>
-                  <strong class="text-zinc-900">Legitimación:</strong> Consentimiento
-                  expreso del interesado (marcado de casilla).
-                </li>
-                <li>
-                  <strong class="text-zinc-900">Destinatarios:</strong> No se cederán
-                  datos a terceros, salvo obligación legal. Proveedores de servicios
-                  de hosting y email (Formspree).
-                </li>
-                <li>
-                  <strong class="text-zinc-900">Derechos:</strong> Acceder, rectificar
-                  y suprimir los datos, así como otros derechos, como se explica en
-                  la información adicional.
-                </li>
-              </ul>
-            </div>
+  <h3>4. Destinatarios de los datos</h3>
+  <p>
+    Los datos no se cederán a terceros salvo en los casos en que exista una
+    obligación legal.
+  </p>
+  <p>
+    No obstante, para el funcionamiento de la web, utilizamos proveedores de
+    servicios que pueden tener acceso a datos personales (encargados del
+    tratamiento), como:
+  </p>
+  <ul>
+    <li>
+      <strong>Proveedor de Hosting:</strong> [NOMBRE DEL PROVEEDOR]
+    </li>
+    <li>
+      <strong>Servicios de formulario:</strong> Utilizamos Formspree para la gestión
+      del formulario de contacto. Puede consultar su política de privacidad en <a
+        href="https://formspree.io/legal/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer">formspree.io</a
+      >.
+    </li>
+  </ul>
 
-            <h3>1. Responsable del Tratamiento</h3>
-            <p>
-              ¿Quién es el responsable del tratamiento de sus datos?<br />
-              <strong>Identidad:</strong> Asociación Talento para el Desarrollo.<br
-              />
-              <strong>NIF:</strong> [INTRODUCIR NIF]<br />
-              <strong>Dir. Postal:</strong> [INTRODUCIR DIRECCIÓN]<br />
-              <strong>Correo electrónico:</strong> [EMAIL DE CONTACTO]
-            </p>
-
-            <h3>2. Finalidad del Tratamiento</h3>
-            <p>
-              En la Asociación Talento para el Desarrollo tratamos la
-              información que nos facilitan las personas interesadas con el fin
-              de gestionar el envío de la información que nos soliciten y
-              facilitar a los interesados ofertas de productos y servicios de su
-              interés (solo si nos ha autorizado expresamente para ello).
-            </p>
-            <p>
-              <strong>Conservación de los datos:</strong> Los datos personales proporcionados
-              se conservarán mientras se mantenga la relación con la entidad, no se
-              solicite su supresión por el interesado, o durante los años necesarios
-              para cumplir con las obligaciones legales.
-            </p>
-
-            <h3>3. Legitimación</h3>
-            <p>
-              La base legal para el tratamiento de sus datos es el <strong
-                >consentimiento</strong
-              >. Para contactar a través de los formularios de esta web es
-              necesario aceptar esta política de privacidad. La oferta
-              prospectiva de productos y servicios está basada en el
-              consentimiento que se le solicita, sin que en ningún caso la
-              retirada de este consentimiento condicione la ejecución del
-              contrato de suscripción o colaboración.
-            </p>
-
-            <h3>4. Destinatarios</h3>
-            <p>
-              Los datos no se comunicarán a terceros, salvo obligación legal.
-            </p>
-            <p>
-              <strong
-                >Proveedores de servicios (Encargados del Tratamiento):</strong
-              ><br />
-              Para prestar servicios estrictamente necesarios para el desarrollo de
-              la actividad, compartimos datos con los siguientes prestadores bajo
-              sus correspondientes condiciones de privacidad:
-            </p>
-            <ul>
-              <li>
-                <strong>Formspree Inc.:</strong> Proveedor utilizado para la gestión
-                y envío de los formularios de contacto. Formspree cumple con los estándares
-                de seguridad y privacidad requeridos. Puedes consultar su política
-                de privacidad en <a
-                  href="https://formspree.io/legal/privacy-policy"
-                  target="_blank"
-                  rel="noopener">formspree.io</a
-                >.
-              </li>
-              <li>
-                <strong>Vercel Inc.:</strong> Proveedor de hosting web.
-              </li>
-            </ul>
-
-            <h3>5. Derechos de las Personas Interesadas</h3>
-            <p>
-              Cualquier persona tiene derecho a obtener confirmación sobre si en
-              la Asociación Talento para el Desarrollo estamos tratando datos
-              personales que les conciernan, o no.
-            </p>
-            <ul class="list-disc pl-5">
-              <li>
-                <strong>Derecho de acceso:</strong> Conocer qué datos suyos estamos
-                tratando.
-              </li>
-              <li>
-                <strong>Derecho de rectificación:</strong> Solicitar la corrección
-                de datos inexactos.
-              </li>
-              <li>
-                <strong>Derecho de supresión:</strong> Solicitar que se borren sus
-                datos cuando ya no sean necesarios.
-              </li>
-              <li>
-                <strong>Derecho a la limitación del tratamiento:</strong> En determinadas
-                circunstancias, podrá solicitar la limitación del tratamiento de sus
-                datos.
-              </li>
-              <li>
-                <strong>Derecho de oposición:</strong> En determinadas circunstancias,
-                podrá oponerse al tratamiento de sus datos.
-              </li>
-            </ul>
-            <p>
-              Puede ejercer sus derechos enviando un correo electrónico a <strong
-                >[EMAIL DE CONTACTO]</strong
-              > adjuntando copia de su DNI o documento identificativo. Asimismo, tiene
-              derecho a presentar una reclamación ante la Agencia Española de Protección
-              de Datos (www.aepd.es) si considera que el tratamiento no se ajusta
-              a la normativa vigente.
-            </p>
-
-            <h3>6. Exactitud y Veracidad de los Datos</h3>
-            <p>
-              El usuario garantiza que los datos personales facilitados a la
-              Asociación son veraces y se hace responsable de comunicar
-              cualquier modificación de los mismos. La Asociación se exonera de
-              cualquier responsabilidad al respecto.
-            </p>
-
-            <h3>7. Medidas de Seguridad</h3>
-            <p>
-              La Asociación Talento para el Desarrollo ha adoptado los niveles
-              de seguridad de protección de los datos personales legalmente
-              requeridos, y procura instalar aquellos otros medios y medidas
-              técnicas adicionales a su alcance para evitar la pérdida, mal uso,
-              alteración, acceso no autorizado y robo de los datos personales
-              facilitados.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-</Layout>
+  <h3>5. Derechos de los usuarios</h3>
+  <p>
+    Cualquier persona tiene derecho a obtener confirmación sobre si en La
+    Asociación estamos tratando datos personales que les conciernan, o no.
+  </p>
+  <p>Las personas interesadas tienen derecho a:</p>
+  <ul>
+    <li>Acceder a sus datos personales.</li>
+    <li>Solicitar la rectificación de los datos inexactos.</li>
+    <li>
+      Solicitar su supresión cuando, entre otros motivos, los datos ya no sean
+      necesarios para los fines que fueron recogidos.
+    </li>
+    <li>Solicitar la limitación del tratamiento de sus datos.</li>
+    <li>Oponerse al tratamiento.</li>
+    <li>Solicitar la portabilidad de los datos.</li>
+  </ul>
+  <p>
+    Para ejercer sus derechos, puede enviar un correo electrónico a <strong
+      >[EMAIL DE CONTACTO]</strong
+    >, adjuntando copia de su DNI o documento identificativo equivalente.
+  </p>
+  <p>
+    Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española
+    de Protección de Datos (<a
+      href="https://www.aepd.es"
+      target="_blank"
+      rel="noopener noreferrer">www.aepd.es</a
+    >) si considera que el tratamiento no se ajusta a la normativa vigente.
+  </p>
+</LegalLayout>

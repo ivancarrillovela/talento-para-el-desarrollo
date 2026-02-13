@@ -1,8 +1,6 @@
 ---
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
 
-const reader = createReader(process.cwd(), keystaticConfig);
 const data = await reader.singletons.sobreNosotros.read();
 
 const titulo = data?.titulo || "Nuestra Historia";

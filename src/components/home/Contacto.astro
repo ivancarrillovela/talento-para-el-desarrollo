@@ -1,8 +1,6 @@
 ---
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
 
-const reader = createReader(process.cwd(), keystaticConfig);
 const data = await reader.singletons.contacto.read();
 
 // Valores por defecto
@@ -127,11 +125,16 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
           </div>
           <div class="ml-1 text-sm">
             <label for="privacidad" class="text-zinc-500">
-              He leído y acepto la <a href="/privacidad" target="_blank" class="font-medium text-zinc-900 underline hover:text-terracotta-500">política de privacidad</a>. 
+              He leído y acepto la <a
+                href="/privacidad"
+                target="_blank"
+                class="font-medium text-zinc-900 underline hover:text-terracotta-500"
+                >política de privacidad</a
+              >.
               <br />
               Entiendo que mis datos se usarán para gestionar esta consulta.
             </label>
-          </div>   
+          </div>
         </div>
 
         <button

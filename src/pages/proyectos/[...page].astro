@@ -4,8 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import PageHeader from "../../components/common/PageHeader.astro";
 import ProjectCard from "../../components/proyectos/ProjectCard.astro";
 import { getCollection } from "astro:content";
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
 
 // 1. Logic for Static Paths & Pagination
 export const getStaticPaths = (async ({ paginate }) => {
@@ -26,7 +25,6 @@ const { page } = Astro.props;
 const proyectos = page.data;
 
 // 3. Intro Data (Singleton)
-const reader = createReader(process.cwd(), keystaticConfig);
 const introData = await reader.singletons.nuestroTrabajoIntro.read();
 
 const titulo = introData?.titulo || "Nuestros Proyectos";

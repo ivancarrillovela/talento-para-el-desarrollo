@@ -1,25 +1,21 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { formatDate } from "../../utils/date";
 
 interface Props {
   proyecto: CollectionEntry<"proyectos">;
   index: number;
+  class?: string;
 }
 
-const { proyecto, index } = Astro.props;
-
-// Helper para formatear fecha
-const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat("es-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
-};
+const { proyecto, index, class: className } = Astro.props;
 ---
 
 <article
-  class="group flex flex-col bg-white rounded-sm shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 border border-zinc-100 overflow-hidden animate-fade-in-up h-full relative"
+  class:list={[
+    "group flex flex-col bg-white rounded-sm shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 border border-zinc-100 overflow-hidden animate-fade-in-up h-full relative",
+    className,
+  ]}
   style={`animation-delay: ${index * 100}ms`}
   data-date={proyecto.data.fecha.toISOString()}
 >
@@ -34,10 +30,10 @@ const formatDate = (date: Date) => {
     </div>
 
     <img
-      src={proyecto.data.imagen || "/no_image.jpg"}
+      src={proyecto.data.imagen || "/images/no_image.jpg"}
       alt={proyecto.data.titulo}
       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out will-change-transform"
-      onerror="this.onerror=null;this.src='/no_image.jpg';"
+      onerror="this.onerror=null;this.src='/images/no_image.jpg';"
     />
   </div>
 
@@ -58,15 +54,17 @@ const formatDate = (date: Date) => {
           <a
             href={proyecto.data.pdf}
             download
-            class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-900 border-b-2 border-zinc-200 hover:border-terracotta-500 pb-1 transition-colors"
+            class="group/pdf relative inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-900 pb-1 transition-colors overflow-hidden"
           >
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-zinc-200" />
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-terracotta-500 transform scale-x-0 group-hover/pdf:scale-x-100 transition-transform duration-300 origin-left" />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-4 h-4"
+              class="w-4 h-4 relative z-10 group-hover/pdf:text-terracotta-500 transition-colors"
             >
               <path
                 stroke-linecap="round"
@@ -74,7 +72,9 @@ const formatDate = (date: Date) => {
                 d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
               />
             </svg>
-            Descargar PDF
+            <span class="relative z-10 group-hover/pdf:text-terracotta-500 transition-colors">
+              Descargar PDF
+            </span>
           </a>
         ) : (
           <span class="block h-5" />

@@ -1,0 +1,54 @@
+---
+import Footer from "../components/common/Footer.astro";
+import Layout from "./Layout.astro";
+import PageHeader from "../components/common/PageHeader.astro";
+import { SITE_INFO } from "../constants";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  description: string;
+  updatedAt?: Date;
+}
+
+const {
+  title,
+  subtitle = "Legal",
+  description,
+  updatedAt = new Date(),
+} = Astro.props;
+
+const fullTitle = `${title} - ${SITE_INFO.name}`;
+---
+
+<Layout title={fullTitle}>
+  <main class="bg-zinc-100 min-h-screen flex flex-col relative">
+    <PageHeader title={title} subtitle={subtitle} description={description} />
+
+    <div class="container mx-auto px-6 lg:px-12 -mt-48 relative z-20 pb-24">
+      <div class="relative w-full">
+        <div
+          class="absolute top-10 -left-10 w-full h-full bg-terracotta-100 z-0 hidden md:block"
+        >
+        </div>
+
+        <div
+          class="bg-white shadow-2xl p-8 md:p-16 border border-zinc-100 relative z-10"
+        >
+          <p
+            class="text-zinc-400 mb-10 text-sm font-medium uppercase tracking-widest border-b border-zinc-100 pb-4 text-right"
+          >
+            Última actualización: {updatedAt.toLocaleDateString("es-ES")}
+          </p>
+
+          <div
+            class="prose prose-lg prose-zinc text-zinc-600 prose-headings:text-zinc-900 prose-headings:font-bold prose-a:text-terracotta-500 max-w-none"
+          >
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

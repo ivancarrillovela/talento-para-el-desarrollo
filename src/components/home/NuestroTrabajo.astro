@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
+import { formatDate } from "../../utils/date";
+import ProjectCard from "../proyectos/ProjectCard.astro";
 
 // 1. Datos de la Intro (Singleton)
-const reader = createReader(process.cwd(), keystaticConfig);
 const introData = await reader.singletons.nuestroTrabajoIntro.read();
 
 // 2. Datos de los Proyectos (Colección)
@@ -12,15 +12,6 @@ const proyectosRaw = await getCollection("proyectos");
 const proyectos = proyectosRaw
   .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf())
   .slice(0, 6);
-
-// Helper para formatear fecha
-const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat("es-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
-};
 
 // Valores por defecto
 const titulo = introData?.titulo || "Proyectos que transforman.";
@@ -98,59 +89,12 @@ if (!proyectos || proyectos.length === 0) return null;
       class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 scrollbar-hide items-stretch md:overflow-visible"
     >
       {
-        proyectos.map((proyecto) => (
-          <article class="min-w-[85vw] md:min-w-0 snap-center group relative bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full border border-zinc-100 md:border-none">
-            <div class="aspect-[4/3] overflow-hidden bg-zinc-200 relative">
-              <img
-                src={proyecto.data.imagen || "/no_image.jpg"}
-                alt={proyecto.data.titulo}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                onerror="this.onerror=null;this.src='/no_image.jpg';"
-              />
-              {/* Badge fecha mobile overlay */}
-              <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-terracotta-500 uppercase tracking-widest rounded-sm shadow-sm md:hidden">
-                {formatDate(proyecto.data.fecha)}
-              </div>
-            </div>
-            <div class="p-6 md:p-8 flex flex-col flex-grow min-h-[18rem]">
-              <div class="hidden md:block text-xs font-bold text-terracotta-500 uppercase tracking-widest mb-2">
-                {formatDate(proyecto.data.fecha)}
-              </div>
-              <h4 class="text-xl md:text-2xl font-bold mb-3 group-hover:text-terracotta-500 transition-colors line-clamp-2 min-h-[3.5rem] md:min-h-[4rem]">
-                {proyecto.data.titulo}
-              </h4>
-              <p class="text-zinc-500 leading-relaxed mb-6 text-sm md:text-base line-clamp-3 min-h-[4.5rem]">
-                {proyecto.data.descripcion}
-              </p>
-
-              {/* Card Footer: Always renders to ensure uniform height */}
-              <div class="mt-auto pt-4 flex items-end">
-                {proyecto.data.pdf && (
-                  <a
-                    href={proyecto.data.pdf}
-                    download
-                    class="inline-flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest border-b-2 border-zinc-200 hover:border-terracotta-500 pb-1 transition-colors"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="w-4 h-4 md:w-5 md:h-5"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
-                      />
-                    </svg>
-                    Descargar PDF
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
+        proyectos.map((proyecto, index) => (
+          <ProjectCard
+            proyecto={proyecto}
+            index={index}
+            class="min-w-[85vw] md:min-w-0 snap-center h-full border border-zinc-100 md:border-none"
+          />
         ))
       }
     </div>

@@ -1,8 +1,6 @@
 ---
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
 
-const reader = createReader(process.cwd(), keystaticConfig);
 const data = await reader.singletons.hero.read();
 
 if (!data) return null;
@@ -15,7 +13,7 @@ const {
   imagen,
 
   textoBotonSecundario = "Cómo colaborar",
-  badgeTitulo = "Numerosas Becas",
+  badgeTitulo = "Numerosas becas",
   badgeDesc = "Otorgadas en el último año.",
 } = data;
 ---
@@ -54,10 +52,10 @@ const {
           >
           </div>
           <img
-            src={imagen || "/no_image.jpg"}
+            src={imagen || "/images/no_image.jpg"}
             alt={titulo}
             class="relative z-10 w-full h-full object-cover shadow-lg filter sepia-[10%] contrast-[105%]"
-            onerror="this.onerror=null;this.src='/no_image.jpg';"
+            onerror="this.onerror=null;this.src='/images/no_image.jpg';"
           />
         </div>
 
@@ -104,10 +102,10 @@ const {
         >
         </div>
         <img
-          src={imagen || "/no_image.jpg"}
+          src={imagen || "/images/no_image.jpg"}
           alt={titulo}
           class="relative z-10 w-full h-full object-cover shadow-2xl filter sepia-[10%] contrast-[105%]"
-          onerror="this.onerror=null;this.src='/no_image.jpg';"
+          onerror="this.onerror=null;this.src='/images/no_image.jpg';"
         />
         <div
           class="absolute bottom-10 -left-10 z-20 bg-white p-6 shadow-xl max-w-xs hidden md:block border-l-4 border-terracotta-500"

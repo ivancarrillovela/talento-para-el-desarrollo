@@ -1,6 +1,7 @@
 ---
-import { createReader } from "@keystatic/core/reader";
-import keystaticConfig from "../../../keystatic.config";
+import { reader } from "../../utils/keystatic";
+
+import { SITE_INFO, FOOTER_LINKS } from "../../constants";
 
 interface Props {
   variant?: "default" | "mobile";
@@ -9,15 +10,8 @@ interface Props {
 const { variant = "default" } = Astro.props;
 const isMobile = variant === "mobile";
 
-const reader = createReader(process.cwd(), keystaticConfig);
 const global = await reader.singletons.global.read();
 const year = new Date().getFullYear();
-
-const links = [
-  { label: "Aviso legal", href: "/aviso-legal" },
-  { label: "Privacidad", href: "/privacidad" },
-  { label: "Política de cookies", href: "/politica-de-cookies" },
-];
 ---
 
 <footer
@@ -37,7 +31,7 @@ const links = [
           ? "text-zinc-900 font-bold text-lg mb-1"
           : "text-white font-bold text-xl mb-2"}
       >
-        {global?.nombreSitio || "Talento para el Desarrollo"}
+        {global?.nombreSitio || SITE_INFO.name}
       </h4>
       <p
         class={isMobile
@@ -55,7 +49,7 @@ const links = [
         : "flex flex-wrap justify-center gap-6 text-sm"}
     >
       {
-        links.map((link) => (
+        FOOTER_LINKS.map((link) => (
           <a
             href={link.href}
             class={
