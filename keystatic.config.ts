@@ -8,7 +8,7 @@ export default config({
   storage: import.meta.env.DEV ? { kind: "local" } : { kind: "cloud" },
 
   singletons: {
-    // 1. HERO
+    // 1. PORTADA
     hero: singleton({
       label: "Portada",
       path: "src/content/hero/datos",
@@ -101,9 +101,12 @@ export default config({
       label: "Configuración Web (Logo, Redes, Footer)",
       path: "src/content/global/datos",
       schema: {
-        nombreSitio: fields.text({ label: "Nombre de la asociación (Si no subes logo se verá esto)" }),
+        nombreSitio: fields.text({
+          label: "Nombre de la asociación (Si no subes logo se verá esto)",
+        }),
         logo: fields.image({
-          label: "Logo de la asociación (Si pones un logo no se verá el nombre de la asociación, solo el logo)",
+          label:
+            "Logo de la asociación (Si pones un logo no se verá el nombre de la asociación, solo el logo)",
           directory: "public/images/global",
           publicPath: "/images/global/",
         }),
@@ -115,7 +118,9 @@ export default config({
           },
           { label: "Redes Sociales" },
         ),
-        footerTexto: fields.text({ label: "Texto pie de página (Junto al Copyright)" }),
+        footerTexto: fields.text({
+          label: "Texto pie de página (Junto al Copyright)",
+        }),
       },
     }),
   },

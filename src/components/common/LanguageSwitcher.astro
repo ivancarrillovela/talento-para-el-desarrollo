@@ -1,0 +1,66 @@
+---
+
+---
+
+<div
+  class="flex items-center gap-2 text-sm font-medium wg-exclude notranslate"
+  data-wg-notranslate
+>
+  <button
+    id="lang-es"
+    class="text-zinc-900 font-bold hover:text-zinc-900 transition-colors"
+    aria-label="Cambiar a Español"
+  >
+    ES
+  </button>
+  <span class="text-zinc-300">|</span>
+  <button
+    id="lang-en"
+    class="text-zinc-400 hover:text-zinc-900 transition-colors"
+    aria-label="Switch to English"
+  >
+    EN
+  </button>
+</div>
+
+<script>
+  // Esperar a que Weglot se inicialice
+  // @ts-ignore
+  Weglot.on("initialized", () => {
+    // @ts-ignore
+    const currentLang = Weglot.getCurrentLang();
+    updateActiveLanguage(currentLang);
+  });
+
+  // @ts-ignore
+  Weglot.on("languageChanged", (newLang) => {
+    updateActiveLanguage(newLang);
+  });
+
+  const btnEs = document.getElementById("lang-es");
+  const btnEn = document.getElementById("lang-en");
+
+  function updateActiveLanguage(lang: string) {
+    if (lang === "es") {
+      btnEs?.classList.add("text-zinc-900", "font-bold");
+      btnEs?.classList.remove("text-zinc-400");
+      btnEn?.classList.add("text-zinc-400");
+      btnEn?.classList.remove("text-zinc-900", "font-bold");
+    } else {
+      btnEn?.classList.add("text-zinc-900", "font-bold");
+      btnEn?.classList.remove("text-zinc-400");
+      btnEs?.classList.add("text-zinc-400");
+      btnEs?.classList.remove("text-zinc-900", "font-bold");
+    }
+  }
+
+  btnEs?.addEventListener("click", () => {
+    // @ts-ignore
+    Weglot.switchTo("es");
+  });
+
+  btnEn?.addEventListener("click", () => {
+    // @ts-ignore
+    Weglot.switchTo("en");
+  });
+</script>

@@ -2,6 +2,7 @@
 import { reader } from "../../utils/keystatic";
 import { SITE_INFO, NAV_LINKS, FOOTER_LINKS } from "../../constants";
 import Footer from "./Footer.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
 
 const globalData = await reader.singletons.global.read();
 const nombre = globalData?.nombreSitio || SITE_INFO.name;
@@ -47,6 +48,8 @@ const logo = globalData?.logo || null;
           </a>
         ))
       }
+
+      <LanguageSwitcher />
 
       <a
         href="#contacto"
@@ -94,12 +97,12 @@ const logo = globalData?.logo || null;
       </svg>
     </button>
 
-    {/* Mobile Menu Overlay - Solid White */}
+    {/* Superposición del menú móvil - Blanco sólido */}
     <div
       id="mobile-menu"
       class="fixed inset-0 bg-white z-40 flex flex-col px-8 pt-28 pb-10 transition-transform duration-300 translate-x-full md:hidden"
     >
-      {/* Top CTA */}
+      {/* CTA Superior */}
       <div class="mb-10">
         <a
           href="#contacto"
@@ -109,7 +112,7 @@ const logo = globalData?.logo || null;
         </a>
       </div>
 
-      {/* Navigation Links */}
+      {/* Enlaces de navegación */}
       <nav class="flex flex-col gap-6 items-start">
         {
           NAV_LINKS.map((link) => (
@@ -121,16 +124,19 @@ const logo = globalData?.logo || null;
             </a>
           ))
         }
+        <div class="mt-4">
+          <LanguageSwitcher />
+        </div>
       </nav>
 
-      {/* Menu Footer - Mirrors Footer.astro */}
+      {/* Pie de menú - Refleja Footer.astro */}
       <Footer variant="mobile" />
     </div>
   </div>
 </nav>
 
 <script>
-  // Mobile Menu Logic
+  // Lógica del menú móvil
   const menuBtn = document.getElementById("menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
   const mobileLinks = mobileMenu?.querySelectorAll("a");
@@ -143,39 +149,39 @@ const logo = globalData?.logo || null;
     const isOpen = mobileMenu?.classList.contains("translate-x-0");
 
     if (isOpen) {
-      // CLOSE
+      // CERRAR
       mobileMenu?.classList.remove("translate-x-0");
       mobileMenu?.classList.add("translate-x-full");
 
-      // Icon Logic: Show Hamburger
+      // Lógica de iconos: Mostrar hamburguesa
       iconMenu?.classList.remove("opacity-0", "rotate-90", "scale-75");
       iconClose?.classList.add("opacity-0", "scale-75");
       iconClose?.classList.remove("rotate-90");
 
-      body.style.overflow = ""; // Enable scroll
+      body.style.overflow = ""; // Habilitar scroll
     } else {
-      // OPEN
+      // ABRIR
       mobileMenu?.classList.remove("translate-x-full");
       mobileMenu?.classList.add("translate-x-0");
 
-      // Icon Logic: Show X
+      // Lógica de iconos: Mostrar X
       iconMenu?.classList.add("opacity-0", "rotate-90", "scale-75");
       iconClose?.classList.remove("opacity-0", "scale-75");
       iconClose?.classList.add("rotate-90");
 
-      body.style.overflow = "hidden"; // Disable scroll
+      body.style.overflow = "hidden"; // Deshabilitar scroll
     }
   }
 
   menuBtn?.addEventListener("click", toggleMenu);
 
-  // Close menu when clicking a link
+  // Cerrar menú al hacer clic en un enlace
   mobileLinks?.forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu?.classList.remove("translate-x-0");
       mobileMenu?.classList.add("translate-x-full");
 
-      // Reset Icons
+      // Restablecer iconos
       iconMenu?.classList.remove("opacity-0", "rotate-90", "scale-75");
       iconClose?.classList.add("opacity-0", "scale-75");
       iconClose?.classList.remove("rotate-90");
@@ -184,7 +190,7 @@ const logo = globalData?.logo || null;
     });
   });
 
-  // Scroll Animation (Desktop)
+  // Animación de scroll (Escritorio)
   function updateNavScroll() {
     if (window.scrollY > 20) {
       nav?.classList.remove("py-4", "shadow-none");

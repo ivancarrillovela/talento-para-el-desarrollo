@@ -6,32 +6,32 @@ import ProjectCard from "../../components/proyectos/ProjectCard.astro";
 import { getCollection } from "astro:content";
 import { reader } from "../../utils/keystatic";
 
-// 1. Logic for Static Paths & Pagination
+// 1. Lógica para rutas estáticas y paginación
 export const getStaticPaths = (async ({ paginate }) => {
-  // Get all projects
+  // Obtener todos los proyectos
   const proyectosRaw = await getCollection("proyectos");
 
-  // Sort by date (Newest first)
+  // Ordenar por fecha (más reciente primero)
   const proyectosSorted = proyectosRaw.sort(
     (a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf(),
   );
 
-  // Return paginated routes (12 items per page)
+  // Devolver rutas paginadas (12 elementos por página)
   return paginate(proyectosSorted, { pageSize: 12 });
 }) satisfies GetStaticPaths;
 
-// 2. Data from Pagination Props
+// 2. Datos de las propiedades de paginación
 const { page } = Astro.props;
 const proyectos = page.data;
 
-// 3. Intro Data (Singleton)
+// 3. Datos de introducción (Singleton)
 const introData = await reader.singletons.nuestroTrabajoIntro.read();
 
 const titulo = introData?.titulo || "Nuestros Proyectos";
 const descripcion =
   "Explora todas nuestras iniciativas y el impacto que generamos.";
 
-// 4. Compute unique years for filter
+// 4. Calcular años únicos para el filtro
 const uniqueYears = [
   ...new Set(proyectos.map((p) => p.data.fecha.getFullYear())),
 ].sort((a, b) => b - a);
@@ -41,28 +41,28 @@ const uniqueYears = [
   title={`Proyectos - Página ${page.currentPage} - Talento para el Desarrollo`}
 >
   <main class="bg-zinc-100 min-h-screen flex flex-col relative">
-    {/* Cinematic Noise Overlay */}
+    {/* Superposición de ruido cinematográfico */}
     <div
       class="fixed inset-0 z-50 pointer-events-none opacity-[0.03]"
       style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E');"
     >
     </div>
 
-    {/* HEADER COMPONENT */}
+    {/* COMPONENTE DE CABECERA */}
     <PageHeader title={titulo} description={descripcion} />
 
-    {/* OVERLAPPING FLOATING CONTAINER */}
+    {/* CONTENEDOR FLOTANTE SUPERPUESTO */}
     <div class="container mx-auto px-6 lg:px-12 -mt-48 relative z-20 pb-24">
       <div class="relative w-full">
         <div
           class="absolute top-10 -left-10 w-full h-full bg-terracotta-100 z-0"
         >
         </div>
-        {/* The "Container That Stands Out" */}
+        {/* El "Contenedor que destaca" */}
         <div
           class="bg-white shadow-2xl p-8 md:p-12 border border-zinc-100 relative z-10"
         >
-          {/* SORT & FILTER TOOLBAR */}
+          {/* BARRA DE HERRAMIENTAS DE ORDEN Y FILTRO */}
           <div
             class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-zinc-100"
           >
@@ -121,7 +121,7 @@ const uniqueYears = [
             }
           </div>
 
-          {/* PAGINATION CONTROLS */}
+          {/* CONTROLES DE PAGINACIÓN */}
           <div
             class="flex justify-between items-center pt-8 border-t border-zinc-100"
           >

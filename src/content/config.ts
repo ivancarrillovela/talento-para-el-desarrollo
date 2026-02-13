@@ -10,7 +10,7 @@ const valores = defineCollection({
   }),
 });
 
-// 2. Colección de HERO
+// 2. Colección de PORTADA
 const hero = defineCollection({
   type: "data",
   schema: z.object({
@@ -69,6 +69,43 @@ const proyectos = defineCollection({
   }),
 });
 
+// 7. Colección de GLOBAL
+const global = defineCollection({
+  type: "data",
+  schema: z.object({
+    nombreSitio: z.string().optional(),
+    logo: z.string().optional(),
+    redes: z
+      .object({
+        instagram: z.string().optional(),
+        linkedin: z.string().optional(),
+        twitter: z.string().optional(),
+      })
+      .optional(),
+    footerTexto: z.string().optional(),
+  }),
+});
+
+// 8. Colección de SOBRE NOSOTROS
+const sobreNosotros = defineCollection({
+  type: "data",
+  schema: z.object({
+    titulo: z.string().optional(),
+    descripcion: z.string().optional(),
+    imagen: z.string().optional(),
+    stats: z
+      .object({
+        stat1_numero: z.string().optional(),
+        stat1_label: z.string().optional(),
+        stat2_numero: z.string().optional(),
+        stat2_label: z.string().optional(),
+        stat3_numero: z.string().optional(),
+        stat3_label: z.string().optional(),
+      })
+      .optional(),
+  }),
+});
+
 export const collections = {
   valores,
   hero,
@@ -76,4 +113,6 @@ export const collections = {
   contacto,
   "nuestro-trabajo-intro": nuestroTrabajoIntro,
   proyectos,
+  global,
+  "sobre-nosotros": sobreNosotros,
 };
