@@ -437,13 +437,23 @@ const uniqueYears = [
       renderProjects();
     }
 
+    function getSortLabel(order: string): string {
+      // @ts-ignore
+      const lang =
+        typeof Weglot !== "undefined" ? Weglot.getCurrentLang() : "es";
+      if (order === "desc") {
+        return lang === "en" ? "Most recent" : "Más recientes";
+      } else {
+        return lang === "en" ? "Oldest" : "Más antiguos";
+      }
+    }
+
     sortBtn.addEventListener("click", () => {
       const current = sortBtn.dataset.order;
       const newOrder = current === "desc" ? "asc" : "desc";
       sortBtn.dataset.order = newOrder;
 
-      sortLabel.textContent =
-        newOrder === "desc" ? "Más recientes" : "Más antiguos";
+      sortLabel.textContent = getSortLabel(newOrder);
       sortIcon.style.transform = newOrder === "asc" ? "rotate(180deg)" : "";
 
       applyFilters();
@@ -452,5 +462,15 @@ const uniqueYears = [
     yearFilter.addEventListener("change", () => {
       applyFilters();
     });
+
+    // Update sort label when Weglot language changes
+    // @ts-ignore
+    if (typeof Weglot !== "undefined") {
+      // @ts-ignore
+      Weglot.on("languageChanged", () => {
+        const currentOrder = sortBtn.dataset.order || "desc";
+        sortLabel.textContent = getSortLabel(currentOrder);
+      });
+    }
   });
 </script>
