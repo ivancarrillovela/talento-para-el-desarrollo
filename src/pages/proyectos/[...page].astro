@@ -16,8 +16,8 @@ export const getStaticPaths = (async ({ paginate }) => {
     (a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf(),
   );
 
-  // Devolver rutas paginadas (12 elementos por página)
-  return paginate(proyectosSorted, { pageSize: 12 });
+  // Devolver rutas paginadas (6 elementos por página)
+  return paginate(proyectosSorted, { pageSize: 6 });
 }) satisfies GetStaticPaths;
 
 // 2. Datos de las propiedades de paginación
@@ -60,15 +60,15 @@ const uniqueYears = [
         </div>
         {/* El "Contenedor que destaca" */}
         <div
-          class="bg-white shadow-2xl p-8 md:p-12 border border-zinc-100 relative z-10"
+          class="bg-white shadow-2xl p-6 md:p-12 border border-zinc-100 relative z-10"
         >
           {/* BARRA DE HERRAMIENTAS DE ORDEN Y FILTRO */}
           <div
-            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-zinc-100"
+            class="flex flex-row justify-between items-center gap-4 mb-8 pb-6 border-b border-zinc-100"
           >
             <button
               id="sort-toggle"
-              class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-terracotta-500 transition-colors cursor-pointer bg-transparent border-none p-0"
+              class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-500 hover:text-terracotta-500 transition-colors cursor-pointer bg-zinc-50 border border-zinc-200 px-4 py-2 rounded-sm"
               data-order="desc"
             >
               <span id="sort-label">Más recientes</span>
@@ -123,13 +123,15 @@ const uniqueYears = [
 
           {/* CONTROLES DE PAGINACIÓN */}
           <div
-            class="flex justify-between items-center pt-8 border-t border-zinc-100"
+            id="pagination-controls"
+            data-current-page={page.currentPage}
+            class="flex flex-wrap justify-between items-center pt-8 border-t border-zinc-100 gap-y-4"
           >
             {
               page.url.prev ? (
                 <a
                   href={page.url.prev}
-                  class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-terracotta-500 transition-colors group"
+                  class="bg-white border border-zinc-200 text-zinc-600 font-bold uppercase tracking-widest text-xs px-4 py-3 rounded-sm hover:text-terracotta-500 hover:border-terracotta-500 transition-colors shadow-sm inline-flex items-center justify-center gap-2 order-2 w-[45%] sm:w-auto sm:order-1"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +139,7 @@ const uniqueYears = [
                     viewBox="0 0 24 24"
                     stroke-width="2"
                     stroke="currentColor"
-                    class="w-4 h-4 transition-transform group-hover:-translate-x-1"
+                    class="w-4 h-4"
                   >
                     <path
                       stroke-linecap="round"
@@ -148,12 +150,12 @@ const uniqueYears = [
                   Anterior
                 </a>
               ) : (
-                <span class="w-20" />
+                <span class="order-2 w-[45%] sm:w-20 sm:order-1" />
               )
             }
 
             <span
-              class="text-xs font-bold uppercase tracking-widest text-zinc-300"
+              class="text-xs font-bold uppercase tracking-widest text-zinc-400 text-center w-full sm:w-auto order-1 sm:order-2 mb-6 sm:mb-0"
             >
               Página {page.currentPage} de {page.lastPage}
             </span>
@@ -162,7 +164,7 @@ const uniqueYears = [
               page.url.next ? (
                 <a
                   href={page.url.next}
-                  class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-zinc-500 hover:text-terracotta-500 transition-colors group"
+                  class="bg-white border border-zinc-200 text-zinc-600 font-bold uppercase tracking-widest text-xs px-4 py-3 rounded-sm hover:text-terracotta-500 hover:border-terracotta-500 transition-colors shadow-sm inline-flex items-center justify-center gap-2 order-3 w-[45%] sm:w-auto sm:order-3"
                 >
                   Siguiente
                   <svg
@@ -171,7 +173,7 @@ const uniqueYears = [
                     viewBox="0 0 24 24"
                     stroke-width="2"
                     stroke="currentColor"
-                    class="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    class="w-4 h-4"
                   >
                     <path
                       stroke-linecap="round"
@@ -181,7 +183,7 @@ const uniqueYears = [
                   </svg>
                 </a>
               ) : (
-                <span class="w-20" />
+                <span class="order-3 w-[45%] sm:w-20 sm:order-3" />
               )
             }
           </div>
@@ -210,7 +212,12 @@ const uniqueYears = [
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  const itemsPerPage = 6;
+  let allProjects: any[] = [];
+  let filteredProjects: any[] = [];
+  let currentPage = 1;
+
+  document.addEventListener("DOMContentLoaded", async () => {
     const sortBtn = document.getElementById("sort-toggle") as HTMLButtonElement;
     const sortLabel = document.getElementById("sort-label")!;
     const sortIcon = document.getElementById("sort-icon")!;
@@ -218,38 +225,216 @@ const uniqueYears = [
       "year-filter",
     ) as HTMLSelectElement;
     const grid = document.getElementById("projects-grid")!;
+    const paginationContainer = document.getElementById("pagination-controls")!;
 
-    function getCards(): HTMLElement[] {
-      return Array.from(
-        grid.querySelectorAll<HTMLElement>(":scope > article[data-date]"),
-      );
+    // Initialize currentPage from DOM if available
+    if (paginationContainer && paginationContainer.dataset.currentPage) {
+      currentPage = parseInt(paginationContainer.dataset.currentPage);
     }
 
-    function sortCards() {
-      const order = sortBtn.dataset.order;
-      const cards = getCards();
+    // Initial fetch
+    try {
+      const response = await fetch("/data/proyectos.json");
+      allProjects = await response.json();
+      filteredProjects = [...allProjects];
 
-      cards.sort((a, b) => {
-        const dateA = new Date(a.dataset.date!).getTime();
-        const dateB = new Date(b.dataset.date!).getTime();
+      // Initialize pagination UI for page 1 (if static matches API)
+      renderPagination();
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+
+    function formatDate(dateString: string) {
+      const d = new Date(dateString);
+      return new Intl.DateTimeFormat("es-ES", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(d);
+    }
+
+    function renderProjects() {
+      grid.innerHTML = "";
+
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      const pageProjects = filteredProjects.slice(start, end);
+
+      if (pageProjects.length === 0) {
+        grid.innerHTML =
+          '<p class="col-span-full text-center text-zinc-500 py-12">No se encontraron proyectos con estos criterios.</p>';
+        renderPagination();
+        return;
+      }
+
+      pageProjects.forEach((project, index) => {
+        const article = document.createElement("article");
+        // Replicating ProjectCard classes
+        article.className = `group flex flex-col bg-white rounded-sm shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500 border border-zinc-100 overflow-hidden animate-fade-in-up h-full relative`;
+        article.style.animationDelay = `${index * 100}ms`;
+        article.dataset.date = project.fecha;
+
+        const pdfSection = project.pdf
+          ? `
+          <a
+            href="${project.pdf}"
+            download
+            class="group/pdf relative inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-900 pb-1 transition-colors overflow-hidden"
+          >
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-zinc-200"></span>
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-terracotta-500 transform scale-x-0 group-hover/pdf:scale-x-100 transition-transform duration-300 origin-left"></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-4 h-4 relative z-10 group-hover/pdf:text-terracotta-500 transition-colors"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+              />
+            </svg>
+            <span class="relative z-10 group-hover/pdf:text-terracotta-500 transition-colors">
+              Descargar PDF
+            </span>
+          </a>
+        `
+          : '<span class="block h-5"></span>';
+
+        const imageSrc = project.imagen || "/images/no_image.jpg";
+
+        article.innerHTML = `
+          <div class="aspect-[3/2] overflow-hidden bg-zinc-100 relative border-b border-zinc-50 group">
+            <div class="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-900 shadow-sm border border-white/50 rounded-sm">
+              ${formatDate(project.fecha)}
+            </div>
+            <img
+              src="${imageSrc}"
+              alt="${project.titulo}"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out will-change-transform"
+              onerror="this.onerror=null;this.src='/images/no_image.jpg';"
+            />
+          </div>
+          <div class="p-6 md:p-8 flex flex-col flex-grow relative">
+            <h2 class="text-xl md:text-2xl font-bold text-zinc-900 mb-3 group-hover:text-terracotta-500 transition-colors leading-tight">
+              ${project.titulo}
+            </h2>
+            <p class="text-zinc-600 leading-relaxed mb-6 text-sm font-light">
+              ${project.descripcion}
+            </p>
+            <div class="mt-auto pt-4 border-t border-zinc-50">
+              ${pdfSection}
+            </div>
+          </div>
+        `;
+        grid.appendChild(article);
+      });
+
+      renderPagination();
+    }
+
+    function renderPagination() {
+      const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
+
+      // Clear existing content
+      paginationContainer.innerHTML = "";
+
+      if (totalPages <= 1) return;
+
+      // Prev Button Logic
+      const prevBtn = document.createElement("button");
+      if (currentPage > 1) {
+        prevBtn.className =
+          "bg-white border border-zinc-200 text-zinc-600 font-bold uppercase tracking-widest text-xs px-4 py-3 rounded-sm hover:text-terracotta-500 hover:border-terracotta-500 transition-colors shadow-sm inline-flex items-center justify-center gap-2 order-2 w-[45%] sm:w-auto sm:order-1 cursor-pointer";
+        prevBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Anterior
+        `;
+        prevBtn.onclick = () => {
+          currentPage--;
+          renderProjects();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+      } else {
+        const placeholder = document.createElement("span");
+        placeholder.className = "order-2 w-[45%] sm:w-20 sm:order-1";
+        prevBtn.replaceWith(placeholder);
+        // We append the placeholder instead if button logic fails, but let's stick to the flow
+      }
+
+      // Next Button Logic
+      const nextBtn = document.createElement("button");
+      if (currentPage < totalPages) {
+        nextBtn.className =
+          "bg-white border border-zinc-200 text-zinc-600 font-bold uppercase tracking-widest text-xs px-4 py-3 rounded-sm hover:text-terracotta-500 hover:border-terracotta-500 transition-colors shadow-sm inline-flex items-center justify-center gap-2 order-3 w-[45%] sm:w-auto sm:order-3 cursor-pointer";
+        nextBtn.innerHTML = `
+          Siguiente
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        `;
+        nextBtn.onclick = () => {
+          currentPage++;
+          renderProjects();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+      } else {
+        // placeholder logic
+      }
+
+      // Page Info
+      const pageInfo = document.createElement("span");
+      pageInfo.className =
+        "text-xs font-bold uppercase tracking-widest text-zinc-400 text-center w-full sm:w-auto order-1 sm:order-2 mb-6 sm:mb-0";
+      pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+
+      // Append elements
+      if (currentPage > 1) {
+        paginationContainer.appendChild(prevBtn);
+      } else {
+        const p = document.createElement("span");
+        p.className = "order-2 w-[45%] sm:w-20 sm:order-1";
+        paginationContainer.appendChild(p);
+      }
+
+      paginationContainer.appendChild(pageInfo);
+
+      if (currentPage < totalPages) {
+        paginationContainer.appendChild(nextBtn);
+      } else {
+        const p = document.createElement("span");
+        p.className = "order-3 w-[45%] sm:w-20 sm:order-3";
+        paginationContainer.appendChild(p);
+      }
+    }
+
+    function applyFilters() {
+      const selectedYear = yearFilter.value;
+      const order = sortBtn.dataset.order;
+
+      // Filter
+      filteredProjects = allProjects.filter((project) => {
+        const projectYear = new Date(project.fecha).getFullYear().toString();
+        return selectedYear === "all" || projectYear === selectedYear;
+      });
+
+      // Sort
+      filteredProjects.sort((a, b) => {
+        const dateA = new Date(a.fecha).getTime();
+        const dateB = new Date(b.fecha).getTime();
         return order === "desc" ? dateB - dateA : dateA - dateB;
       });
 
-      cards.forEach((card) => grid.appendChild(card));
-    }
+      // Reset to page 1
+      currentPage = 1;
 
-    function filterCards() {
-      const selectedYear = yearFilter.value;
-      const cards = getCards();
-
-      cards.forEach((card) => {
-        const cardYear = new Date(card.dataset.date!).getFullYear().toString();
-        if (selectedYear === "all" || cardYear === selectedYear) {
-          card.style.display = "";
-        } else {
-          card.style.display = "none";
-        }
-      });
+      // Render
+      renderProjects();
     }
 
     sortBtn.addEventListener("click", () => {
@@ -261,11 +446,11 @@ const uniqueYears = [
         newOrder === "desc" ? "Más recientes" : "Más antiguos";
       sortIcon.style.transform = newOrder === "asc" ? "rotate(180deg)" : "";
 
-      sortCards();
+      applyFilters();
     });
 
     yearFilter.addEventListener("change", () => {
-      filterCards();
+      applyFilters();
     });
   });
 </script>

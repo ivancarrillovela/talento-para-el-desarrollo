@@ -80,6 +80,7 @@ const global = defineCollection({
         instagram: z.string().optional(),
         linkedin: z.string().optional(),
         twitter: z.string().optional(),
+        webExterna: z.string().optional(),
       })
       .optional(),
     footerTexto: z.string().optional(),
@@ -106,6 +107,23 @@ const sobreNosotros = defineCollection({
   }),
 });
 
+// 9. Colección de CÓMO BENEFICIARTE
+const comoBeneficiarte = defineCollection({
+  type: "data",
+  schema: z.object({
+    tituloSmall: z.string().optional(),
+    titulo: z.string().optional(),
+    descripcion: z.string().optional(),
+    paso1_titulo: z.string().optional(),
+    paso1_desc: z.string().optional(),
+    paso2_titulo: z.string().optional(),
+    paso2_desc: z.string().optional(),
+    paso3_titulo: z.string().optional(),
+    paso3_desc: z.string().optional(),
+    botonTexto: z.string().optional(),
+  }),
+});
+
 export const collections = {
   valores,
   hero,
@@ -115,4 +133,5 @@ export const collections = {
   proyectos,
   global,
   "sobre-nosotros": sobreNosotros,
+  "como-beneficiarte": comoBeneficiarte,
 };

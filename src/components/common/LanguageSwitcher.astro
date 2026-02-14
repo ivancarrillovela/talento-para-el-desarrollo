@@ -1,66 +1,99 @@
 ---
+interface Props {
+  theme?: "light" | "dark";
+}
 
+const { theme = "light" } = Astro.props;
 ---
 
 <div
-  class="flex items-center gap-2 text-sm font-medium wg-exclude notranslate"
+  class="language-switcher flex items-center gap-2 text-sm font-medium wg-exclude notranslate"
   data-wg-notranslate
+  data-theme={theme}
 >
-  <button
-    id="lang-es"
-    class="text-zinc-900 font-bold hover:text-zinc-900 transition-colors"
-    aria-label="Cambiar a Español"
-  >
+  <button class="lang-es transition-colors" aria-label="Cambiar a Español">
     ES
   </button>
-  <span class="text-zinc-300">|</span>
-  <button
-    id="lang-en"
-    class="text-zinc-400 hover:text-zinc-900 transition-colors"
-    aria-label="Switch to English"
-  >
+  <span class="separator text-zinc-300">|</span>
+  <button class="lang-en transition-colors" aria-label="Switch to English">
     EN
   </button>
 </div>
 
 <script>
-  // Esperar a que Weglot se inicialice
   // @ts-ignore
   Weglot.on("initialized", () => {
     // @ts-ignore
     const currentLang = Weglot.getCurrentLang();
-    updateActiveLanguage(currentLang);
+    updateAllSwitchers(currentLang);
   });
 
   // @ts-ignore
   Weglot.on("languageChanged", (newLang) => {
-    updateActiveLanguage(newLang);
+    updateAllSwitchers(newLang);
   });
 
-  const btnEs = document.getElementById("lang-es");
-  const btnEn = document.getElementById("lang-en");
+  function updateAllSwitchers(lang: string) {
+    const switchers = document.querySelectorAll(".language-switcher");
 
-  function updateActiveLanguage(lang: string) {
-    if (lang === "es") {
-      btnEs?.classList.add("text-zinc-900", "font-bold");
-      btnEs?.classList.remove("text-zinc-400");
-      btnEn?.classList.add("text-zinc-400");
-      btnEn?.classList.remove("text-zinc-900", "font-bold");
-    } else {
-      btnEn?.classList.add("text-zinc-900", "font-bold");
-      btnEn?.classList.remove("text-zinc-400");
-      btnEs?.classList.add("text-zinc-400");
-      btnEs?.classList.remove("text-zinc-900", "font-bold");
-    }
+    switchers.forEach((switcher) => {
+      const theme = (switcher as HTMLElement).dataset.theme || "light";
+      const btnEs = switcher.querySelector(".lang-es");
+      const btnEn = switcher.querySelector(".lang-en");
+      const separator = switcher.querySelector(".separator");
+
+      // Reset base classes
+      btnEs?.classList.remove(
+        "font-bold",
+        "text-zinc-900",
+        "text-zinc-400",
+        "text-white",
+        "text-zinc-500",
+      );
+      btnEn?.classList.remove(
+        "font-bold",
+        "text-zinc-900",
+        "text-zinc-400",
+        "text-white",
+        "text-zinc-500",
+      );
+      separator?.classList.remove("text-zinc-300", "text-zinc-600");
+
+      if (theme === "light") {
+        separator?.classList.add("text-zinc-300");
+        if (lang === "es") {
+          btnEs?.classList.add("text-zinc-900", "font-bold");
+          btnEn?.classList.add("text-zinc-400");
+        } else {
+          btnEn?.classList.add("text-zinc-900", "font-bold");
+          btnEs?.classList.add("text-zinc-400");
+        }
+      } else {
+        // Dark Theme
+        separator?.classList.add("text-zinc-600");
+        if (lang === "es") {
+          btnEs?.classList.add("text-white", "font-bold");
+          btnEn?.classList.add("text-zinc-500", "hover:text-white");
+        } else {
+          btnEn?.classList.add("text-white", "font-bold");
+          btnEs?.classList.add("text-zinc-500", "hover:text-white");
+        }
+      }
+    });
   }
 
-  btnEs?.addEventListener("click", () => {
-    // @ts-ignore
-    Weglot.switchTo("es");
-  });
+  // Event Listeners for click
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
 
-  btnEn?.addEventListener("click", () => {
-    // @ts-ignore
-    Weglot.switchTo("en");
+    if (target.classList.contains("lang-es")) {
+      // @ts-ignore
+      Weglot.switchTo("es");
+    }
+
+    if (target.classList.contains("lang-en")) {
+      // @ts-ignore
+      Weglot.switchTo("en");
+    }
   });
 </script>

@@ -115,12 +115,42 @@ export default config({
             instagram: fields.text({ label: "URL Instagram" }),
             linkedin: fields.text({ label: "URL LinkedIn" }),
             twitter: fields.text({ label: "URL Twitter/X" }),
+            webExterna: fields.text({ label: "URL Web Externa" }),
           },
           { label: "Redes Sociales" },
         ),
         footerTexto: fields.text({
           label: "Texto pie de página (Junto al Copyright)",
         }),
+      },
+    }),
+
+    // 7. CÓMO BENEFICIARTE
+    comoBeneficiarte: singleton({
+      label: "Cómo Beneficiarte",
+      path: "src/content/como-beneficiarte/datos",
+      schema: {
+        tituloSmall: fields.text({
+          label: "Título Pequeño (ej: Oportunidades)",
+        }),
+        titulo: fields.text({ label: "Título Principal" }),
+        descripcion: fields.text({ label: "Descripción", multiline: true }),
+        paso1_titulo: fields.text({ label: "Paso 1: Título" }),
+        paso1_desc: fields.text({
+          label: "Paso 1: Descripción",
+          multiline: true,
+        }),
+        paso2_titulo: fields.text({ label: "Paso 2: Título" }),
+        paso2_desc: fields.text({
+          label: "Paso 2: Descripción",
+          multiline: true,
+        }),
+        paso3_titulo: fields.text({ label: "Paso 3: Título" }),
+        paso3_desc: fields.text({
+          label: "Paso 3: Descripción",
+          multiline: true,
+        }),
+        botonTexto: fields.text({ label: "Texto del Botón (Ej: Solicitar ahora)" }),
       },
     }),
   },
