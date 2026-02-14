@@ -21,11 +21,11 @@ const year = new Date().getFullYear();
 >
   <div
     class={isMobile
-      ? ""
-      : "container mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-8"}
+      ? "flex flex-col"
+      : "container mx-auto px-6 lg:px-12 grid grid-cols-3 items-center gap-8"}
   >
     {/* Sección de marca */}
-    <div class={isMobile ? "" : "text-center md:text-left"}>
+    <div class={isMobile ? "" : "text-left"}>
       <h4
         class={isMobile
           ? "text-zinc-900 font-bold text-lg mb-1"
@@ -33,25 +33,34 @@ const year = new Date().getFullYear();
       >
         {global?.nombreSitio || SITE_INFO.name}
       </h4>
-      <p
-        class={isMobile
-          ? "text-sm text-zinc-400 mb-4"
-          : "text-sm max-w-xs mx-auto md:mx-0"}
-      >
+      <p class={isMobile ? "text-sm text-zinc-400 mb-4" : "text-sm max-w-xs"}>
         Construyendo puentes de oportunidad y desarrollo profesional.
       </p>
     </div>
 
-    {/* Sección de enlaces y redes */}
+    {/* Copyright - Centro */}
+    <div
+      class={isMobile
+        ? "text-xs text-zinc-400 mt-8 order-last"
+        : "text-sm text-zinc-600 text-center"}
+    >
+      &copy; {year}
+      {
+        global?.nombreSitio + ". " + global?.footerTexto ||
+          "Todos los derechos reservados."
+      }
+    </div>
+
+    {/* Sección de enlaces y redes - Derecha */}
     <div
       class={isMobile
         ? "flex flex-col gap-4 text-sm text-zinc-500"
-        : "flex flex-col items-center gap-4 text-sm"}
+        : "flex flex-col items-end gap-4 text-sm"}
     >
       <div
         class={isMobile
           ? "flex flex-wrap gap-x-5 gap-y-2"
-          : "flex flex-wrap justify-center gap-6"}
+          : "flex flex-wrap justify-end gap-6"}
       >
         {
           FOOTER_LINKS.map((link) => (
@@ -175,16 +184,6 @@ const year = new Date().getFullYear();
           )
         }
       </div>
-    </div>
-
-    {/* Derechos de autor */}
-    <div
-      class={isMobile
-        ? "text-xs text-zinc-400 mt-4"
-        : "text-sm text-zinc-600 text-center md:text-right"}
-    >
-      &copy; {year}
-      {global?.footerTexto || "Todos los derechos reservados."}
     </div>
   </div>
 </footer>
