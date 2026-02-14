@@ -11,11 +11,17 @@ const { theme = "light" } = Astro.props;
   data-wg-notranslate
   data-theme={theme}
 >
-  <button class="lang-es transition-colors" aria-label="Cambiar a Español">
+  <button
+    class="lang-es text-zinc-900 font-bold transition-colors"
+    aria-label="Cambiar a Español"
+  >
     ES
   </button>
   <span class="separator text-zinc-300">|</span>
-  <button class="lang-en transition-colors" aria-label="Switch to English">
+  <button
+    class="lang-en text-zinc-400 transition-colors"
+    aria-label="Switch to English"
+  >
     EN
   </button>
 </div>
