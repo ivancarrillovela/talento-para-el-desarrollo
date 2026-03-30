@@ -14,3 +14,18 @@ html {
   background-color: #18181b;
   color: white;
 }
+
+@media (max-width: 1024px) {
+  /* Desactivar efectos hover de Tailwind en móvil/tablet */
+  [class*="hover:"],
+  .group:hover {
+    --tw-translate-y: 0 !important;
+    --tw-translate-x: 0 !important;
+    --tw-scale-x: 1 !important;
+    --tw-scale-y: 1 !important;
+    --tw-shadow: 0 0 #0000 !important;
+    --tw-shadow-colored: 0 0 #0000 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}

@@ -7,8 +7,8 @@ export const SITE_INFO = {
 export const NAV_LINKS = [
   { label: "Sobre nosotros", href: "#sobre-nosotros" },
   { label: "Lo que buscamos", href: "#valores" },
-  { label: "Nuestro trabajo", href: "#nuestro-trabajo" },
-  { label: "Contactanos", href: "#contacto" },
+  { label: "Actividades", href: "#actividades" },
+  { label: "Contáctanos", href: "#contacto" },
 ];
 
 export const FOOTER_LINKS = [
