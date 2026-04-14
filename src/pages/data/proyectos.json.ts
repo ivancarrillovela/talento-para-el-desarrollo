@@ -6,7 +6,11 @@ export const GET: APIRoute = async () => {
 
   const projectsData = allProjects.map((project) => ({
     titulo: project.data.titulo,
+    titulo_en: project.data.titulo_en,
+    titulo_fr: project.data.titulo_fr,
     descripcion: project.data.descripcion,
+    descripcion_en: project.data.descripcion_en,
+    descripcion_fr: project.data.descripcion_fr,
     imagen: project.data.imagen,
     fecha: project.data.fecha.toISOString(),
     pdf: project.data.pdf,

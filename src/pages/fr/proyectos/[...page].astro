@@ -1,11 +1,11 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Layout from "../../layouts/Layout.astro";
-import PageHeader from "../../components/common/PageHeader.astro";
-import ProjectCard from "../../components/proyectos/ProjectCard.astro";
+import Layout from "../../../layouts/Layout.astro";
+import PageHeader from "../../../components/common/PageHeader.astro";
+import ProjectCard from "../../../components/proyectos/ProjectCard.astro";
 import { getCollection } from "astro:content";
-import { reader, getLangField } from "../../utils/keystatic";
-import { useTranslations } from "../../i18n/ui";
+import { reader, getLangField } from "../../../utils/keystatic";
+import { useTranslations } from "../../../i18n/ui";
 
 // 1. Lógica para rutas estáticas y paginación
 export const getStaticPaths = (async ({ paginate }) => {

@@ -1,118 +1,120 @@
 ---
 import LegalLayout from "../layouts/LegalLayout.astro";
+import { useTranslations } from "../i18n/ui";
+
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+
+const content = {
+  es: {
+    intro: `La presente Política de Privacidad describe cómo la <strong>Asociación Talento para el Desarrollo</strong> (en adelante, "La Asociación") recoge y procesa los datos personales de los usuarios a través de nuestro sitio web.`,
+    s1h: "1. Responsable del Tratamiento",
+    s1items: ["<strong>Identidad:</strong> Asociación Talento para el Desarrollo", "<strong>NIF:</strong> [INTRODUCIR NIF AQUÍ]", "<strong>Dirección:</strong> [INTRODUCIR DIRECCIÓN COMPLETA AQUÍ]", "<strong>Email:</strong> [EMAIL DE CONTACTO]"],
+    s2h: "2. Finalidad del tratamiento",
+    s2p: "Tratamos la información que nos facilitan las personas interesadas para:",
+    s2items: ["<strong>Gestión de consultas:</strong> Atender las solicitudes de información recibidas a través del formulario de contacto o correo electrónico.", "<strong>Colaboración:</strong> Gestionar las propuestas de colaboración o voluntariado.", "<strong>Cumplimiento legal:</strong> Cumplir con nuestras obligaciones legales y fiscales."],
+    s2p2: "No se tomarán decisiones automatizadas con base en los perfiles de los usuarios.",
+    s3h: "3. Legitimación",
+    s3p: "La base legal para el tratamiento de sus datos es:",
+    s3items: ["<strong>Consentimiento del interesado:</strong> Al enviar el formulario de contacto o escribirnos un correo, usted acepta expresamente el tratamiento de sus datos para la finalidad indicada.", "<strong>Interés legítimo:</strong> Para la gestión administrativa interna y la respuesta a consultas."],
+    s4h: "4. Destinatarios de los datos",
+    s4p1: "Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal.",
+    s4p2: "No obstante, para el funcionamiento de la web, utilizamos proveedores de servicios que pueden tener acceso a datos personales (encargados del tratamiento), como:",
+    s4items: ["<strong>Proveedor de Hosting:</strong> [NOMBRE DEL PROVEEDOR]", "<strong>Servicios de formulario:</strong> Utilizamos Formspree para la gestión del formulario de contacto. Puede consultar su política de privacidad en <a href='https://formspree.io/legal/privacy-policy' target='_blank' rel='noopener noreferrer'>formspree.io</a>."],
+    s5h: "5. Derechos de los usuarios",
+    s5p1: "Cualquier persona tiene derecho a obtener confirmación sobre si en La Asociación estamos tratando datos personales que les conciernan, o no.",
+    s5p2: "Las personas interesadas tienen derecho a:",
+    s5items: ["Acceder a sus datos personales.", "Solicitar la rectificación de los datos inexactos.", "Solicitar su supresión cuando, entre otros motivos, los datos ya no sean necesarios para los fines que fueron recogidos.", "Solicitar la limitación del tratamiento de sus datos.", "Oponerse al tratamiento.", "Solicitar la portabilidad de los datos."],
+    s5p3: `Para ejercer sus derechos, puede enviar un correo electrónico a <strong>[EMAIL DE CONTACTO]</strong>, adjuntando copia de su DNI o documento identificativo equivalente.`,
+    s5p4: `Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>) si considera que el tratamiento no se ajusta a la normativa vigente.`,
+  },
+  en: {
+    intro: `This Privacy Policy describes how the <strong>Talento para el Desarrollo Association</strong> (hereinafter, "The Association") collects and processes the personal data of users through our website.`,
+    s1h: "1. Data Controller",
+    s1items: ["<strong>Identity:</strong> Talento para el Desarrollo Association", "<strong>Tax ID:</strong> [INSERT TAX ID HERE]", "<strong>Address:</strong> [INSERT FULL ADDRESS HERE]", "<strong>Email:</strong> [CONTACT EMAIL]"],
+    s2h: "2. Purpose of processing",
+    s2p: "We process the information provided by interested parties in order to:",
+    s2items: ["<strong>Query management:</strong> Respond to information requests received through the contact form or email.", "<strong>Collaboration:</strong> Manage collaboration or volunteering proposals.", "<strong>Legal compliance:</strong> Fulfil our legal and tax obligations."],
+    s2p2: "No automated decisions will be made based on user profiles.",
+    s3h: "3. Legal basis",
+    s3p: "The legal basis for processing your data is:",
+    s3items: ["<strong>Data subject's consent:</strong> By submitting the contact form or sending us an email, you expressly consent to the processing of your data for the stated purpose.", "<strong>Legitimate interest:</strong> For internal administrative management and responding to queries."],
+    s4h: "4. Recipients of the data",
+    s4p1: "Data will not be shared with third parties except where required by law.",
+    s4p2: "However, for the operation of the website, we use service providers who may have access to personal data (data processors), such as:",
+    s4items: ["<strong>Hosting provider:</strong> [PROVIDER NAME]", "<strong>Form services:</strong> We use Formspree to manage the contact form. You can read their privacy policy at <a href='https://formspree.io/legal/privacy-policy' target='_blank' rel='noopener noreferrer'>formspree.io</a>."],
+    s5h: "5. Users' rights",
+    s5p1: "Any person has the right to obtain confirmation as to whether The Association is processing personal data concerning them.",
+    s5p2: "Interested parties have the right to:",
+    s5items: ["Access their personal data.", "Request the rectification of inaccurate data.", "Request erasure when, among other reasons, the data are no longer necessary for the purposes for which they were collected.", "Request the restriction of the processing of their data.", "Object to processing.", "Request data portability."],
+    s5p3: `To exercise your rights, you may send an email to <strong>[CONTACT EMAIL]</strong>, attaching a copy of your ID or equivalent identification document.`,
+    s5p4: `You also have the right to lodge a complaint with the Spanish Data Protection Agency (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>) if you consider that the processing does not comply with applicable regulations.`,
+  },
+  fr: {
+    intro: `La présente Politique de confidentialité décrit comment l'<strong>Association Talento para el Desarrollo</strong> (ci-après, "L'Association") collecte et traite les données personnelles des utilisateurs via notre site web.`,
+    s1h: "1. Responsable du traitement",
+    s1items: ["<strong>Identité :</strong> Association Talento para el Desarrollo", "<strong>NIF :</strong> [INSÉRER LE NIF ICI]", "<strong>Adresse :</strong> [INSÉRER L'ADRESSE COMPLÈTE ICI]", "<strong>Email :</strong> [EMAIL DE CONTACT]"],
+    s2h: "2. Finalité du traitement",
+    s2p: "Nous traitons les informations fournies par les personnes intéressées afin de :",
+    s2items: ["<strong>Gestion des demandes :</strong> Répondre aux demandes d'information reçues via le formulaire de contact ou par e-mail.", "<strong>Collaboration :</strong> Gérer les propositions de collaboration ou de bénévolat.", "<strong>Conformité légale :</strong> Respecter nos obligations légales et fiscales."],
+    s2p2: "Aucune décision automatisée ne sera prise sur la base des profils des utilisateurs.",
+    s3h: "3. Fondement juridique",
+    s3p: "La base juridique du traitement de vos données est :",
+    s3items: ["<strong>Consentement de la personne concernée :</strong> En soumettant le formulaire de contact ou en nous écrivant un e-mail, vous consentez expressément au traitement de vos données aux fins indiquées.", "<strong>Intérêt légitime :</strong> Pour la gestion administrative interne et la réponse aux demandes."],
+    s4h: "4. Destinataires des données",
+    s4p1: "Les données ne seront pas communiquées à des tiers sauf en cas d'obligation légale.",
+    s4p2: "Cependant, pour le fonctionnement du site web, nous utilisons des prestataires de services qui peuvent avoir accès à des données personnelles (sous-traitants), tels que :",
+    s4items: ["<strong>Hébergeur :</strong> [NOM DU PRESTATAIRE]", "<strong>Services de formulaire :</strong> Nous utilisons Formspree pour gérer le formulaire de contact. Vous pouvez consulter leur politique de confidentialité sur <a href='https://formspree.io/legal/privacy-policy' target='_blank' rel='noopener noreferrer'>formspree.io</a>."],
+    s5h: "5. Droits des utilisateurs",
+    s5p1: "Toute personne a le droit d'obtenir confirmation que L'Association traite ou non des données personnelles la concernant.",
+    s5p2: "Les personnes intéressées ont le droit de :",
+    s5items: ["Accéder à leurs données personnelles.", "Demander la rectification des données inexactes.", "Demander leur suppression lorsque, entre autres raisons, les données ne sont plus nécessaires aux fins pour lesquelles elles ont été collectées.", "Demander la limitation du traitement de leurs données.", "S'opposer au traitement.", "Demander la portabilité des données."],
+    s5p3: `Pour exercer vos droits, vous pouvez envoyer un e-mail à <strong>[EMAIL DE CONTACT]</strong>, en joignant une copie de votre carte d'identité ou document d'identification équivalent.`,
+    s5p4: `Vous avez également le droit de déposer une plainte auprès de l'Agence espagnole de protection des données (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>) si vous estimez que le traitement n'est pas conforme à la réglementation en vigueur.`,
+  },
+};
+
+const c = content[lang as keyof typeof content] || content.es;
 ---
 
 <LegalLayout
-  title="Política de Privacidad"
-  description="Información sobre el tratamiento de datos personales."
+  title={t('privacidad.title')}
+  subtitle={t('legal.subtitle')}
+  description={t('privacidad.description')}
 >
-  <p>
-    La presente Política de Privacidad describe cómo la <strong
-      >Asociación Talento para el Desarrollo</strong
-    > (en adelante, "La Asociación") recoge y procesa los datos personales de los
-    usuarios a través de nuestro sitio web.
-  </p>
+  <p set:html={c.intro} />
 
-  <h3>1. Responsable del Tratamiento</h3>
-  <ul
-    class="list-disc pl-5 space-y-2 bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 text-base my-8"
-  >
-    <li><strong>Identidad:</strong> Asociación Talento para el Desarrollo</li>
-    <li><strong>NIF:</strong> [INTRODUCIR NIF AQUÍ]</li>
-    <li>
-      <strong>Dirección:</strong> [INTRODUCIR DIRECCIÓN COMPLETA AQUÍ]
-    </li>
-    <li><strong>Email:</strong> [EMAIL DE CONTACTO]</li>
+  <h3>{c.s1h}</h3>
+  <ul class="list-disc pl-5 space-y-2 bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 text-base my-8">
+    {c.s1items.map(item => <li set:html={item} />)}
   </ul>
 
-  <h3>2. Finalidad del tratamiento</h3>
-  <p>
-    Tratamos la información que nos facilitan las personas interesadas para:
-  </p>
+  <h3>{c.s2h}</h3>
+  <p>{c.s2p}</p>
   <ul>
-    <li>
-      <strong>Gestión de consultas:</strong> Atender las solicitudes de información
-      recibidas a través del formulario de contacto o correo electrónico.
-    </li>
-    <li>
-      <strong>Colaboración:</strong> Gestionar las propuestas de colaboración o voluntariado.
-    </li>
-    <li>
-      <strong>Cumplimiento legal:</strong> Cumplir con nuestras obligaciones legales
-      y fiscales.
-    </li>
+    {c.s2items.map(item => <li set:html={item} />)}
   </ul>
-  <p>
-    No se tomarán decisiones automatizadas con base en los perfiles de los
-    usuarios.
-  </p>
+  <p>{c.s2p2}</p>
 
-  <h3>3. Legitimación</h3>
-  <p>La base legal para el tratamiento de sus datos es:</p>
+  <h3>{c.s3h}</h3>
+  <p>{c.s3p}</p>
   <ul>
-    <li>
-      <strong>Consentimiento del interesado:</strong> Al enviar el formulario de contacto
-      o escribirnos un correo, usted acepta expresamente el tratamiento de sus datos
-      para la finalidad indicada.
-    </li>
-    <li>
-      <strong>Interés legítimo:</strong> Para la gestión administrativa interna y
-      la respuesta a consultas.
-    </li>
+    {c.s3items.map(item => <li set:html={item} />)}
   </ul>
 
-  <h3>4. Destinatarios de los datos</h3>
-  <p>
-    Los datos no se cederán a terceros salvo en los casos en que exista una
-    obligación legal.
-  </p>
-  <p>
-    No obstante, para el funcionamiento de la web, utilizamos proveedores de
-    servicios que pueden tener acceso a datos personales (encargados del
-    tratamiento), como:
-  </p>
+  <h3>{c.s4h}</h3>
+  <p>{c.s4p1}</p>
+  <p>{c.s4p2}</p>
   <ul>
-    <li>
-      <strong>Proveedor de Hosting:</strong> [NOMBRE DEL PROVEEDOR]
-    </li>
-    <li>
-      <strong>Servicios de formulario:</strong> Utilizamos Formspree para la gestión
-      del formulario de contacto. Puede consultar su política de privacidad en <a
-        href="https://formspree.io/legal/privacy-policy"
-        target="_blank"
-        rel="noopener noreferrer">formspree.io</a
-      >.
-    </li>
+    {c.s4items.map(item => <li set:html={item} />)}
   </ul>
 
-  <h3>5. Derechos de los usuarios</h3>
-  <p>
-    Cualquier persona tiene derecho a obtener confirmación sobre si en La
-    Asociación estamos tratando datos personales que les conciernan, o no.
-  </p>
-  <p>Las personas interesadas tienen derecho a:</p>
+  <h3>{c.s5h}</h3>
+  <p>{c.s5p1}</p>
+  <p>{c.s5p2}</p>
   <ul>
-    <li>Acceder a sus datos personales.</li>
-    <li>Solicitar la rectificación de los datos inexactos.</li>
-    <li>
-      Solicitar su supresión cuando, entre otros motivos, los datos ya no sean
-      necesarios para los fines que fueron recogidos.
-    </li>
-    <li>Solicitar la limitación del tratamiento de sus datos.</li>
-    <li>Oponerse al tratamiento.</li>
-    <li>Solicitar la portabilidad de los datos.</li>
+    {c.s5items.map(item => <li>{item}</li>)}
   </ul>
-  <p>
-    Para ejercer sus derechos, puede enviar un correo electrónico a <strong
-      >[EMAIL DE CONTACTO]</strong
-    >, adjuntando copia de su DNI o documento identificativo equivalente.
-  </p>
-  <p>
-    Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española
-    de Protección de Datos (<a
-      href="https://www.aepd.es"
-      target="_blank"
-      rel="noopener noreferrer">www.aepd.es</a
-    >) si considera que el tratamiento no se ajusta a la normativa vigente.
-  </p>
+  <p set:html={c.s5p3} />
+  <p set:html={c.s5p4} />
 </LegalLayout>

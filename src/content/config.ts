@@ -62,8 +62,12 @@ const proyectos = defineCollection({
   type: "data",
   schema: z.object({
     titulo: z.string(),
+    titulo_en: z.string().optional(),
+    titulo_fr: z.string().optional(),
     fecha: z.coerce.date(), // Para poder ordenar
     descripcion: z.string(),
+    descripcion_en: z.string().optional(),
+    descripcion_fr: z.string().optional(),
     imagen: z.string().optional(),
     pdf: z.string().optional(),
   }),

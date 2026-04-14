@@ -1,33 +1,23 @@
 ---
-import { reader } from "../../utils/keystatic";
+import { useTranslations } from "../../i18n/ui";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const data = await reader.singletons.contacto.read();
-
-// Valores por defecto
-const titulo = data?.titulo || "¿Quieres colaborar con el proyecto?";
-const descripcion =
-  data?.descripcion ||
-  "Buscamos personas que crean en el potencial humano tanto como nosotros. ¡Ponte en contacto!";
-const textoBoton = data?.textoBoton || "Enviar Mensaje";
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+const privacidadUrl = getRelativeLocaleUrl(lang, "/privacidad");
 ---
 
 <section id="contacto" class="bg-zinc-50 py-16 md:py-24">
   <div class="container mx-auto px-6 lg:px-12">
     <div class="max-w-2xl mx-auto text-center mb-16">
-      <h2
-        class="text-terracotta-500 font-bold tracking-widest uppercase text-sm mb-2"
-      >
-        Hablemos
+      <h2 class="text-terracotta-500 font-bold tracking-widest uppercase text-sm mb-2">
+        {t('contacto.label')}
       </h2>
-      <h3 class="text-4xl font-bold text-zinc-900 mb-4">{titulo}</h3>
-      <p class="text-zinc-500">
-        {descripcion}
-      </p>
+      <h3 class="text-4xl font-bold text-zinc-900 mb-4">{t('contacto.titulo')}</h3>
+      <p class="text-zinc-500">{t('contacto.descripcion')}</p>
     </div>
 
-    <div
-      class="max-w-xl mx-auto bg-white p-6 md:p-12 shadow-xl border-t-4 border-terracotta-500 relative"
-    >
+    <div class="max-w-xl mx-auto bg-white p-6 md:p-12 shadow-xl border-t-4 border-terracotta-500 relative">
       <form
         id="contacto-form"
         action="https://formspree.io/f/xdalnzvb"
@@ -35,43 +25,37 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
         class="space-y-6"
       >
         <div>
-          <label
-            for="nombre"
-            class="block text-sm font-medium text-zinc-700 mb-1"
-            >Nombre completo</label
-          >
+          <label for="nombre" class="block text-sm font-medium text-zinc-700 mb-1">
+            {t('contacto.nombre')}
+          </label>
           <input
             type="text"
             name="nombre"
             id="nombre"
             required
             class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 focus:border-terracotta-500 focus:ring-1 focus:ring-terracotta-500 outline-none transition-colors"
-            placeholder="Tu nombre completo"
+            placeholder={t('contacto.nombrePH')}
           />
         </div>
 
         <div>
-          <label
-            for="email"
-            class="block text-sm font-medium text-zinc-700 mb-1"
-            >Correo electrónico</label
-          >
+          <label for="email" class="block text-sm font-medium text-zinc-700 mb-1">
+            {t('contacto.email')}
+          </label>
           <input
             type="email"
             name="email"
             id="email"
             required
             class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 focus:border-terracotta-500 focus:ring-1 focus:ring-terracotta-500 outline-none transition-colors"
-            placeholder="tu@email.com"
+            placeholder={t('contacto.emailPH')}
           />
         </div>
 
         <div>
-          <label
-            for="asunto"
-            class="block text-sm font-medium text-zinc-700 mb-1"
-            >¿En qué podemos ayudarte?</label
-          >
+          <label for="asunto" class="block text-sm font-medium text-zinc-700 mb-1">
+            {t('contacto.asunto')}
+          </label>
           <div class="relative">
             <select
               name="asunto"
@@ -79,38 +63,30 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
               required
               class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 focus:border-terracotta-500 focus:ring-1 focus:ring-terracotta-500 outline-none transition-colors appearance-none cursor-pointer"
             >
-              <option value="" disabled selected>Selecciona una opción</option>
-              <option value="Quiero colaborar">Quiero colaborar</option>
-              <option value="Quiero beneficiarme">Quiero beneficiarme</option>
-              <option value="Otro">Otro</option>
+              <option value="" disabled selected>{t('contacto.selectOp')}</option>
+              <option value="Quiero colaborar">{t('contacto.opColaborar')}</option>
+              <option value="Quiero beneficiarme">{t('contacto.opBenefi')}</option>
+              <option value="Otro">{t('contacto.opOtro')}</option>
             </select>
-            <div
-              class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-zinc-500"
-            >
-              <svg
-                class="h-4 w-4 fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                ><path
-                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                ></path></svg
-              >
+            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-zinc-500">
+              <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+              </svg>
             </div>
           </div>
         </div>
 
         <div>
-          <label
-            for="mensaje"
-            class="block text-sm font-medium text-zinc-700 mb-1">Mensaje</label
-          >
+          <label for="mensaje" class="block text-sm font-medium text-zinc-700 mb-1">
+            {t('contacto.mensaje')}
+          </label>
           <textarea
             name="mensaje"
             id="mensaje"
             rows="4"
             required
             class="w-full px-4 py-3 bg-zinc-50 border border-zinc-200 focus:border-terracotta-500 focus:ring-1 focus:ring-terracotta-500 outline-none transition-colors"
-            placeholder="Escribe tu mensaje..."></textarea>
+            placeholder={t('contacto.placeholder')}></textarea>
         </div>
 
         <div class="flex items-start gap-3 pt-2 pb-2">
@@ -125,14 +101,14 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
           </div>
           <div class="ml-1 text-sm">
             <label for="privacidad" class="text-zinc-500">
-              He leído y acepto la <a
-                href="/privacidad"
+              {t('contacto.privacidad1')}<a
+                href={privacidadUrl}
                 target="_blank"
                 class="font-medium text-zinc-900 underline hover:text-terracotta-500"
-                >política de privacidad</a
+                >{t('footer.privacy')}</a
               >.
               <br />
-              Entiendo que mis datos se usarán para gestionar esta consulta.
+              {t('contacto.privacidad2')}
             </label>
           </div>
         </div>
@@ -141,8 +117,10 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
           id="boton-enviar"
           type="submit"
           class="w-full bg-zinc-900 text-white font-bold py-4 hover:bg-terracotta-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          data-sending={t('contact.form.sending')}
+          data-original={t('contacto.boton')}
         >
-          {textoBoton}
+          {t('contacto.boton')}
         </button>
       </form>
 
@@ -150,21 +128,11 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
         id="mensaje-exito"
         class="hidden absolute inset-0 bg-white flex-col items-center justify-center text-center p-8 z-10 animate-fade-in"
       >
-        <div
-          class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mb-4"
-        >
-          ✓
-        </div>
-        <h4 class="text-2xl font-bold text-zinc-900 mb-2">¡Mensaje enviado!</h4>
-        <p class="text-zinc-500 mb-6">
-          Gracias por contactar con nosotros. Te responderemos lo antes posible.
-        </p>
-        <button
-          id="boton-nuevo"
-          type="button"
-          class="text-terracotta-500 font-bold hover:underline"
-        >
-          Enviar otro mensaje
+        <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-3xl mb-4">✓</div>
+        <h4 class="text-2xl font-bold text-zinc-900 mb-2">{t('contact.form.success')}</h4>
+        <p class="text-zinc-500 mb-6">{t('contacto.gracias')}</p>
+        <button id="boton-nuevo" type="button" class="text-terracotta-500 font-bold hover:underline">
+          {t('contacto.otroMensaje')}
         </button>
       </div>
 
@@ -172,68 +140,52 @@ const textoBoton = data?.textoBoton || "Enviar Mensaje";
         id="mensaje-error"
         class="hidden mt-4 p-4 bg-red-50 text-red-600 text-center rounded-sm border border-red-200"
       >
-        Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.
+        {t('contact.form.error')}
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  // Lógica JavaScript para enviar sin recargar
   const form = document.getElementById("contacto-form") as HTMLFormElement;
   const statusSuccess = document.getElementById("mensaje-exito");
   const statusError = document.getElementById("mensaje-error");
-  const submitButton = document.getElementById(
-    "boton-enviar",
-  ) as HTMLButtonElement;
+  const submitButton = document.getElementById("boton-enviar") as HTMLButtonElement;
   const resetButton = document.getElementById("boton-nuevo");
 
   if (form) {
     form.addEventListener("submit", async function (event) {
-      event.preventDefault(); // 1. Evita que la página se recargue
-
+      event.preventDefault();
       const data = new FormData(form);
-      const action = form.action;
-
-      // Desactivar botón mientras envía
       if (submitButton) {
         submitButton.disabled = true;
-        submitButton.innerText = "Enviando...";
+        submitButton.innerText = submitButton.dataset.sending || "Enviando...";
       }
-
       try {
-        const response = await fetch(action, {
+        const response = await fetch(form.action, {
           method: "POST",
           body: data,
-          headers: {
-            Accept: "application/json",
-          },
+          headers: { Accept: "application/json" },
         });
-
         if (response.ok) {
-          // 2. Si todo va bien: Limpia el formulario y muestra mensaje de éxito
           form.reset();
           statusSuccess?.classList.remove("hidden");
           statusSuccess?.classList.add("flex");
           statusError?.classList.add("hidden");
         } else {
-          // Si falla Formspree
           statusError?.classList.remove("hidden");
         }
-      } catch (error) {
-        // Si falla la red
+      } catch {
         statusError?.classList.remove("hidden");
       } finally {
-        // Restaurar botón original
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.innerText = "Enviar Mensaje"; // O el texto original si prefieres leerlo del DOM
+          submitButton.innerText = submitButton.dataset.original || "Enviar Mensaje";
         }
       }
     });
   }
 
-  // Botón para volver a mostrar el formulario limpio
   if (resetButton) {
     resetButton.addEventListener("click", () => {
       statusSuccess?.classList.add("hidden");

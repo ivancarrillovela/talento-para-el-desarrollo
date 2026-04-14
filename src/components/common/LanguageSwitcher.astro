@@ -1,105 +1,66 @@
 ---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
 interface Props {
   theme?: "light" | "dark";
 }
 
 const { theme = "light" } = Astro.props;
+const currentLocale = Astro.currentLocale || "es";
+
+const pathname = Astro.url.pathname;
+let basePath = pathname;
+if (basePath.startsWith('/en/') || basePath === '/en') {
+  basePath = basePath.replace('/en', '') || '/';
+} else if (basePath.startsWith('/fr/') || basePath === '/fr') {
+  basePath = basePath.replace('/fr', '') || '/';
+}
+
+// Ensure basePath starts with a slash 
+if (!basePath.startsWith('/')) basePath = '/' + basePath;
+
+const esUrl = getRelativeLocaleUrl("es", basePath);
+const enUrl = getRelativeLocaleUrl("en", basePath);
+const frUrl = getRelativeLocaleUrl("fr", basePath);
 ---
 
 <div
-  class="language-switcher flex items-center gap-2 text-sm font-medium wg-exclude notranslate"
-  data-wg-notranslate
+  class="language-switcher flex items-center gap-2 text-sm font-medium"
   data-theme={theme}
 >
-  <button
-    class="lang-es text-zinc-900 font-bold transition-colors"
+  <a
+    href={esUrl}
+    class={`lang-es transition-colors ${
+      theme === 'light' 
+        ? (currentLocale === 'es' ? 'text-zinc-900 font-bold' : 'text-zinc-400 hover:text-zinc-900') 
+        : (currentLocale === 'es' ? 'text-white font-bold' : 'text-zinc-500 hover:text-white')
+    }`}
     aria-label="Cambiar a Español"
   >
     ES
-  </button>
-  <span class="separator text-zinc-300">|</span>
-  <button
-    class="lang-en text-zinc-400 transition-colors"
+  </a>
+  <span class={`separator ${theme === 'light' ? 'text-zinc-300' : 'text-zinc-600'}`}>|</span>
+  <a
+    href={enUrl}
+    class={`lang-en transition-colors ${
+      theme === 'light' 
+        ? (currentLocale === 'en' ? 'text-zinc-900 font-bold' : 'text-zinc-400 hover:text-zinc-900') 
+        : (currentLocale === 'en' ? 'text-white font-bold' : 'text-zinc-500 hover:text-white')
+    }`}
     aria-label="Switch to English"
   >
     EN
-  </button>
+  </a>
+  <span class={`separator ${theme === 'light' ? 'text-zinc-300' : 'text-zinc-600'}`}>|</span>
+  <a
+    href={frUrl}
+    class={`lang-fr transition-colors ${
+      theme === 'light' 
+        ? (currentLocale === 'fr' ? 'text-zinc-900 font-bold' : 'text-zinc-400 hover:text-zinc-900') 
+        : (currentLocale === 'fr' ? 'text-white font-bold' : 'text-zinc-500 hover:text-white')
+    }`}
+    aria-label="Passer au Français"
+  >
+    FR
+  </a>
 </div>
-
-<script>
-  // @ts-ignore
-  Weglot.on("initialized", () => {
-    // @ts-ignore
-    const currentLang = Weglot.getCurrentLang();
-    updateAllSwitchers(currentLang);
-  });
-
-  // @ts-ignore
-  Weglot.on("languageChanged", (newLang) => {
-    updateAllSwitchers(newLang);
-  });
-
-  function updateAllSwitchers(lang: string) {
-    const switchers = document.querySelectorAll(".language-switcher");
-
-    switchers.forEach((switcher) => {
-      const theme = (switcher as HTMLElement).dataset.theme || "light";
-      const btnEs = switcher.querySelector(".lang-es");
-      const btnEn = switcher.querySelector(".lang-en");
-      const separator = switcher.querySelector(".separator");
-
-      // Reset base classes
-      btnEs?.classList.remove(
-        "font-bold",
-        "text-zinc-900",
-        "text-zinc-400",
-        "text-white",
-        "text-zinc-500",
-      );
-      btnEn?.classList.remove(
-        "font-bold",
-        "text-zinc-900",
-        "text-zinc-400",
-        "text-white",
-        "text-zinc-500",
-      );
-      separator?.classList.remove("text-zinc-300", "text-zinc-600");
-
-      if (theme === "light") {
-        separator?.classList.add("text-zinc-300");
-        if (lang === "es") {
-          btnEs?.classList.add("text-zinc-900", "font-bold");
-          btnEn?.classList.add("text-zinc-400");
-        } else {
-          btnEn?.classList.add("text-zinc-900", "font-bold");
-          btnEs?.classList.add("text-zinc-400");
-        }
-      } else {
-        // Dark Theme
-        separator?.classList.add("text-zinc-600");
-        if (lang === "es") {
-          btnEs?.classList.add("text-white", "font-bold");
-          btnEn?.classList.add("text-zinc-500", "hover:text-white");
-        } else {
-          btnEn?.classList.add("text-white", "font-bold");
-          btnEs?.classList.add("text-zinc-500", "hover:text-white");
-        }
-      }
-    });
-  }
-
-  // Event Listeners for click
-  document.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-
-    if (target.classList.contains("lang-es")) {
-      // @ts-ignore
-      Weglot.switchTo("es");
-    }
-
-    if (target.classList.contains("lang-en")) {
-      // @ts-ignore
-      Weglot.switchTo("en");
-    }
-  });
-</script>

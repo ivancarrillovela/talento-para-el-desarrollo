@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/common/Navbar.astro";
+import Hero from "../../components/home/Hero.astro";
+import SobreNosotros from "../../components/home/SobreNosotros.astro";
+import Valores from "../../components/home/Valores.astro";
+import Actividades from "../../components/home/Actividades.astro";
+import NuestroTrabajo from "../../components/home/NuestroTrabajo.astro";
+import ComoBeneficiarte from "../../components/home/ComoBeneficiarte.astro";
+import Contacto from "../../components/home/Contacto.astro";
+import Footer from "../../components/common/Footer.astro";
+import { reader } from "../../utils/keystatic";
+
+const globalData = await reader.singletons.global.read();
+const nombre = globalData?.nombreSitio || "Talento para el Desarrollo";
+---
+
+<Layout title={nombre}>
+  <Navbar />
+
+  <main>
+    <Hero />
+    <SobreNosotros />
+    <Valores />
+    <Actividades />
+    <!-- <NuestroTrabajo /> -->
+    <ComoBeneficiarte />
+    <Contacto />
+  </main>
+
+  <Footer />
+</Layout>

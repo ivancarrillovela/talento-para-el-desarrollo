@@ -1,136 +1,121 @@
 ---
 import LegalLayout from "../layouts/LegalLayout.astro";
+import { useTranslations } from "../i18n/ui";
+
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+
+const content = {
+  es: {
+    intro: `El presente Aviso Legal regula las condiciones generales de acceso y utilización del sitio web accesible en la dirección URL <strong>[TU_DOMINIO.ORG]</strong> (en adelante, el sitio web), que la <strong>Asociación Talento para el Desarrollo</strong> pone a disposición de los usuarios de Internet.`,
+    s1h: "1. Datos Identificativos",
+    s1p: `En cumplimiento del deber de información regulado en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se facilitan a continuación los siguientes datos:`,
+    s1items: ["<strong>Titular:</strong> Asociación Talento para el Desarrollo (en adelante, \"La Asociación\").", "<strong>NIF:</strong> [INTRODUCIR NIF AQUÍ]", "<strong>Domicilio Social:</strong> [INTRODUCIR DIRECCIÓN COMPLETA AQUÍ]", "<strong>Datos Registrales:</strong> Inscrita en el Registro Nacional de Asociaciones con el número [NÚMERO DE REGISTRO], Sección [SECCIÓN].", "<strong>Email de contacto:</strong> [EMAIL DE CONTACTO]", "<strong>Teléfono:</strong> [TELÉFONO OPCIONAL]"],
+    s2h: "2. Usuarios",
+    s2p: "El acceso y/o uso de este sitio web atribuye la condición de USUARIO, que acepta, desde dicho acceso y/o uso, las Condiciones Generales de Uso aquí reflejadas.",
+    s3h: "3. Uso del Portal",
+    s3p1: "El sitio web proporciona el acceso a multitud de informaciones, servicios, programas o datos en Internet pertenecientes a La Asociación a los que el USUARIO pueda tener acceso. El USUARIO asume la responsabilidad del uso del portal.",
+    s3p2: "El USUARIO se compromete a hacer un uso adecuado de los contenidos y servicios que La Asociación ofrece a través de su portal y, con carácter enunciativo pero no limitativo, a no emplearlos para:",
+    s3items: ["Incurrir en actividades ilícitas, ilegales o contrarias a la buena fe y al orden público.", "Difundir contenidos o propaganda de carácter racista, xenófobo, pornográfico-ilegal, de apología del terrorismo o atentatorio contra los derechos humanos.", "Provocar daños en los sistemas físicos y lógicos de La Asociación, de sus proveedores o de terceras personas."],
+    s4h: "4. Propiedad Intelectual e Industrial",
+    s4p1: "La Asociación por sí o como cesionaria, es titular de todos los derechos de propiedad intelectual e industrial de su página web, así como de los elementos contenidos en la misma.",
+    s4p2: "<strong>Todos los derechos reservados.</strong> En virtud de lo dispuesto en los artículos 8 y 32.1, párrafo segundo, de la Ley de Propiedad Intelectual, quedan expresamente prohibidas la reproducción, la distribución y la comunicación pública de la totalidad o parte de los contenidos de esta página web, con fines comerciales, sin la autorización de La Asociación.",
+    s5h: "5. Exclusión de Garantías y Responsabilidad",
+    s5p: "La Asociación no se hace responsable, en ningún caso, de los daños y perjuicios de cualquier naturaleza que pudieran ocasionar errores u omisiones en los contenidos, falta de disponibilidad del portal o la transmisión de virus o programas maliciosos.",
+    s6h: "6. Modificaciones",
+    s6p: "La Asociación se reserva el derecho de efectuar sin previo aviso las modificaciones que considere oportunas en su portal.",
+    s7h: "7. Enlaces",
+    s7p: "En el caso de que en el sitio web se dispusiesen enlaces o hipervínculos hacia otros sitios de Internet, La Asociación no ejercerá ningún tipo de control sobre dichos sitios y contenidos.",
+    s8h: "8. Legislación Aplicable y Jurisdicción",
+    s8p: `La relación entre La Asociación y el USUARIO se regirá por la normativa española vigente y cualquier controversia se someterá a los Juzgados y tribunales de la ciudad de <strong>[CIUDAD DE LA ASOCIACIÓN]</strong>, salvo que la Ley aplicable disponga otra cosa.`,
+  },
+  en: {
+    intro: `This Legal Notice governs the general conditions of access and use of the website accessible at the URL <strong>[YOUR_DOMAIN.ORG]</strong> (hereinafter, the website), which the <strong>Talento para el Desarrollo Association</strong> makes available to Internet users.`,
+    s1h: "1. Identifying Information",
+    s1p: "In compliance with the information obligation regulated in Article 10 of Law 34/2002 of 11 July on Information Society Services and Electronic Commerce (LSSI-CE), the following data are provided:",
+    s1items: ["<strong>Owner:</strong> Talento para el Desarrollo Association (hereinafter, \"The Association\").", "<strong>Tax ID:</strong> [INSERT TAX ID HERE]", "<strong>Registered Address:</strong> [INSERT FULL ADDRESS HERE]", "<strong>Registration Data:</strong> Registered in the National Registry of Associations under number [REGISTRATION NUMBER], Section [SECTION].", "<strong>Contact email:</strong> [CONTACT EMAIL]", "<strong>Phone:</strong> [OPTIONAL PHONE]"],
+    s2h: "2. Users",
+    s2p: "Access to and/or use of this website grants the status of USER, who accepts, from such access and/or use, the General Conditions of Use set out herein.",
+    s3h: "3. Use of the Portal",
+    s3p1: "The website provides access to a wide range of information, services, programmes or data on the Internet belonging to The Association. The USER assumes responsibility for the use of the portal.",
+    s3p2: "The USER agrees to make appropriate use of the content and services that The Association offers through its portal and, by way of example but not limitation, not to use them to:",
+    s3items: ["Engage in unlawful, illegal or bad faith activities.", "Disseminate content or propaganda of a racist, xenophobic, illegally pornographic, terrorist-glorifying or human rights-violating nature.", "Cause damage to the physical and logical systems of The Association, its suppliers or third parties."],
+    s4h: "4. Intellectual and Industrial Property",
+    s4p1: "The Association, on its own behalf or as assignee, holds all intellectual and industrial property rights to its website and the elements contained therein.",
+    s4p2: "<strong>All rights reserved.</strong> Pursuant to Articles 8 and 32.1, second paragraph, of the Intellectual Property Law, the reproduction, distribution and public communication of all or part of the contents of this website for commercial purposes, without the authorisation of The Association, are expressly prohibited.",
+    s5h: "5. Exclusion of Warranties and Liability",
+    s5p: "The Association shall not be liable in any case for damages of any kind that may arise from errors or omissions in the content, lack of availability of the portal, or the transmission of viruses or malicious programmes.",
+    s6h: "6. Modifications",
+    s6p: "The Association reserves the right to make modifications to its portal without prior notice.",
+    s7h: "7. Links",
+    s7p: "Where the website contains links or hyperlinks to other Internet sites, The Association shall exercise no control over such sites and their content.",
+    s8h: "8. Applicable Law and Jurisdiction",
+    s8p: `The relationship between The Association and the USER shall be governed by Spanish law and any disputes shall be submitted to the Courts and Tribunals of the city of <strong>[CITY OF THE ASSOCIATION]</strong>, unless applicable law provides otherwise.`,
+  },
+  fr: {
+    intro: `Les présentes mentions légales régissent les conditions générales d'accès et d'utilisation du site web accessible à l'URL <strong>[VOTRE_DOMAINE.ORG]</strong> (ci-après, le site web), que l'<strong>Association Talento para el Desarrollo</strong> met à la disposition des utilisateurs d'Internet.`,
+    s1h: "1. Informations d'identification",
+    s1p: "Conformément à l'obligation d'information réglementée à l'article 10 de la loi 34/2002 du 11 juillet sur les services de la société de l'information, les données suivantes sont fournies :",
+    s1items: ["<strong>Titulaire :</strong> Association Talento para el Desarrollo (ci-après, \"L'Association\").", "<strong>NIF :</strong> [INSÉRER LE NIF ICI]", "<strong>Siège social :</strong> [INSÉRER L'ADRESSE COMPLÈTE ICI]", "<strong>Données d'enregistrement :</strong> Inscrite au Registre National des Associations sous le numéro [NUMÉRO D'ENREGISTREMENT], Section [SECTION].", "<strong>Email de contact :</strong> [EMAIL DE CONTACT]", "<strong>Téléphone :</strong> [TÉLÉPHONE OPTIONNEL]"],
+    s2h: "2. Utilisateurs",
+    s2p: "L'accès et/ou l'utilisation de ce site web attribuent la qualité d'UTILISATEUR, qui accepte, depuis cet accès et/ou utilisation, les Conditions Générales d'Utilisation ici reflétées.",
+    s3h: "3. Utilisation du portail",
+    s3p1: "Le site web donne accès à de nombreuses informations, services, programmes ou données sur Internet appartenant à L'Association. L'UTILISATEUR assume la responsabilité de l'utilisation du portail.",
+    s3p2: "L'UTILISATEUR s'engage à faire un usage approprié des contenus et services que L'Association offre par l'intermédiaire de son portail et, à titre énonciatif mais non limitatif, à ne pas les utiliser pour :",
+    s3items: ["Se livrer à des activités illicites, illégales ou contraires à la bonne foi et à l'ordre public.", "Diffuser des contenus ou de la propagande à caractère raciste, xénophobe, pornographique illégal, d'apologie du terrorisme ou portant atteinte aux droits de l'homme.", "Causer des dommages aux systèmes physiques et logiques de L'Association, de ses fournisseurs ou de tiers."],
+    s4h: "4. Propriété intellectuelle et industrielle",
+    s4p1: "L'Association, par elle-même ou en tant que cessionnaire, est titulaire de tous les droits de propriété intellectuelle et industrielle de son site web, ainsi que des éléments qui y sont contenus.",
+    s4p2: "<strong>Tous droits réservés.</strong> En vertu des dispositions des articles 8 et 32.1, deuxième alinéa, de la Loi sur la Propriété Intellectuelle, la reproduction, la distribution et la communication publique de tout ou partie du contenu de ce site web à des fins commerciales, sans l'autorisation de L'Association, sont expressément interdites.",
+    s5h: "5. Exclusion de garanties et de responsabilité",
+    s5p: "L'Association ne saurait être tenue responsable, en aucun cas, des dommages de quelque nature que ce soit pouvant résulter d'erreurs ou d'omissions dans les contenus, d'une indisponibilité du portail ou de la transmission de virus ou de programmes malveillants.",
+    s6h: "6. Modifications",
+    s6p: "L'Association se réserve le droit d'apporter sans préavis les modifications qu'elle jugera opportunes sur son portail.",
+    s7h: "7. Liens",
+    s7p: "Dans le cas où le site web contiendrait des liens ou des hyperliens vers d'autres sites Internet, L'Association n'exercera aucun contrôle sur lesdits sites et leur contenu.",
+    s8h: "8. Législation applicable et juridiction",
+    s8p: `La relation entre L'Association et l'UTILISATEUR sera régie par la législation espagnole en vigueur et tout litige sera soumis aux tribunaux de la ville de <strong>[VILLE DE L'ASSOCIATION]</strong>, sauf disposition contraire de la loi applicable.`,
+  },
+};
+
+const c = content[lang as keyof typeof content] || content.es;
 ---
 
 <LegalLayout
-  title="Aviso Legal"
-  description="Información legal y condiciones de uso del sitio web."
+  title={t('avisoLegal.title')}
+  subtitle={t('legal.subtitle')}
+  description={t('avisoLegal.description')}
 >
-  <p>
-    El presente Aviso Legal regula las condiciones generales de acceso y
-    utilización del sitio web accesible en la dirección URL <strong
-      >[TU_DOMINIO.ORG]</strong
-    > (en adelante, el sitio web), que la <strong
-      >Asociación Talento para el Desarrollo</strong
-    > pone a disposición de los usuarios de Internet.
-  </p>
+  <p set:html={c.intro} />
 
-  <h3>1. Datos Identificativos</h3>
-  <p>
-    En cumplimiento del deber de información regulado en el artículo 10 de la
-    Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y
-    del Comercio Electrónico (LSSI-CE), se facilitan a continuación los
-    siguientes datos:
-  </p>
-  <ul
-    class="list-disc pl-5 space-y-2 bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 text-base my-8"
-  >
-    <li>
-      <strong>Titular:</strong> Asociación Talento para el Desarrollo (en adelante,
-      "La Asociación").
-    </li>
-    <li><strong>NIF:</strong> [INTRODUCIR NIF AQUÍ]</li>
-    <li>
-      <strong>Domicilio Social:</strong> [INTRODUCIR DIRECCIÓN COMPLETA AQUÍ]
-    </li>
-    <li>
-      <strong>Datos Registrales:</strong> Inscrita en el Registro Nacional de Asociaciones
-      (o Autonómico correspondiente) con el número [NÚMERO DE REGISTRO], Sección [SECCIÓN].
-    </li>
-    <li><strong>Email de contacto:</strong> [EMAIL DE CONTACTO]</li>
-    <li><strong>Teléfono:</strong> [TELÉFONO OPCIONAL]</li>
+  <h3>{c.s1h}</h3>
+  <p>{c.s1p}</p>
+  <ul class="list-disc pl-5 space-y-2 bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 text-base my-8">
+    {c.s1items.map(item => <li set:html={item} />)}
   </ul>
 
-  <h3>2. Usuarios</h3>
-  <p>
-    El acceso y/o uso de este sitio web atribuye la condición de USUARIO, que
-    acepta, desde dicho acceso y/o uso, las Condiciones Generales de Uso aquí
-    reflejadas. Las citadas Condiciones serán de aplicación independientemente
-    de las Condiciones Generales de Contratación que en su caso resulten de
-    obligado cumplimiento.
-  </p>
+  <h3>{c.s2h}</h3>
+  <p>{c.s2p}</p>
 
-  <h3>3. Uso del Portal</h3>
-  <p>
-    El sitio web proporciona el acceso a multitud de informaciones, servicios,
-    programas o datos (en adelante, "los contenidos") en Internet pertenecientes
-    a La Asociación a los que el USUARIO pueda tener acceso. El USUARIO asume la
-    responsabilidad del uso del portal. Dicha responsabilidad se extiende al
-    registro que fuese necesario para acceder a determinados servicios o
-    contenidos.
-  </p>
-  <p>
-    El USUARIO se compromete a hacer un uso adecuado de los contenidos y
-    servicios que La Asociación ofrece a través de su portal y con carácter
-    enunciativo pero no limitativo, a no emplearlos para:
-  </p>
+  <h3>{c.s3h}</h3>
+  <p>{c.s3p1}</p>
+  <p>{c.s3p2}</p>
   <ul>
-    <li>
-      Incurrir en actividades ilícitas, ilegales o contrarias a la buena fe y al
-      orden público.
-    </li>
-    <li>
-      Difundir contenidos o propaganda de carácter racista, xenófobo,
-      pornográfico-ilegal, de apología del terrorismo o atentatorio contra los
-      derechos humanos.
-    </li>
-    <li>
-      Provocar daños en los sistemas físicos y lógicos de La Asociación, de sus
-      proveedores o de terceras personas.
-    </li>
+    {c.s3items.map(item => <li>{item}</li>)}
   </ul>
 
-  <h3>4. Propiedad Intelectual e Industrial</h3>
-  <p>
-    La Asociación por sí o como cesionaria, es titular de todos los derechos de
-    propiedad intelectual e industrial de su página web, así como de los
-    elementos contenidos en la misma (a título enunciativo, imágenes, sonido,
-    audio, vídeo, software o textos; marcas o logotipos, combinaciones de
-    colores, estructura y diseño, selección de materiales usados, programas de
-    ordenador necesarios para su funcionamiento, acceso y uso, etc.).
-  </p>
-  <p>
-    <strong>Todos los derechos reservados.</strong> En virtud de lo dispuesto en los
-    artículos 8 y 32.1, párrafo segundo, de la Ley de Propiedad Intelectual, quedan
-    expresamente prohibidas la reproducción, la distribución y la comunicación pública,
-    incluida su modalidad de puesta a disposición, de la totalidad o parte de los
-    contenidos de esta página web, con fines comerciales, en cualquier soporte y por
-    cualquier medio técnico, sin la autorización de La Asociación.
-  </p>
+  <h3>{c.s4h}</h3>
+  <p>{c.s4p1}</p>
+  <p set:html={c.s4p2} />
 
-  <h3>5. Exclusión de Garantías y Responsabilidad</h3>
-  <p>
-    La Asociación no se hace responsable, en ningún caso, de los daños y
-    perjuicios de cualquier naturaleza que pudieran ocasionar, a título
-    enunciativo: errores u omisiones en los contenidos, falta de disponibilidad
-    del portal o la transmisión de virus o programas maliciosos o lesivos en los
-    contenidos, a pesar de haber adoptado todas las medidas tecnológicas
-    necesarias para evitarlo.
-  </p>
+  <h3>{c.s5h}</h3>
+  <p>{c.s5p}</p>
 
-  <h3>6. Modificaciones</h3>
-  <p>
-    La Asociación se reserva el derecho de efectuar sin previo aviso las
-    modificaciones que considere oportunas en su portal, pudiendo cambiar,
-    suprimir o añadir tanto los contenidos y servicios que se presten a través
-    de la misma como la forma en la que éstos aparezcan presentados o
-    localizados en su portal.
-  </p>
+  <h3>{c.s6h}</h3>
+  <p>{c.s6p}</p>
 
-  <h3>7. Enlaces</h3>
-  <p>
-    En el caso de que en el sitio web se dispusiesen enlaces o hipervínculos
-    hacía otros sitios de Internet, La Asociación no ejercerá ningún tipo de
-    control sobre dichos sitios y contenidos. En ningún caso La Asociación
-    asumirá responsabilidad alguna por los contenidos de algún enlace
-    perteneciente a un sitio web ajeno.
-  </p>
+  <h3>{c.s7h}</h3>
+  <p>{c.s7p}</p>
 
-  <h3>8. Legislación Aplicable y Jurisdicción</h3>
-  <p>
-    La relación entre La Asociación y el USUARIO se regirá por la normativa
-    española vigente y cualquier controversia se someterá a los Juzgados y
-    tribunales de la ciudad de <strong>[CIUDAD DE LA ASOCIACIÓN]</strong>, salvo
-    que la Ley aplicable disponga otra cosa.
-  </p>
+  <h3>{c.s8h}</h3>
+  <p set:html={c.s8p} />
 </LegalLayout>

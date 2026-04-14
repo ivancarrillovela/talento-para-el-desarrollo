@@ -1,12 +1,23 @@
 ---
-import { reader } from "../../utils/keystatic";
-import { SITE_INFO, NAV_LINKS, FOOTER_LINKS } from "../../constants";
+import { SITE_INFO } from "../../constants";
 import Footer from "./Footer.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { useTranslations } from "../../i18n/ui";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const globalData = await reader.singletons.global.read();
-const nombre = globalData?.nombreSitio || SITE_INFO.name;
-const logo = globalData?.logo || null;
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+const rootHref = getRelativeLocaleUrl(lang, "/");
+
+const nombre = SITE_INFO.name;
+const logo = null; // Removed Keystatic logo, using text by default unless localized logo is added later
+
+const navLinks = [
+  { label: t('nav.about'), href: `${rootHref}#sobre-nosotros` },
+  { label: t('nav.values'), href: `${rootHref}#valores` },
+  { label: t('nav.activities'), href: `${rootHref}#actividades` },
+  { label: t('nav.contact'), href: `${rootHref}#contacto` },
+];
 ---
 
 <nav
@@ -17,7 +28,7 @@ const logo = globalData?.logo || null;
     class="container mx-auto px-6 lg:px-12 flex justify-between items-center"
   >
     <a
-      href="/"
+      href={rootHref}
       class="text-2xl font-bold text-zinc-900 flex items-center gap-2"
     >
       {
@@ -38,7 +49,7 @@ const logo = globalData?.logo || null;
 
     <div class="hidden md:flex items-center gap-8">
       {
-        NAV_LINKS.map((link) => (
+        navLinks.map((link) => (
           <a
             href={link.href}
             class="group relative text-sm font-medium text-zinc-700 hover:text-terracotta-500 transition-colors py-1"
@@ -52,10 +63,10 @@ const logo = globalData?.logo || null;
       <LanguageSwitcher />
 
       <a
-        href="#contacto"
+        href={`${rootHref}#contacto`}
         class="px-5 py-2.5 bg-zinc-900 text-white text-sm font-medium rounded-sm hover:bg-terracotta-500 transition-colors"
       >
-        Colaborar
+        {t('nav.collaborate')}
       </a>
     </div>
 
@@ -106,7 +117,7 @@ const logo = globalData?.logo || null;
       <div class="flex items-center justify-center gap-3 mb-6 mobile-nav-lang">
         <span
           class="text-[11px] font-medium text-zinc-400 uppercase tracking-[0.15em]"
-          >Idioma</span
+          >{t('nav.language')}</span
         >
         <span class="w-1 h-px bg-zinc-200"></span>
         <LanguageSwitcher />
@@ -117,7 +128,7 @@ const logo = globalData?.logo || null;
         class="mobile-nav flex flex-col items-stretch border-t border-zinc-200/60"
       >
         {
-          NAV_LINKS.map((link, index) => (
+          navLinks.map((link, index) => (
             <a
               href={link.href}
               class="mobile-nav-link group relative flex items-center justify-between py-8 border-b border-zinc-200/60 overflow-hidden"
@@ -159,10 +170,10 @@ const logo = globalData?.logo || null;
       {/* CTA + Footer pegados abajo */}
       <div class="mt-auto">
         <a
-          href="#contacto"
+          href={`${rootHref}#contacto`}
           class="flex items-center justify-center w-full py-3.5 mb-6 bg-zinc-900 text-white text-base font-medium rounded-md hover:bg-terracotta-500 transition-colors shadow-sm"
         >
-          Colabora con nosotros
+          {t('nav.collaborateFull')}
         </a>
         <Footer variant="mobile" />
       </div>

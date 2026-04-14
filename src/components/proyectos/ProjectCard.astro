@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { formatDate } from "../../utils/date";
+import { getLangField } from "../../utils/keystatic";
 
 interface Props {
   proyecto: CollectionEntry<"proyectos">;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const { proyecto, index, class: className } = Astro.props;
+const lang = Astro.currentLocale || "es";
 ---
 
 <article
@@ -41,11 +43,11 @@ const { proyecto, index, class: className } = Astro.props;
     <h2
       class="text-xl md:text-2xl font-bold text-zinc-900 mb-3 group-hover:text-terracotta-500 transition-colors leading-tight"
     >
-      {proyecto.data.titulo}
+      {getLangField(proyecto.data, 'titulo', lang) || proyecto.data.titulo}
     </h2>
 
     <p class="text-zinc-600 leading-relaxed mb-6 text-sm font-light">
-      {proyecto.data.descripcion}
+      {getLangField(proyecto.data, 'descripcion', lang) || proyecto.data.descripcion}
     </p>
 
     <div class="mt-auto pt-4 border-t border-zinc-50">
@@ -73,7 +75,7 @@ const { proyecto, index, class: className } = Astro.props;
               />
             </svg>
             <span class="relative z-10 group-hover/pdf:text-terracotta-500 transition-colors">
-              Descargar PDF
+              {lang === 'en' ? 'Download PDF' : lang === 'fr' ? 'Télécharger le PDF' : 'Descargar PDF'}
             </span>
           </a>
         ) : (

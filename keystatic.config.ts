@@ -13,12 +13,26 @@ export default config({
       label: "Portada",
       path: "src/content/hero/datos",
       schema: {
-        titulo: fields.text({ label: "Título Principal" }),
-        subtitulo: fields.text({ label: "Subtítulo (parte en color)" }),
-        descripcion: fields.text({ label: "Descripción", multiline: true }),
-        textoBoton: fields.text({ label: "Texto Botón Principal" }),
+        titulo: fields.text({ label: "Título Principal (ES)" }),
+        titulo_en: fields.text({ label: "Título Principal (EN)" }),
+        titulo_fr: fields.text({ label: "Título Principal (FR)" }),
+        subtitulo: fields.text({ label: "Subtítulo (parte en color) (ES)" }),
+        subtitulo_en: fields.text({ label: "Subtítulo (parte en color) (EN)" }),
+        subtitulo_fr: fields.text({ label: "Subtítulo (parte en color) (FR)" }),
+        descripcion: fields.text({ label: "Descripción (ES)", multiline: true }),
+        descripcion_en: fields.text({ label: "Descripción (EN)", multiline: true }),
+        descripcion_fr: fields.text({ label: "Descripción (FR)", multiline: true }),
+        textoBoton: fields.text({ label: "Texto Botón Principal (ES)" }),
+        textoBoton_en: fields.text({ label: "Texto Botón Principal (EN)" }),
+        textoBoton_fr: fields.text({ label: "Texto Botón Principal (FR)" }),
         textoBotonSecundario: fields.text({
-          label: "Texto Botón Secundario (ej: Cómo colaborar)",
+          label: "Texto Botón Secundario (ej: Cómo colaborar) (ES)",
+        }),
+        textoBotonSecundario_en: fields.text({
+          label: "Texto Botón Secundario (ej: Cómo colaborar) (EN)",
+        }),
+        textoBotonSecundario_fr: fields.text({
+          label: "Texto Botón Secundario (ej: Cómo colaborar) (FR)",
         }),
         imagen: fields.image({
           label: "Imagen de portada",
@@ -26,8 +40,12 @@ export default config({
           publicPath: "/images/hero/",
         }),
         // Datos del "Badge" flotante
-        badgeTitulo: fields.text({ label: "Badge: Título (ej: +1.200 Becas)" }),
-        badgeDesc: fields.text({ label: "Badge: Descripción" }),
+        badgeTitulo: fields.text({ label: "Badge: Título (ej: +1.200 Becas) (ES)" }),
+        badgeTitulo_en: fields.text({ label: "Badge: Título (ej: +1.200 Becas) (EN)" }),
+        badgeTitulo_fr: fields.text({ label: "Badge: Título (ej: +1.200 Becas) (FR)" }),
+        badgeDesc: fields.text({ label: "Badge: Descripción (ES)" }),
+        badgeDesc_en: fields.text({ label: "Badge: Descripción (EN)" }),
+        badgeDesc_fr: fields.text({ label: "Badge: Descripción (FR)" }),
       },
     }),
 
@@ -36,8 +54,12 @@ export default config({
       label: "Sobre Nosotros",
       path: "src/content/sobre-nosotros/datos",
       schema: {
-        titulo: fields.text({ label: "Título (ej: Nuestra Historia)" }),
-        descripcion: fields.text({ label: "Texto principal", multiline: true }),
+        titulo: fields.text({ label: "Título (ej: Nuestra Historia) (ES)" }),
+        titulo_en: fields.text({ label: "Título (ej: Nuestra Historia) (EN)" }),
+        titulo_fr: fields.text({ label: "Título (ej: Nuestra Historia) (FR)" }),
+        descripcion: fields.text({ label: "Texto principal (ES)", multiline: true }),
+        descripcion_en: fields.text({ label: "Texto principal (EN)", multiline: true }),
+        descripcion_fr: fields.text({ label: "Texto principal (FR)", multiline: true }),
         imagen: fields.image({
           label: "Imagen del equipo o fundadores",
           directory: "public/images/about",
@@ -45,14 +67,30 @@ export default config({
         }),
         stats: fields.object(
           {
-            stat1_numero: fields.text({ label: "Dato 1: Número (ej: +50)" }),
+            stat1_numero: fields.text({ label: "Dato 1: Número (ej: +50) (ES)" }),
+        stat1_numero_en: fields.text({ label: "Dato 1: Número (ej: +50) (EN)" }),
+        stat1_numero_fr: fields.text({ label: "Dato 1: Número (ej: +50) (FR)" }),
             stat1_label: fields.text({
-              label: "Dato 1: Texto (ej: Proyectos)",
+              label: "Dato 1: Texto (ej: Proyectos) (ES)",
             }),
-            stat2_numero: fields.text({ label: "Dato 2: Número" }),
-            stat2_label: fields.text({ label: "Dato 2: Texto" }),
-            stat3_numero: fields.text({ label: "Dato 3: Número" }),
-            stat3_label: fields.text({ label: "Dato 3: Texto" }),
+        stat1_label_en: fields.text({
+              label: "Dato 1: Texto (ej: Proyectos) (EN)",
+            }),
+        stat1_label_fr: fields.text({
+              label: "Dato 1: Texto (ej: Proyectos) (FR)",
+            }),
+            stat2_numero: fields.text({ label: "Dato 2: Número (ES)" }),
+        stat2_numero_en: fields.text({ label: "Dato 2: Número (EN)" }),
+        stat2_numero_fr: fields.text({ label: "Dato 2: Número (FR)" }),
+            stat2_label: fields.text({ label: "Dato 2: Texto (ES)" }),
+        stat2_label_en: fields.text({ label: "Dato 2: Texto (EN)" }),
+        stat2_label_fr: fields.text({ label: "Dato 2: Texto (FR)" }),
+            stat3_numero: fields.text({ label: "Dato 3: Número (ES)" }),
+        stat3_numero_en: fields.text({ label: "Dato 3: Número (EN)" }),
+        stat3_numero_fr: fields.text({ label: "Dato 3: Número (FR)" }),
+            stat3_label: fields.text({ label: "Dato 3: Texto (ES)" }),
+        stat3_label_en: fields.text({ label: "Dato 3: Texto (EN)" }),
+        stat3_label_fr: fields.text({ label: "Dato 3: Texto (FR)" }),
           },
           { label: "Estadísticas de Impacto" },
         ),
@@ -64,9 +102,19 @@ export default config({
       label: " Lo que buscamos (Cabecera)",
       path: "src/content/valores-intro/datos",
       schema: {
-        titulo: fields.text({ label: "Título Grande" }),
+        titulo: fields.text({ label: "Título Grande (ES)" }),
+        titulo_en: fields.text({ label: "Título Grande (EN)" }),
+        titulo_fr: fields.text({ label: "Título Grande (FR)" }),
         descripcion: fields.text({
-          label: "Descripción Lateral",
+          label: "Descripción Lateral (ES)",
+          multiline: true,
+        }),
+        descripcion_en: fields.text({
+          label: "Descripción Lateral (EN)",
+          multiline: true,
+        }),
+        descripcion_fr: fields.text({
+          label: "Descripción Lateral (FR)",
           multiline: true,
         }),
       },
@@ -77,8 +125,12 @@ export default config({
       label: "Nuestro Trabajo (Cabecera)",
       path: "src/content/nuestro-trabajo-intro/datos",
       schema: {
-        titulo: fields.text({ label: "Título Grande" }),
-        descripcion: fields.text({ label: "Descripción", multiline: true }),
+        titulo: fields.text({ label: "Título Grande (ES)" }),
+        titulo_en: fields.text({ label: "Título Grande (EN)" }),
+        titulo_fr: fields.text({ label: "Título Grande (FR)" }),
+        descripcion: fields.text({ label: "Descripción (ES)", multiline: true }),
+        descripcion_en: fields.text({ label: "Descripción (EN)", multiline: true }),
+        descripcion_fr: fields.text({ label: "Descripción (FR)", multiline: true }),
       },
     }),
 
@@ -87,12 +139,24 @@ export default config({
       label: "Contacto",
       path: "src/content/contacto/datos",
       schema: {
-        titulo: fields.text({ label: "Título Grande" }),
+        titulo: fields.text({ label: "Título Grande (ES)" }),
+        titulo_en: fields.text({ label: "Título Grande (EN)" }),
+        titulo_fr: fields.text({ label: "Título Grande (FR)" }),
         descripcion: fields.text({
-          label: "Texto descriptivo",
+          label: "Texto descriptivo (ES)",
           multiline: true,
         }),
-        textoBoton: fields.text({ label: "Texto del Botón Enviar" }),
+        descripcion_en: fields.text({
+          label: "Texto descriptivo (EN)",
+          multiline: true,
+        }),
+        descripcion_fr: fields.text({
+          label: "Texto descriptivo (FR)",
+          multiline: true,
+        }),
+        textoBoton: fields.text({ label: "Texto del Botón Enviar (ES)" }),
+        textoBoton_en: fields.text({ label: "Texto del Botón Enviar (EN)" }),
+        textoBoton_fr: fields.text({ label: "Texto del Botón Enviar (FR)" }),
       },
     }),
 
@@ -102,7 +166,13 @@ export default config({
       path: "src/content/global/datos",
       schema: {
         nombreSitio: fields.text({
-          label: "Nombre de la asociación (Si no subes logo se verá esto)",
+          label: "Nombre de la asociación (Si no subes logo se verá esto) (ES)",
+        }),
+        nombreSitio_en: fields.text({
+          label: "Nombre de la asociación (Si no subes logo se verá esto) (EN)",
+        }),
+        nombreSitio_fr: fields.text({
+          label: "Nombre de la asociación (Si no subes logo se verá esto) (FR)",
         }),
         logo: fields.image({
           label:
@@ -112,15 +182,29 @@ export default config({
         }),
         redes: fields.object(
           {
-            instagram: fields.text({ label: "URL Instagram" }),
-            linkedin: fields.text({ label: "URL LinkedIn" }),
-            twitter: fields.text({ label: "URL Twitter/X" }),
-            webExterna: fields.text({ label: "URL Web Externa" }),
+            instagram: fields.text({ label: "URL Instagram (ES)" }),
+        instagram_en: fields.text({ label: "URL Instagram (EN)" }),
+        instagram_fr: fields.text({ label: "URL Instagram (FR)" }),
+            linkedin: fields.text({ label: "URL LinkedIn (ES)" }),
+        linkedin_en: fields.text({ label: "URL LinkedIn (EN)" }),
+        linkedin_fr: fields.text({ label: "URL LinkedIn (FR)" }),
+            twitter: fields.text({ label: "URL Twitter/X (ES)" }),
+        twitter_en: fields.text({ label: "URL Twitter/X (EN)" }),
+        twitter_fr: fields.text({ label: "URL Twitter/X (FR)" }),
+            webExterna: fields.text({ label: "URL Web Externa (ES)" }),
+        webExterna_en: fields.text({ label: "URL Web Externa (EN)" }),
+        webExterna_fr: fields.text({ label: "URL Web Externa (FR)" }),
           },
           { label: "Redes Sociales" },
         ),
         footerTexto: fields.text({
-          label: "Texto pie de página (Junto al Copyright)",
+          label: "Texto pie de página (Junto al Copyright) (ES)",
+        }),
+        footerTexto_en: fields.text({
+          label: "Texto pie de página (Junto al Copyright) (EN)",
+        }),
+        footerTexto_fr: fields.text({
+          label: "Texto pie de página (Junto al Copyright) (FR)",
         }),
       },
     }),
@@ -131,26 +215,68 @@ export default config({
       path: "src/content/como-beneficiarte/datos",
       schema: {
         tituloSmall: fields.text({
-          label: "Título Pequeño (ej: Oportunidades)",
+          label: "Título Pequeño (ej: Oportunidades) (ES)",
         }),
-        titulo: fields.text({ label: "Título Principal" }),
-        descripcion: fields.text({ label: "Descripción", multiline: true }),
-        paso1_titulo: fields.text({ label: "Paso 1: Título" }),
+        tituloSmall_en: fields.text({
+          label: "Título Pequeño (ej: Oportunidades) (EN)",
+        }),
+        tituloSmall_fr: fields.text({
+          label: "Título Pequeño (ej: Oportunidades) (FR)",
+        }),
+        titulo: fields.text({ label: "Título Principal (ES)" }),
+        titulo_en: fields.text({ label: "Título Principal (EN)" }),
+        titulo_fr: fields.text({ label: "Título Principal (FR)" }),
+        descripcion: fields.text({ label: "Descripción (ES)", multiline: true }),
+        descripcion_en: fields.text({ label: "Descripción (EN)", multiline: true }),
+        descripcion_fr: fields.text({ label: "Descripción (FR)", multiline: true }),
+        paso1_titulo: fields.text({ label: "Paso 1: Título (ES)" }),
+        paso1_titulo_en: fields.text({ label: "Paso 1: Título (EN)" }),
+        paso1_titulo_fr: fields.text({ label: "Paso 1: Título (FR)" }),
         paso1_desc: fields.text({
-          label: "Paso 1: Descripción",
+          label: "Paso 1: Descripción (ES)",
           multiline: true,
         }),
-        paso2_titulo: fields.text({ label: "Paso 2: Título" }),
+        paso1_desc_en: fields.text({
+          label: "Paso 1: Descripción (EN)",
+          multiline: true,
+        }),
+        paso1_desc_fr: fields.text({
+          label: "Paso 1: Descripción (FR)",
+          multiline: true,
+        }),
+        paso2_titulo: fields.text({ label: "Paso 2: Título (ES)" }),
+        paso2_titulo_en: fields.text({ label: "Paso 2: Título (EN)" }),
+        paso2_titulo_fr: fields.text({ label: "Paso 2: Título (FR)" }),
         paso2_desc: fields.text({
-          label: "Paso 2: Descripción",
+          label: "Paso 2: Descripción (ES)",
           multiline: true,
         }),
-        paso3_titulo: fields.text({ label: "Paso 3: Título" }),
+        paso2_desc_en: fields.text({
+          label: "Paso 2: Descripción (EN)",
+          multiline: true,
+        }),
+        paso2_desc_fr: fields.text({
+          label: "Paso 2: Descripción (FR)",
+          multiline: true,
+        }),
+        paso3_titulo: fields.text({ label: "Paso 3: Título (ES)" }),
+        paso3_titulo_en: fields.text({ label: "Paso 3: Título (EN)" }),
+        paso3_titulo_fr: fields.text({ label: "Paso 3: Título (FR)" }),
         paso3_desc: fields.text({
-          label: "Paso 3: Descripción",
+          label: "Paso 3: Descripción (ES)",
           multiline: true,
         }),
-        botonTexto: fields.text({ label: "Texto del Botón (Ej: Solicitar ahora)" }),
+        paso3_desc_en: fields.text({
+          label: "Paso 3: Descripción (EN)",
+          multiline: true,
+        }),
+        paso3_desc_fr: fields.text({
+          label: "Paso 3: Descripción (FR)",
+          multiline: true,
+        }),
+        botonTexto: fields.text({ label: "Texto del Botón (Ej: Solicitar ahora) (ES)" }),
+        botonTexto_en: fields.text({ label: "Texto del Botón (Ej: Solicitar ahora) (EN)" }),
+        botonTexto_fr: fields.text({ label: "Texto del Botón (Ej: Solicitar ahora) (FR)" }),
       },
     }),
   },
@@ -164,12 +290,24 @@ export default config({
       slugField: "titulo",
       path: "src/content/valores/*",
       schema: {
-        titulo: fields.slug({ name: { label: "Título del valor" } }),
+        titulo: fields.slug({ name: { label: "Título del valor (ES)" } }),
+        titulo_en: fields.text({ label: "Título del valor (EN)" }),
+        titulo_fr: fields.text({ label: "Título del valor (FR)" }),
         descripcion: fields.text({
-          label: "Descripción breve",
+          label: "Descripción breve (ES)",
           multiline: true,
         }),
-        icono: fields.text({ label: "Emoji o Icono para el valor (ej: 🎓)" }),
+        descripcion_en: fields.text({
+          label: "Descripción breve (EN)",
+          multiline: true,
+        }),
+        descripcion_fr: fields.text({
+          label: "Descripción breve (FR)",
+          multiline: true,
+        }),
+        icono: fields.text({ label: "Emoji o Icono para el valor (ej: 🎓) (ES)" }),
+        icono_en: fields.text({ label: "Emoji o Icono para el valor (ej: 🎓) (EN)" }),
+        icono_fr: fields.text({ label: "Emoji o Icono para el valor (ej: 🎓) (FR)" }),
       },
     }),
 
@@ -179,7 +317,9 @@ export default config({
       slugField: "titulo",
       path: "src/content/proyectos/*",
       schema: {
-        titulo: fields.slug({ name: { label: "Título del Proyecto (Breve)" } }),
+        titulo: fields.slug({ name: { label: "Título del Proyecto (Breve) (ES)" } }),
+        titulo_en: fields.text({ label: "Título del Proyecto (Breve) (EN)" }),
+        titulo_fr: fields.text({ label: "Título del Proyecto (Breve) (FR)" }),
         fecha: fields.date({
           label: "Fecha de publicación",
           validation: { isRequired: true },
@@ -190,7 +330,15 @@ export default config({
           publicPath: "/images/proyectos/",
         }),
         descripcion: fields.text({
-          label: "Descripción breve",
+          label: "Descripción breve (ES)",
+          multiline: true,
+        }),
+        descripcion_en: fields.text({
+          label: "Descripción breve (EN)",
+          multiline: true,
+        }),
+        descripcion_fr: fields.text({
+          label: "Descripción breve (FR)",
           multiline: true,
         }),
         pdf: fields.file({

@@ -1,21 +1,10 @@
 ---
-import { reader } from "../../utils/keystatic";
+import { useTranslations } from "../../i18n/ui";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const data = await reader.singletons.hero.read();
-
-if (!data) return null;
-
-const {
-  titulo,
-  subtitulo,
-  descripcion,
-  textoBoton,
-  imagen,
-
-  textoBotonSecundario = "Cómo colaborar",
-  badgeTitulo = "Numerosas becas",
-  badgeDesc = "Otorgadas en el último año.",
-} = data;
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+const rootHref = getRelativeLocaleUrl(lang, "/");
 ---
 
 <section
@@ -31,16 +20,16 @@ const {
           <span
             class="text-terracotta-500 text-sm font-bold tracking-widest uppercase"
           >
-            Inversión en Talento
+            {t('hero.label')}
           </span>
         </div>
 
         <h1
           class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-zinc-900 leading-[0.95] tracking-tighter"
         >
-          {titulo}
+          {t('hero.titulo')}
           <br />
-          <span class="italic font-serif text-terracotta-500">{subtitulo}</span>
+          <span class="italic font-serif text-terracotta-500">{t('hero.subtitulo')}</span>
         </h1>
 
         {/* Imagen móvil (Entre el título y la descripción) */}
@@ -52,8 +41,8 @@ const {
           >
           </div>
           <img
-            src={imagen || "/images/no_image.jpg"}
-            alt={titulo}
+            src="/images/hero/imagen.avif"
+            alt={t('hero.titulo')}
             class="relative z-10 w-full h-full object-cover shadow-lg filter sepia-[10%] contrast-[105%]"
             onerror="this.onerror=null;this.src='/images/no_image.jpg';"
           />
@@ -62,21 +51,21 @@ const {
         <p
           class="text-xl text-zinc-600 max-w-lg leading-relaxed font-light border-l-2 border-zinc-200 pl-6"
         >
-          {descripcion}
+          {t('hero.descripcion')}
         </p>
 
         <div class="flex items-center gap-3 md:gap-5 pt-6">
           <a
-            href="#actividades"
+            href={`${rootHref}#actividades`}
             class="px-6 py-3 md:px-8 md:py-4 bg-zinc-900 text-white text-base md:text-lg font-medium rounded-sm hover:bg-terracotta-500 transition-colors duration-300 shadow-xl shadow-zinc-200 whitespace-nowrap"
           >
-            {textoBoton}
+            {t('hero.boton')}
           </a>
           <a
-            href="#contacto"
+            href={`${rootHref}#contacto`}
             class="group flex items-center gap-2 px-3 py-3 md:px-6 md:py-4 text-zinc-900 text-base md:text-lg font-medium hover:text-terracotta-500 transition-colors duration-300 whitespace-nowrap"
           >
-            {textoBotonSecundario}
+            {t('hero.botonSecundario')}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -102,8 +91,8 @@ const {
         >
         </div>
         <img
-          src={imagen || "/images/no_image.jpg"}
-          alt={titulo}
+          src="/images/hero/imagen.avif"
+          alt={t('hero.titulo')}
           class="relative z-10 w-full h-full object-cover shadow-2xl filter sepia-[10%] contrast-[105%]"
           onerror="this.onerror=null;this.src='/images/no_image.jpg';"
         />
@@ -111,10 +100,10 @@ const {
           class="absolute bottom-10 -left-10 z-20 bg-white p-6 shadow-xl max-w-xs hidden md:block border-l-4 border-terracotta-500"
         >
           <p class="text-zinc-500 text-xs uppercase tracking-wider mb-1">
-            Impacto Real
+            {t('hero.badgeLabel')}
           </p>
-          <p class="text-2xl font-bold text-zinc-900">{badgeTitulo}</p>
-          <p class="text-sm text-zinc-400 mt-1">{badgeDesc}</p>
+          <p class="text-2xl font-bold text-zinc-900">{t('hero.badgeTitulo')}</p>
+          <p class="text-sm text-zinc-400 mt-1">{t('hero.badgeDesc')}</p>
         </div>
       </div>
     </div>

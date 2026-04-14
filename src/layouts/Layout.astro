@@ -10,7 +10,7 @@ const { title = "Talento para el Desarrollo" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={Astro.currentLocale ?? "es"}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -18,13 +18,6 @@ const { title = "Talento para el Desarrollo" } = Astro.props;
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
-    <script>
-      Weglot.initialize({
-        api_key: "wg_ae44912707256f11826353e172b8610c7",
-        hide_switcher: true,
-      });
-    </script>
   </head>
   <body>
     <slot />

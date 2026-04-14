@@ -1,64 +1,71 @@
 ---
 import LegalLayout from "../layouts/LegalLayout.astro";
+import { useTranslations } from "../i18n/ui";
+
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+
+const content = {
+  es: {
+    intro: `Informamos a los usuarios de que en este sitio web <strong>NO se utilizan cookies propias ni de terceros</strong> para el seguimiento, análisis o publicidad comportamental.`,
+    s1h: "¿Qué son las cookies?",
+    s1p: "Una cookie es un fichero que se descarga en su ordenador al acceder a determinadas páginas web. Las cookies permiten a una página web, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación de un usuario o de su equipo y, dependiendo de la información que contengan y de la forma en que utilice su equipo, pueden utilizarse para reconocer al usuario.",
+    s2h: "Nuestro compromiso con la privacidad",
+    s2p: "En la <strong>Asociación Talento para el Desarrollo</strong> nos tomamos muy en serio la privacidad de nuestros usuarios. Por ello, hemos diseñado este sitio web para funcionar sin necesidad de almacenar cookies en su dispositivo.",
+    items: ["<strong>No utilizamos Google Analytics</strong> ni otros sistemas de métricas que requieran cookies.", "<strong>No mostramos publicidad</strong> personalizada ni de terceros.", "<strong>No rastreamos</strong> su actividad fuera de este sitio web."],
+    s3h: "Cookies técnicas (Exentas)",
+    s3p: "Es posible que el servidor donde se aloja la web o los servicios de terceros esenciales para su funcionamiento utilicen mecanismos de almacenamiento técnico que son estrictamente necesarios y que, según el artículo 22.2 de la LSSI, no requieren consentimiento informado.",
+    s4h: "Enlaces a terceros",
+    s4p: "El portal puede contener enlaces a sitios web de terceros, cuyas políticas de privacidad son ajenas a la de la Asociación. Al acceder a tales sitios web usted puede decidir si acepta sus políticas de privacidad y de cookies.",
+  },
+  en: {
+    intro: `We inform users that this website <strong>DOES NOT use first-party or third-party cookies</strong> for tracking, analytics or behavioural advertising.`,
+    s1h: "What are cookies?",
+    s1p: "A cookie is a file that is downloaded to your computer when you access certain web pages. Cookies allow a website, among other things, to store and retrieve information about the browsing habits of a user or their device and, depending on the information they contain and how you use your device, they can be used to recognise the user.",
+    s2h: "Our commitment to privacy",
+    s2p: "At the <strong>Talento para el Desarrollo Association</strong> we take the privacy of our users very seriously. Therefore, we have designed this website to work without the need to store cookies on your device.",
+    items: ["<strong>We do not use Google Analytics</strong> or other metrics systems that require cookies.", "<strong>We do not display</strong> personalised or third-party advertising.", "<strong>We do not track</strong> your activity outside this website."],
+    s3h: "Technical cookies (Exempt)",
+    s3p: "It is possible that the server hosting the website or essential third-party services use technical storage mechanisms that are strictly necessary and which, pursuant to Article 22.2 of the LSSI, do not require informed consent.",
+    s4h: "Third-party links",
+    s4p: "The portal may contain links to third-party websites whose privacy policies are separate from those of the Association. When accessing such websites, you may decide whether to accept their privacy and cookie policies.",
+  },
+  fr: {
+    intro: `Nous informons les utilisateurs que ce site web <strong>N'UTILISE PAS de cookies propres ni de tiers</strong> à des fins de suivi, d'analyse ou de publicité comportementale.`,
+    s1h: "Que sont les cookies ?",
+    s1p: "Un cookie est un fichier qui se télécharge sur votre ordinateur lorsque vous accédez à certaines pages web. Les cookies permettent à un site web, entre autres, de stocker et de récupérer des informations sur les habitudes de navigation d'un utilisateur ou de son appareil et, en fonction des informations qu'ils contiennent et de la façon dont vous utilisez votre appareil, ils peuvent être utilisés pour reconnaître l'utilisateur.",
+    s2h: "Notre engagement en matière de confidentialité",
+    s2p: "Chez l'<strong>Association Talento para el Desarrollo</strong>, nous prenons très au sérieux la vie privée de nos utilisateurs. C'est pourquoi nous avons conçu ce site web pour fonctionner sans avoir besoin de stocker des cookies sur votre appareil.",
+    items: ["<strong>Nous n'utilisons pas Google Analytics</strong> ni d'autres systèmes de métriques nécessitant des cookies.", "<strong>Nous n'affichons pas</strong> de publicité personnalisée ni de tiers.", "<strong>Nous ne suivons pas</strong> votre activité en dehors de ce site web."],
+    s3h: "Cookies techniques (Exemptés)",
+    s3p: "Il est possible que le serveur hébergeant le site web ou les services tiers essentiels à son fonctionnement utilisent des mécanismes de stockage technique strictement nécessaires qui, conformément à l'article 22.2 de la LSSI, ne nécessitent pas de consentement éclairé.",
+    s4h: "Liens vers des tiers",
+    s4p: "Le portail peut contenir des liens vers des sites web de tiers dont les politiques de confidentialité sont distinctes de celles de l'Association. En accédant à ces sites web, vous pouvez décider d'accepter ou non leurs politiques de confidentialité et de cookies.",
+  },
+};
+
+const c = content[lang as keyof typeof content] || content.es;
 ---
 
 <LegalLayout
-  title="Política de Cookies"
-  description="Información sobre el uso de cookies en nuestro sitio web."
+  title={t('cookies.title')}
+  subtitle={t('legal.subtitle')}
+  description={t('cookies.description')}
 >
-  <p>
-    Informamos a los usuarios de que en este sitio web <strong
-      >NO se utilizan cookies propias ni de terceros</strong
-    > para el seguimiento, análisis o publicidad comportamental.
-  </p>
+  <p set:html={c.intro} />
 
-  <h3>¿Qué son las cookies?</h3>
-  <p>
-    Una cookie es un fichero que se descarga en su ordenador al acceder a
-    determinadas páginas web. Las cookies permiten a una página web, entre otras
-    cosas, almacenar y recuperar información sobre los hábitos de navegación de
-    un usuario o de su equipo y, dependiendo de la información que contengan y
-    de la forma en que utilice su equipo, pueden utilizarse para reconocer al
-    usuario.
-  </p>
+  <h3>{c.s1h}</h3>
+  <p>{c.s1p}</p>
 
-  <h3>Nuestro compromiso con la privacidad</h3>
-  <p>
-    En la <strong>Asociación Talento para el Desarrollo</strong> nos tomamos muy en
-    serio la privacidad de nuestros usuarios. Por ello, hemos diseñado este sitio
-    web para funcionar sin necesidad de almacenar cookies en su dispositivo.
-  </p>
-
-  <ul
-    class="list-disc pl-5 space-y-2 bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 text-base my-8"
-  >
-    <li>
-      <strong>No utilizamos Google Analytics</strong> ni otros sistemas de métricas
-      que requieran cookies.
-    </li>
-    <li>
-      <strong>No mostramos publicidad</strong> personalizada ni de terceros.
-    </li>
-    <li>
-      <strong>No rastreamos</strong> su actividad fuera de este sitio web.
-    </li>
+  <h3>{c.s2h}</h3>
+  <p set:html={c.s2p} />
+  <ul class="list-disc pl-5 space-y-2 bg-zinc-50 p-6 rounded-sm border-l-4 border-terracotta-500 text-base my-8">
+    {c.items.map(item => <li set:html={item} />)}
   </ul>
 
-  <h3>Cookies técnicas (Exentas)</h3>
-  <p>
-    Es posible que el servidor donde se aloja la web o los servicios de terceros
-    esenciales para su funcionamiento (como el balanceo de carga o la seguridad)
-    utilicen mecanismos de almacenamiento técnico que son estrictamente
-    necesarios y que, según el artículo 22.2 de la LSSI, no requieren
-    consentimiento informado.
-  </p>
+  <h3>{c.s3h}</h3>
+  <p>{c.s3p}</p>
 
-  <h3>Enlaces a terceros</h3>
-  <p>
-    El portal puede contener enlaces a sitios web de terceros, cuyas políticas
-    de privacidad son ajenas a la de la Asociación. Al acceder a tales sitios
-    web usted puede decidir si acepta sus políticas de privacidad y de cookies.
-    Con carácter general, si navega por internet usted puede aceptar o rechazar
-    las cookies de terceros desde las opciones de configuración de su navegador.
-  </p>
+  <h3>{c.s4h}</h3>
+  <p>{c.s4p}</p>
 </LegalLayout>

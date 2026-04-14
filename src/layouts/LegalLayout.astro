@@ -1,8 +1,10 @@
 ---
 import Footer from "../components/common/Footer.astro";
+import Navbar from "../components/common/Navbar.astro";
 import Layout from "./Layout.astro";
 import PageHeader from "../components/common/PageHeader.astro";
 import { SITE_INFO } from "../constants";
+import { useTranslations } from "../i18n/ui";
 
 interface Props {
   title: string;
@@ -18,11 +20,16 @@ const {
   updatedAt = new Date(),
 } = Astro.props;
 
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
 const fullTitle = `${title} - ${SITE_INFO.name}`;
+const localeMap: Record<string, string> = { es: 'es-ES', en: 'en-GB', fr: 'fr-FR' };
+const dateLocale = localeMap[lang] || 'es-ES';
 ---
 
 <Layout title={fullTitle}>
-  <main class="bg-zinc-100 min-h-screen flex flex-col relative">
+  <Navbar />
+  <main class="bg-zinc-100 min-h-screen flex flex-col relative pt-20">
     <PageHeader title={title} subtitle={subtitle} description={description} />
 
     <div class="container mx-auto px-6 lg:px-12 -mt-48 relative z-20 pb-24">
@@ -38,7 +45,7 @@ const fullTitle = `${title} - ${SITE_INFO.name}`;
           <p
             class="text-zinc-400 mb-10 text-sm font-medium uppercase tracking-widest border-b border-zinc-100 pb-4 text-right"
           >
-            Última actualización: {updatedAt.toLocaleDateString("es-ES")}
+            {t('legal.updatedAt')}: {updatedAt.toLocaleDateString(dateLocale)}
           </p>
 
           <div

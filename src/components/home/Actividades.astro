@@ -1,23 +1,25 @@
 ---
+import { useTranslations } from "../../i18n/ui";
+
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+
 const actividades = [
   {
-    titulo: "Sesiones informativas",
-    descripcion: "Organizamos jornadas y talleres de concienciación de los principales problemas que afectan a los países menos desarrollados y sus posibles soluciones. Estas sesiones fomentan una visión crítica y comprometida.",
-    num: "Concienciación",
-    label: "Concienciación"
+    titulo:      t('actividad1.titulo'),
+    etiqueta:    t('actividad1.etiqueta'),
+    descripcion: t('actividad1.descripcion'),
   },
   {
-    titulo: "Orientación académica",
-    descripcion: "Asesoramos a los candidatos en la elección de programas de estudio, universidades y líneas de investigación, alineando sus intereses personales con las necesidades de desarrollo de sus países de origen.",
-    num: "Desarrollo",
-    label: "Desarrollo"
+    titulo:      t('actividad2.titulo'),
+    etiqueta:    t('actividad2.etiqueta'),
+    descripcion: t('actividad2.descripcion'),
   },
   {
-    titulo: "Encuentros con expertos",
-    descripcion: "Facilitamos reuniones, seminarios con especialistas en distintas áreas (economía, educación, salud, políticas públicas, etc.), que aporten ideas innovadoras para un desarrollo sostenible.",
-    num: "Networking",
-    label: "Networking"
-  }
+    titulo:      t('actividad3.titulo'),
+    etiqueta:    t('actividad3.etiqueta'),
+    descripcion: t('actividad3.descripcion'),
+  },
 ];
 ---
 
@@ -27,34 +29,31 @@ const actividades = [
   <div class="container mx-auto px-6 lg:px-12 relative z-10">
     <div class="max-w-4xl mb-20">
       <h2 class="text-terracotta-500 font-bold tracking-[0.25em] uppercase text-sm mb-8">
-        ACTIVIDADES
+        {t('actividades.label')}
       </h2>
       <h3 class="text-3xl md:text-5xl font-bold leading-tight text-zinc-900 mb-10 text-balance">
-        Comprometidos con la formación y el intercambio de conocimiento.
+        {t('actividades.titulo')}
       </h3>
       <p class="text-xl md:text-2xl text-zinc-600 leading-relaxed font-light">
-        Desarrollamos iniciativas estratégicas para garantizar que el talento africano cuente con las herramientas necesarias para su progreso.
+        {t('actividades.descripcion')}
       </p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
       {actividades.map((act, index) => (
         <div class={`group relative p-10 lg:p-14 bg-white border border-zinc-100 rounded-[2.5rem] transition-all duration-700 ease-out hover:-translate-y-4 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] flex flex-col justify-between min-h-[480px] ${index === 1 ? 'lg:-translate-y-12' : ''}`}>
-          
           <div class="relative z-10">
             <span class="text-5xl lg:text-[56px] font-bold text-zinc-900/[0.02] absolute -top-5 -right-3 select-none group-hover:text-terracotta-500/[0.05] transition-colors duration-700 italic tracking-tighter leading-none">
-              {act.num}
+              {act.etiqueta}
             </span>
-
             <div class="mb-12">
               <span class="text-[10px] font-bold text-terracotta-500/50 uppercase tracking-[0.3em] mb-4 block">
-                {act.label}
+                {act.etiqueta}
               </span>
               <h4 class="text-2xl lg:text-3xl font-bold text-zinc-900 leading-tight group-hover:text-terracotta-500 transition-colors duration-300">
                 {act.titulo}
               </h4>
             </div>
-
             <p class="text-zinc-500 text-lg font-light leading-relaxed group-hover:text-zinc-600 transition-colors duration-500">
               {act.descripcion}
             </p>
@@ -62,10 +61,10 @@ const actividades = [
 
           <div class="relative z-10 mt-auto pt-10 border-t border-zinc-50 group-hover:border-terracotta-100 transition-colors duration-500">
             <a href="#contacto" class="group/link inline-flex items-center gap-3 text-zinc-400 hover:text-terracotta-500 transition-all duration-300">
-               <span class="text-xs font-bold uppercase tracking-[0.2em]">Más información</span>
-               <div class="w-8 h-8 rounded-full border border-zinc-100 flex items-center justify-center group-hover/link:bg-terracotta-500 group-hover/link:border-terracotta-500 transition-all duration-500">
-                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/link:text-white transition-colors duration-500"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-               </div>
+              <span class="text-xs font-bold uppercase tracking-[0.2em]">{t('actividades.masInfo')}</span>
+              <div class="w-8 h-8 rounded-full border border-zinc-100 flex items-center justify-center group-hover/link:bg-terracotta-500 group-hover/link:border-terracotta-500 transition-all duration-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover/link:text-white transition-colors duration-500"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
             </a>
           </div>
         </div>
