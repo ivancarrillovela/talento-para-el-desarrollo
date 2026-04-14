@@ -119,7 +119,7 @@ export const ui = {
     'actividades.label':       'Actividades',
     'actividades.titulo':      'Comprometidos con la formación y el intercambio de conocimiento.',
     'actividades.descripcion': 'Desarrollamos iniciativas estratégicas para garantizar que el talento africano cuente con las herramientas necesarias para su progreso.',
-    'actividades.masInfo':     'Más información',
+    'actividades.masInfo':     'Solicitar información',
 
     'actividad1.titulo':      'Sesiones informativas',
     'actividad1.etiqueta':    'Concienciación',
@@ -301,7 +301,7 @@ export const ui = {
     'actividades.label':       'Activities',
     'actividades.titulo':      'Committed to training and knowledge exchange.',
     'actividades.descripcion': 'We develop strategic initiatives to ensure that African talent has the necessary tools for its progress.',
-    'actividades.masInfo':     'Learn more',
+    'actividades.masInfo':     'Request information',
 
     'actividad1.titulo':      'Informative Sessions',
     'actividad1.etiqueta':    'Awareness',
@@ -479,7 +479,7 @@ export const ui = {
     'actividades.label':       'Activités',
     'actividades.titulo':      "Engagés dans la formation et le partage des connaissances.",
     'actividades.descripcion': "Nous développons des initiatives stratégiques pour garantir que le talent africain dispose des outils nécessaires à son progrès.",
-    'actividades.masInfo':     'En savoir plus',
+    'actividades.masInfo':     'Demander des informations',
 
     'actividad1.titulo':      "Sessions d'information",
     'actividad1.etiqueta':    'Sensibilisation',
