@@ -53,7 +53,7 @@ const juntaMiembros = t("sobre.junta.miembros")
 
 <section
   id="sobre-nosotros"
-  class="relative py-16 sm:py-24 lg:py-44 bg-zinc-50 overflow-hidden"
+  class="relative pt-10 pb-16 sm:pt-14 sm:pb-24 lg:pt-24 lg:pb-44 bg-zinc-50 overflow-hidden"
 >
   <div class="container mx-auto px-6 lg:px-12 relative z-10 text-left">
     {/* Cabecera Premium Optimizada */}
@@ -85,7 +85,8 @@ const juntaMiembros = t("sobre.junta.miembros")
             {
               estructura.map((item) => (
                 <div
-                  class={`flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full transition-all duration-500 ${item.render === "button" ? "bg-zinc-900 text-white lg:hover:bg-terracotta-500" : "hover:bg-zinc-50"}`}
+                  id={item.render === "button" ? "open-junta" : undefined}
+                  class={`flex items-center gap-3 px-4 sm:px-5 py-2.5 rounded-xl lg:rounded-full transition-all duration-500 ${item.render === "button" ? "bg-zinc-900 text-white lg:hover:bg-terracotta-500 cursor-pointer" : "hover:bg-zinc-50"}`}
                 >
                   <div
                     class={`flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full shrink-0 ${item.render === "button" ? "bg-white/20" : "bg-terracotta-50 text-terracotta-500"}`}
@@ -108,10 +109,7 @@ const juntaMiembros = t("sobre.junta.miembros")
                   </div>
                   <div class="flex flex-col min-w-0">
                     {item.render === "button" ? (
-                      <button
-                        id="open-junta"
-                        class="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] flex items-center gap-1.5 focus:outline-none truncate"
-                      >
+                      <div class="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] flex items-center gap-1.5 truncate">
                         {item.titulo}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +127,7 @@ const juntaMiembros = t("sobre.junta.miembros")
                         >
                           <path d="M9 5l7 7-7 7" />
                         </svg>
-                      </button>
+                      </div>
                     ) : (
                       <span class="text-[9px] sm:text-[10px] font-bold text-zinc-500 uppercase tracking-[0.1em] sm:tracking-[0.15em] leading-none truncate">
                         {item.titulo}
@@ -171,7 +169,7 @@ const juntaMiembros = t("sobre.junta.miembros")
     >
       {
         objetivos.map((obj) => (
-          <div class="group relative p-8 sm:p-10 lg:p-14 bg-white border border-zinc-100 rounded-[2.5rem] lg:rounded-[3.5rem] overflow-hidden transition-all duration-700 ease-out lg:hover:-translate-y-4 lg:hover:shadow-[0_45px_100px_-20px_rgba(0,0,0,0.08)] text-left flex flex-col h-auto min-w-[85vw] sm:min-w-[400px] lg:min-w-0 snap-center lg:snap-align-none reveal-fade-up">
+          <div class="group relative p-8 sm:p-10 lg:p-14 bg-white border border-zinc-200 shadow-xl shadow-zinc-200/50 rounded-[2.5rem] lg:rounded-[3.5rem] overflow-hidden transition-all duration-700 ease-out lg:hover:-translate-y-4 lg:hover:shadow-[0_45px_100px_-20px_rgba(0,0,0,0.08)] text-left flex flex-col h-auto min-w-[85vw] sm:min-w-[400px] lg:min-w-0 snap-center lg:snap-align-none reveal-fade-up">
             <span class="text-5xl lg:text-[72px] font-bold text-zinc-900/[0.015] absolute top-8 right-8 lg:top-10 lg:right-10 select-none group-hover:text-terracotta-500/[0.04] transition-all duration-700 italic tracking-tighter leading-none transform group-hover:-translate-y-3">
               {obj.watermark}
             </span>
@@ -238,7 +236,7 @@ const juntaMiembros = t("sobre.junta.miembros")
     class="p-0 bg-transparent backdrop:bg-zinc-950/70 backdrop:backdrop-blur-xl group focus:outline-none"
   >
     <div
-      class="bg-white max-w-xl w-[92vw] rounded-[1.5rem] sm:rounded-[3rem] overflow-hidden shadow-2xl transform transition-all duration-500 scale-95 opacity-0 group-open:scale-100 group-open:opacity-100 border border-white/20"
+      class="bg-white max-w-xl w-[85vw] rounded-[1.5rem] sm:rounded-[3rem] overflow-hidden shadow-2xl transform transition-all duration-500 scale-95 opacity-0 group-open:scale-100 group-open:opacity-100 border border-white/20"
     >
       <div class="p-6 sm:p-12 lg:p-20 relative text-left">
         <button

@@ -84,7 +84,7 @@ export const ui = {
     'valor.compromiso.icono':       'C',
 
     'valor.empatia.titulo':      'Empatía',
-    'valor.empatia.descripcion': 'Entendemos profundamente las necesidades de los demás para diseñar soluciones humanas.',
+    'valor.empatia.descripcion': 'Queremos entender de una forma más profunda las necesidades de los demás para diseñar soluciones humanas.',
     'valor.empatia.icono':       'E',
 
     'valor.integridad.titulo':      'Integridad',
@@ -267,7 +267,7 @@ export const ui = {
     'valor.compromiso.icono':       'C',
 
     'valor.empatia.titulo':      'Empathy',
-    'valor.empatia.descripcion': 'We deeply understand the needs of others to design human-centred solutions.',
+    'valor.empatia.descripcion': 'We want to understand the needs of others in a deeper way to design human-centred solutions.',
     'valor.empatia.icono':       'E',
 
     'valor.integridad.titulo':      'Integrity',
@@ -442,10 +442,10 @@ export const ui = {
 
     'valor.compromiso.titulo':      'Engagement',
     'valor.compromiso.descripcion': 'Dévouement total à notre cause et aux personnes que nous servons, avec passion et ardeur.',
-    'valor.compromiso.icono':       'C',
+    'valor.compromiso.icono':       'E',
 
     'valor.empatia.titulo':      'Empathie',
-    'valor.empatia.descripcion': "Nous comprenons profondément les besoins des autres pour concevoir des solutions humaines.",
+    'valor.empatia.descripcion': "Nous voulons comprendre les besoins des autres de manière plus profonde pour concevoir des solutions humaines.",
     'valor.empatia.icono':       'E',
 
     'valor.integridad.titulo':      'Intégrité',
@@ -470,11 +470,11 @@ export const ui = {
 
     'valor.sostenibilidad.titulo':      'Durabilité',
     'valor.sostenibilidad.descripcion': "Des projets qui perdurent dans le temps, générant de l'autonomie plutôt que de la dépendance.",
-    'valor.sostenibilidad.icono':       'S',
+    'valor.sostenibilidad.icono':       'D',
 
     'valor.anticorrupcion.titulo':      'Zéro Corruption',
     'valor.anticorrupcion.descripcion': "Nous maintenons une position ferme de tolérance zéro envers tout acte malhonnête.",
-    'valor.anticorrupcion.icono':       'C',
+    'valor.anticorrupcion.icono':       'Z',
 
     'actividades.label':       'Activités',
     'actividades.titulo':      "Engagés dans la formation et le partage des connaissances.",
