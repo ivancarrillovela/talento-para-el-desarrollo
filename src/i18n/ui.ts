@@ -63,7 +63,7 @@ export const ui = {
     'sobre.comunidad.label':    'Gobernanza y Comunidad',
     'sobre.comunidad.titulo':   'Nuestra Estructura',
     'sobre.comunidad.p':        'Contamos con una estructura transparente, formada por profesionales y colaboradores que comparten nuestra visión de futuro.',
-    'sobre.junta.titulo':       'Junta Directiva',
+    'sobre.junta.titulo':       'Dirección',
     'sobre.junta.btn':          'Ver miembros',
     'sobre.junta.miembros':     'Luis Ravina Bohórquez, Miguel Bruned Armendáriz, Luis Alberiko Gil Alaña, Miguel Janer García',
     'sobre.junta.desc':         'Buscamos perfiles con altas capacidades académicas, compromiso social y vocación de liderazgo, que deseen continuar su formación mediante estudios de posgrado, máster o doctorado en Europa.',
