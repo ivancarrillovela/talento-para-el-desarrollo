@@ -49,7 +49,7 @@ export const ui = {
 
     'sobre.obj1.titulo':      'Carrera Académica y Docente',
     'sobre.obj1.watermark':   'CARRERA',
-    'sobre.obj1.descripcion': 'Identificamos a jóvenes de entre 22 y 27 años procedentes de países en desarrollo, con especial atención a África, para ofrecerles información cualificada sobre las posibilidades de llevar a cabo una exitosa carrera docente e investigadora. Promovemos el desarrollo de trayectorias académicas que generen un impacto real en sus países de origen, contribuyendo al progreso social, económico y educativo de sus comunidades.',
+    'sobre.obj1.descripcion': 'Identificar a jóvenes para ofrecerles información cualificada sobre las posibilidades de llevar a cabo una exitosa carrera docente e investigadora. Promovemos el desarrollo de trayectorias académicas que generen un impacto real en sus países de origen, contribuyendo al progreso social, económico y educativo de sus comunidades.',
 
     'sobre.obj2.titulo':      'Redes de Colaboración',
     'sobre.obj2.watermark':   'REDES',
@@ -234,7 +234,7 @@ export const ui = {
 
     'sobre.obj1.titulo':      'Academic and Teaching Career',
     'sobre.obj1.watermark':   'CAREER',
-    'sobre.obj1.descripcion': 'We identify young people between 22 and 27 years old from developing countries, with special focus on Africa, to offer them qualified information about the possibilities of carrying out a successful teaching and research career. We promote the development of academic trajectories that generate real impact in their home countries, contributing to social, economic and educational progress in their communities.',
+    'sobre.obj1.descripcion': 'Identify young people to offer them qualified information about the possibilities of carrying out a successful teaching and research career. We promote the development of academic trajectories that generate real impact in their home countries, contributing to social, economic and educational progress in their communities.',
 
     'sobre.obj2.titulo':      'Collaboration Networks',
     'sobre.obj2.watermark':   'NETWORKS',
@@ -247,7 +247,7 @@ export const ui = {
     'sobre.comunidad.label':    'Governance & Community',
     'sobre.comunidad.titulo':   'Our Structure',
     'sobre.comunidad.p':        'We have a transparent structure, made up of professionals and collaborators who share our vision of the future.',
-    'sobre.junta.titulo':       'Board of Directors',
+    'sobre.junta.titulo':       'The board',
     'sobre.junta.btn':          'View members',
     'sobre.junta.miembros':     'Luis Ravina Bohórquez, Miguel Bruned Armendáriz, Luis Alberiko Gil Alaña, Miguel Janer García',
     'sobre.junta.desc':         'We look for profiles with high academic capacities, social commitment and a vocation for leadership, who wish to continue their training through postgraduate, master\'s or doctoral studies in Europe.',
@@ -412,7 +412,7 @@ export const ui = {
 
     'sobre.obj1.titulo':      "Carrière académique et enseignante",
     'sobre.obj1.watermark':   'CARRIÈRE',
-    'sobre.obj1.descripcion': "Nous identifions les jeunes entre 22 et 27 ans originaires de pays en développement, avec une attention particulière à l'Afrique, pour leur offrir des informations qualifiées sur les possibilités de mener une carrière d'enseignant et de chercheur. Nous promouvons le développement de trajectoires académiques qui génèrent un impact réel dans leurs pays d'origine.",
+    'sobre.obj1.descripcion': "Identifier des jeunes pour leur offrir des informations qualifiées sur les possibilités de mener une carrière d'enseignant et de chercheur. Nous promouvons le développement de trajectoires académiques qui génèrent un impact réel dans leurs pays d'origine, en contribuant au progrès social, économique et éducatif de leurs communautés.",
 
     'sobre.obj2.titulo':      'Réseaux de collaboration',
     'sobre.obj2.watermark':   'RÉSEAUX',

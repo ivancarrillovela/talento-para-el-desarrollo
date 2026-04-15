@@ -51,10 +51,10 @@ const valores = [
             {/* Overlay de gradiente sutil al hover */}
             <div class="absolute inset-0 bg-gradient-to-br from-terracotta-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-xl lg:rounded-2xl" />
             
-            <div class="relative z-10 shrink-0">
-              <div class="px-3 py-1.5 md:px-5 md:py-2.5 bg-zinc-900/80 border border-white/10 rounded-lg md:rounded-xl flex items-center justify-center text-white group-hover:border-terracotta-500 group-hover:text-terracotta-500 transition-all duration-500 shadow-2xl relative overflow-hidden">
+            <div class="relative z-10 shrink-0 max-w-full">
+              <div class="px-2 py-1.5 sm:px-3 sm:py-1.5 md:px-5 md:py-2.5 bg-zinc-900/80 border border-white/10 rounded-lg md:rounded-xl flex items-center justify-center text-white group-hover:border-terracotta-500 group-hover:text-terracotta-500 transition-all duration-500 shadow-2xl relative overflow-hidden max-w-full">
                 <div class="absolute inset-0 bg-gradient-to-tr from-terracotta-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <h4 class="relative z-10 text-sm md:text-lg font-bold tracking-widest uppercase mb-0">
+                <h4 class="relative z-10 text-[11px] min-[380px]:text-xs sm:text-sm md:text-lg font-bold tracking-wider sm:tracking-widest uppercase mb-0 text-center break-words hyphens-auto">
                   {t(`valor.${v.key}.titulo` as any)}
                 </h4>
               </div>
