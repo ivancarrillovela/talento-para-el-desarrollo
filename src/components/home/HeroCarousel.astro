@@ -1,0 +1,182 @@
+---
+import { useTranslations } from "../../i18n/ui";
+
+interface Person {
+  name: string;
+  location: string;
+}
+
+interface Props {
+  images: string[];
+  alt: string;
+  shadow?: 'lg' | '2xl';
+  people?: Person[];
+}
+
+const { images, alt, shadow = 'lg', people = [] } = Astro.props;
+const lang = Astro.currentLocale || "es";
+const t = useTranslations(lang as any);
+
+// Generate unique ID for this carousel instance
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div data-carousel-id={carouselId} class="carousel-container group relative w-full h-full overflow-hidden rounded-sm">
+  <!-- Background accent -->
+  <div class="absolute top-4 right-4 w-full h-full bg-terracotta-100 z-0"></div>
+
+  <!-- Carousel images with overlay gradient -->
+  <div class="carousel-images relative w-full h-full z-10">
+    {images.map((image, index) => (
+      <div
+        class={`carousel-slide absolute inset-0 transition-opacity duration-1000 ease-out ${
+          index === 0 ? "opacity-100" : "opacity-0"
+        }`}
+        data-slide-index={index}
+      >
+        <img
+          src={image}
+          alt={`${alt} - ${index + 1}`}
+          class={`w-full h-full object-cover object-top shadow-${shadow} filter sepia-[10%] contrast-[105%]`}
+          onerror="this.onerror=null;this.src='/images/no_image.jpg';"
+        />
+        <!-- Gradient overlay subtle para mejorar puntos indicadores -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent opacity-100"></div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Dots indicators - Mejorados estéticamente -->
+  <div class="carousel-dots absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2.5 bg-black/20 backdrop-blur-sm px-3 py-2 rounded-full border border-white/20">
+    {images.map((_, index) => (
+      <button
+        class={`carousel-dot transition-all duration-300 rounded-full border border-white/40 ${
+          index === 0 
+            ? "w-8 h-2.5 bg-white shadow-lg" 
+            : "w-2.5 h-2.5 bg-white/60 hover:bg-white/80 hover:scale-110"
+        }`}
+        data-dot-index={index}
+        aria-label={`Ir a la imagen ${index + 1}`}
+        type="button"
+      />
+    ))}
+  </div>
+
+  <!-- Navigation arrows - Opcional pero elegante -->
+  <div class="carousel-nav absolute inset-0 z-15 pointer-events-none">
+    <button
+      class="carousel-prev absolute left-4 top-1/2 -translate-y-1/2 pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 border border-white/30 hover:border-white/50"
+      aria-label="Imagen anterior"
+      type="button"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+    <button
+      class="carousel-next absolute right-4 top-1/2 -translate-y-1/2 pointer-events-auto w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 border border-white/30 hover:border-white/50"
+      aria-label="Siguiente imagen"
+      type="button"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5L15.75 12l-7.5 7.5" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script define:vars={{ carouselId, people }}>
+  function initCarousel(containerId) {
+    const container = document.querySelector(
+      `[data-carousel-id="${containerId}"]`
+    );
+    if (!container) return;
+
+    let currentIndex = 0;
+    const slides = container.querySelectorAll(".carousel-slide");
+    const dots = container.querySelectorAll(".carousel-dot");
+    const prevBtn = container.querySelector(".carousel-prev");
+    const nextBtn = container.querySelector(".carousel-next");
+
+    function updateCarousel(index) {
+      // Update slides
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("opacity-100", i === index);
+        slide.classList.toggle("opacity-0", i !== index);
+      });
+
+      // Update dots - mejorado con transiciones
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.remove("bg-white/60", "hover:bg-white/80", "w-2.5", "h-2.5");
+          dot.classList.add("w-8", "h-2.5", "bg-white", "shadow-lg");
+        } else {
+          dot.classList.remove("w-8", "h-2.5", "bg-white", "shadow-lg");
+          dot.classList.add("w-2.5", "h-2.5", "bg-white/60", "hover:bg-white/80");
+        }
+      });
+
+      // Emit custom event so parent can update badge
+      window.dispatchEvent(new CustomEvent("carouselIndexChange", { 
+        detail: { index, carouselId, people } 
+      }));
+    }
+
+    // Initialize with first slide
+    updateCarousel(0);
+
+    // Auto-advance carousel every 5 seconds
+    let autoplayInterval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateCarousel(currentIndex);
+    }, 5000);
+
+    // Click handlers for dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        clearInterval(autoplayInterval);
+        currentIndex = index;
+        updateCarousel(currentIndex);
+        // Restart autoplay after 5 seconds
+        autoplayInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateCarousel(currentIndex);
+        }, 5000);
+      });
+    });
+
+    // Navigation buttons
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        clearInterval(autoplayInterval);
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateCarousel(currentIndex);
+        autoplayInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateCarousel(currentIndex);
+        }, 5000);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        clearInterval(autoplayInterval);
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel(currentIndex);
+        autoplayInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateCarousel(currentIndex);
+        }, 5000);
+      });
+    }
+  }
+
+  // Initialize carousel when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      initCarousel(carouselId);
+    });
+  } else {
+    initCarousel(carouselId);
+  }
+</script>

@@ -1,10 +1,23 @@
 ---
 import { useTranslations } from "../../i18n/ui";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import HeroCarousel from "./HeroCarousel.astro";
 
 const lang = Astro.currentLocale || "es";
 const t = useTranslations(lang as any);
 const rootHref = getRelativeLocaleUrl(lang, "/");
+
+const carouselImages = [
+  "/images/hero/carrusel1.jpg",
+  "/images/hero/carrusel2.jpg",
+  "/images/hero/carrusel3.jpg"
+];
+
+const carouselPeople = [
+  { name: t('hero.students.0.name'), location: t('hero.students.0.location'), bio: t('hero.students.0.bio') },
+  { name: t('hero.students.1.name'), location: t('hero.students.1.location'), bio: t('hero.students.1.bio') },
+  { name: t('hero.students.2.name'), location: t('hero.students.2.location'), bio: t('hero.students.2.bio') }
+];
 ---
 
 <section
@@ -32,20 +45,9 @@ const rootHref = getRelativeLocaleUrl(lang, "/");
           <span class="italic font-serif text-terracotta-500">{t('hero.subtitulo')}</span>
         </h1>
 
-        {/* Imagen móvil (Entre el título y la descripción) */}
-        <div
-          class="block lg:hidden w-full h-[40vh] relative rounded-sm overflow-hidden my-6"
-        >
-          <div
-            class="absolute top-4 right-4 w-full h-full bg-terracotta-100 z-0"
-          >
-          </div>
-          <img
-            src="/images/hero/imagen.avif"
-            alt={t('hero.titulo')}
-            class="relative z-10 w-full h-full object-cover shadow-lg filter sepia-[10%] contrast-[105%]"
-            onerror="this.onerror=null;this.src='/images/no_image.jpg';"
-          />
+        {/* Carrusel móvil (Entre el título y la descripción) */}
+        <div class="block lg:hidden w-full h-[40vh] relative rounded-sm overflow-hidden mt-12 mb-6">
+          <HeroCarousel images={carouselImages} alt={t('hero.titulo')} shadow="lg" people={carouselPeople} />
         </div>
 
         <p
@@ -84,28 +86,168 @@ const rootHref = getRelativeLocaleUrl(lang, "/");
       </div>
 
       <div
-        class="hidden lg:block w-full lg:w-1/2 relative h-[60vh] lg:h-[80vh]"
+        class="hidden lg:block w-full lg:w-1/2 relative h-[60vh] lg:h-[80vh] mt-10"
       >
+        <HeroCarousel images={carouselImages} alt={t('hero.titulo')} shadow="2xl" people={carouselPeople} />
         <div
-          class="absolute top-10 right-10 w-full h-full bg-terracotta-100 z-0"
-        >
-        </div>
-        <img
-          src="/images/hero/imagen.avif"
-          alt={t('hero.titulo')}
-          class="relative z-10 w-full h-full object-cover shadow-2xl filter sepia-[10%] contrast-[105%]"
-          onerror="this.onerror=null;this.src='/images/no_image.jpg';"
-        />
-        <div
+          data-hero-badge="true"
           class="absolute bottom-10 -left-10 z-20 bg-white p-6 shadow-xl max-w-xs hidden md:block border-l-4 border-terracotta-500"
         >
-          <p class="text-zinc-500 text-xs uppercase tracking-wider mb-1">
-            {t('hero.badgeLabel')}
+          <p class="text-2xl font-bold text-zinc-900 badge-name"></p>
+          <p class="text-sm text-zinc-400 mt-1 badge-location"></p>
+          <button 
+            class="mt-4 text-xs font-semibold uppercase tracking-widest text-terracotta-500 hover:text-terracotta-900 transition-colors cursor-pointer group"
+            data-open-modal="true"
+          >
+            <span class="group-hover:underline">{t('hero.readMore')}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 inline-block ml-1 group-hover:translate-x-1 transition-transform">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de estudiante -->
+  <div 
+    id="student-modal"
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    style="animation: fadeIn 0.3s ease-out;"
+  >
+    <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden flex flex-col animate-fade-in-up">
+      <!-- Modal Header con gradiente -->
+      <div class="relative bg-gradient-to-r from-terracotta-500 to-terracotta-900 px-8 py-6 text-white flex items-start justify-between">
+        <!-- Elemento decorativo de fondo -->
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full filter blur-3xl"></div>
+        </div>
+        <div class="relative flex-1">
+          <h3 class="text-3xl font-bold text-white modal-title leading-tight"></h3>
+        </div>
+        <button 
+          class="relative text-white/80 hover:text-white transition-colors flex-shrink-0 ml-4 p-2 hover:bg-white/20 rounded-full"
+          data-close-modal="true"
+          aria-label="Cerrar modal"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="flex-1 overflow-y-auto">
+        <div class="px-8 py-8">
+          <!-- Línea decorativa -->
+          <div class="w-12 h-1 bg-terracotta-500 mb-6 rounded-full"></div>
+          
+          <p class="text-zinc-700 text-lg leading-relaxed modal-content font-light">
           </p>
-          <p class="text-2xl font-bold text-zinc-900">{t('hero.badgeTitulo')}</p>
-          <p class="text-sm text-zinc-400 mt-1">{t('hero.badgeDesc')}</p>
+
+          <!-- Elemento decorativo de cierre -->
+          <div class="mt-10 pt-6 border-t border-zinc-100">
+            <div class="flex items-center gap-2 text-terracotta-500">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span class="text-sm font-semibold">Talento para el Desarrollo</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.4s ease-out;
+  }
+
+  #student-modal.flex .bg-gradient-to-r {
+    animation: fadeInUp 0.4s ease-out;
+  }
+</style>
+
+<script define:vars={{ carouselPeople }}>
+  // Modal functionality
+  const modal = document.getElementById("student-modal");
+  const openModalBtn = document.querySelector("[data-open-modal='true']");
+  const closeModalBtn = document.querySelector("[data-close-modal='true']");
+  const modalTitle = document.querySelector(".modal-title");
+  const modalContent = document.querySelector(".modal-content");
+
+  let currentStudentIndex = 0;
+
+  function openModal() {
+    // Update modal content with current student
+    if (carouselPeople && carouselPeople[currentStudentIndex]) {
+      if (modalTitle) modalTitle.textContent = carouselPeople[currentStudentIndex].name;
+      if (modalContent) modalContent.textContent = carouselPeople[currentStudentIndex].bio || 'Información próximamente...';
+    }
+    modal?.classList.remove("hidden");
+    modal?.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal?.classList.add("hidden");
+    modal?.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  openModalBtn?.addEventListener("click", openModal);
+  closeModalBtn?.addEventListener("click", closeModal);
+
+  // Close modal on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Close modal when clicking outside
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  // Listen for carousel changes
+  window.addEventListener("carouselIndexChange", (event) => {
+    const { index, people } = event.detail;
+    const badge = document.querySelector('[data-hero-badge="true"]');
+    currentStudentIndex = index;
+    
+    if (badge && carouselPeople && carouselPeople[index]) {
+      const badgeName = badge.querySelector(".badge-name");
+      const badgeLocation = badge.querySelector(".badge-location");
+      
+      if (badgeName) badgeName.textContent = carouselPeople[index].name;
+      if (badgeLocation) badgeLocation.textContent = carouselPeople[index].location;
+      
+      // Update modal content
+      if (modalTitle) modalTitle.textContent = carouselPeople[index].name;
+      if (modalContent) modalContent.textContent = carouselPeople[index].bio || 'Información próximamente...';
+    }
+  });
+</script>
+  });
+</style>
