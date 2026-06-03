@@ -3,16 +3,3 @@ export const SITE_INFO = {
   description: "Construyendo puentes de oportunidad y desarrollo profesional.",
   email: "contacto@talentoparaeldesarrollo.org", // Marcador de posición, actualizar si es necesario
 };
-
-export const NAV_LINKS = [
-  { label: "Sobre nosotros", href: "#sobre-nosotros" },
-  { label: "Lo que buscamos", href: "#valores" },
-  { label: "Actividades", href: "#actividades" },
-  { label: "Contáctanos", href: "#contacto" },
-];
-
-export const FOOTER_LINKS = [
-  { label: "Aviso legal", href: "/aviso-legal" },
-  { label: "Privacidad", href: "/privacidad" },
-  { label: "Política de cookies", href: "/politica-de-cookies" },
-];

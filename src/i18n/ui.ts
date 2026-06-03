@@ -18,6 +18,7 @@ export const ui = {
     'nav.collaborate':     'Colaborar',
     'nav.collaborateFull': 'Colabora con nosotros',
     'nav.language':        'Idioma',
+    'nav.backToHome':      'Volver al inicio',
 
     // ── FOOTER ──────────────────────────────────────────────────────────────
     'footer.slogan':  'Construyendo puentes de oportunidad y desarrollo profesional.',
@@ -88,39 +89,30 @@ export const ui = {
 
     'valor.compromiso.titulo':      'Compromiso',
     'valor.compromiso.descripcion': 'Dedicación total a nuestra causa y a las personas a las que servimos, con pasión y entrega.',
-    'valor.compromiso.icono':       'C',
 
     'valor.empatia.titulo':      'Empatía',
     'valor.empatia.descripcion': 'Queremos entender de una forma más profunda las necesidades de los demás para diseñar soluciones humanas.',
-    'valor.empatia.icono':       'E',
 
     'valor.integridad.titulo':      'Integridad',
     'valor.integridad.descripcion': 'Actuamos con transparencia y ética en cada decisión, construyendo confianza sólida.',
-    'valor.integridad.icono':       'I',
 
     'valor.innovacion.titulo':      'Innovación Social',
     'valor.innovacion.descripcion': 'Buscamos nuevas soluciones a viejos problemas, desafiando el status quo para maximizar el impacto.',
-    'valor.innovacion.icono':       'I',
 
     'valor.liderazgo.titulo':      'Liderazgo',
     'valor.liderazgo.descripcion': 'Inspiramos a otros a tomar acción y convertirse en agentes de cambio en sus comunidades.',
-    'valor.liderazgo.icono':       'L',
 
     'valor.colaboracion.titulo':      'Colaboración',
     'valor.colaboracion.descripcion': 'Creemos en el poder de las alianzas. Juntos llegamos más lejos que solos.',
-    'valor.colaboracion.icono':       'C',
 
     'valor.excelencia.titulo':      'Excelencia',
     'valor.excelencia.descripcion': 'No nos conformamos. Buscamos la máxima calidad y rigor en cada iniciativa que emprendemos.',
-    'valor.excelencia.icono':       'E',
 
     'valor.sostenibilidad.titulo':      'Sostenibilidad',
     'valor.sostenibilidad.descripcion': 'Proyectos que perduran en el tiempo, generando autonomía y no dependencia.',
-    'valor.sostenibilidad.icono':       'S',
 
     'valor.anticorrupcion.titulo':      'Cero Corrupción',
     'valor.anticorrupcion.descripcion': 'Mantenemos una postura firme de tolerancia cero ante cualquier acto deshonesto.',
-    'valor.anticorrupcion.icono':       'C',
 
     // ── ACTIVIDADES ─────────────────────────────────────────────────────────
     'actividades.label':       'Actividades',
@@ -139,13 +131,6 @@ export const ui = {
     'actividad3.titulo':      'Encuentros con expertos',
     'actividad3.etiqueta':    'Networking',
     'actividad3.descripcion': 'Facilitamos reuniones, seminarios con especialistas en distintas áreas (economía, educación, salud, políticas públicas, etc.), que aporten ideas innovadoras para un desarrollo sostenible.',
-
-    // ── NUESTRO TRABAJO ─────────────────────────────────────────────────────
-    'trabajo.label':       'Nuestro Trabajo',
-    'trabajo.titulo':      'Proyectos que transforman.',
-    'trabajo.descripcion': 'Iniciativas concretas donde aplicamos nuestra metodología para generar un cambio real y sostenible.',
-    'trabajo.verTodos':    'Ver todas las iniciativas',
-    'trabajo.desliza':     'Desliza',
 
     // ── COMO BENEFICIARTE ────────────────────────────────────────────────────
     'beneficiarte.label':       'Oportunidades',
@@ -191,15 +176,12 @@ export const ui = {
 
     'avisoLegal.title':       'Aviso Legal',
     'avisoLegal.description': 'Información legal y condiciones de uso del sitio web.',
-    'avisoLegal.subtitle':    'Legal',
 
     'privacidad.title':       'Política de Privacidad',
     'privacidad.description': 'Información sobre el tratamiento de datos personales.',
-    'privacidad.subtitle':    'Legal',
 
     'cookies.title':       'Política de Cookies',
     'cookies.description': 'Información sobre el uso de cookies en nuestro sitio web.',
-    'cookies.subtitle':    'Legal',
   },
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -213,6 +195,7 @@ export const ui = {
     'nav.collaborate':     'Collaborate',
     'nav.collaborateFull': 'Collaborate with us',
     'nav.language':        'Language',
+    'nav.backToHome':      'Back to home',
 
     'footer.slogan':  'Building bridges of opportunity and professional development.',
     'footer.rights':  'All rights reserved.',
@@ -278,39 +261,30 @@ export const ui = {
 
     'valor.compromiso.titulo':      'Commitment',
     'valor.compromiso.descripcion': 'Total dedication to our cause and to the people we serve, with passion and devotion.',
-    'valor.compromiso.icono':       'C',
 
     'valor.empatia.titulo':      'Empathy',
     'valor.empatia.descripcion': 'We want to understand the needs of others in a deeper way to design human-centred solutions.',
-    'valor.empatia.icono':       'E',
 
     'valor.integridad.titulo':      'Integrity',
     'valor.integridad.descripcion': 'We act with transparency and ethics in every decision, building solid trust.',
-    'valor.integridad.icono':       'I',
 
     'valor.innovacion.titulo':      'Social Innovation',
     'valor.innovacion.descripcion': 'We seek new solutions to old problems, challenging the status quo to maximise impact.',
-    'valor.innovacion.icono':       'I',
 
     'valor.liderazgo.titulo':      'Leadership',
     'valor.liderazgo.descripcion': 'We inspire others to take action and become agents of change in their communities.',
-    'valor.liderazgo.icono':       'L',
 
     'valor.colaboracion.titulo':      'Collaboration',
     'valor.colaboracion.descripcion': 'We believe in the power of alliances. Together we go further than alone.',
-    'valor.colaboracion.icono':       'C',
 
     'valor.excelencia.titulo':      'Excellence',
     'valor.excelencia.descripcion': 'We do not settle. We seek the highest quality and rigour in every initiative we undertake.',
-    'valor.excelencia.icono':       'E',
 
     'valor.sostenibilidad.titulo':      'Sustainability',
     'valor.sostenibilidad.descripcion': 'Projects that last over time, generating autonomy rather than dependency.',
-    'valor.sostenibilidad.icono':       'S',
 
     'valor.anticorrupcion.titulo':      'Zero Corruption',
     'valor.anticorrupcion.descripcion': 'We maintain a firm stance of zero tolerance towards any dishonest act.',
-    'valor.anticorrupcion.icono':       'C',
 
     'actividades.label':       'Activities',
     'actividades.titulo':      'Committed to training and knowledge exchange.',
@@ -328,12 +302,6 @@ export const ui = {
     'actividad3.titulo':      'Expert Meetings',
     'actividad3.etiqueta':    'Networking',
     'actividad3.descripcion': 'We facilitate meetings and seminars with specialists in various fields (economics, education, health, public policy, etc.) who contribute innovative ideas for sustainable development.',
-
-    'trabajo.label':       'Our Work',
-    'trabajo.titulo':      'Projects that transform.',
-    'trabajo.descripcion': 'Concrete initiatives where we apply our methodology to generate real and sustainable change.',
-    'trabajo.verTodos':    'See all initiatives',
-    'trabajo.desliza':     'Swipe',
 
     'beneficiarte.label':       'Opportunities',
     'beneficiarte.titulo':      'How can you benefit?',
@@ -376,15 +344,12 @@ export const ui = {
 
     'avisoLegal.title':       'Legal Notice',
     'avisoLegal.description': 'Legal information and conditions of use of the website.',
-    'avisoLegal.subtitle':    'Legal',
 
     'privacidad.title':       'Privacy Policy',
     'privacidad.description': 'Information about the processing of personal data.',
-    'privacidad.subtitle':    'Legal',
 
     'cookies.title':       'Cookie Policy',
     'cookies.description': 'Information about the use of cookies on our website.',
-    'cookies.subtitle':    'Legal',
   },
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -398,6 +363,7 @@ export const ui = {
     'nav.collaborate':     'Collaborer',
     'nav.collaborateFull': 'Collaborer avec nous',
     'nav.language':        'Langue',
+    'nav.backToHome':      "Retour à l'accueil",
 
     'footer.slogan':  "Construire des ponts d'opportunité et de développement professionnel.",
     'footer.rights':  'Tous droits réservés.',
@@ -463,39 +429,30 @@ export const ui = {
 
     'valor.compromiso.titulo':      'Engagement',
     'valor.compromiso.descripcion': 'Dévouement total à notre cause et aux personnes que nous servons, avec passion et ardeur.',
-    'valor.compromiso.icono':       'E',
 
     'valor.empatia.titulo':      'Empathie',
     'valor.empatia.descripcion': "Nous voulons comprendre les besoins des autres de manière plus profonde pour concevoir des solutions humaines.",
-    'valor.empatia.icono':       'E',
 
     'valor.integridad.titulo':      'Intégrité',
     'valor.integridad.descripcion': "Nous agissons avec transparence et éthique dans chaque décision, en bâtissant une confiance solide.",
-    'valor.integridad.icono':       'I',
 
     'valor.innovacion.titulo':      'Innovation Sociale',
     'valor.innovacion.descripcion': "Nous cherchons de nouvelles solutions à de vieux problèmes, en défiant le statu quo pour maximiser l'impact.",
-    'valor.innovacion.icono':       'I',
 
     'valor.liderazgo.titulo':      'Leadership',
     'valor.liderazgo.descripcion': "Nous inspirons les autres à agir et à devenir des agents de changement dans leurs communautés.",
-    'valor.liderazgo.icono':       'L',
 
     'valor.colaboracion.titulo':      'Collaboration',
     'valor.colaboracion.descripcion': "Nous croyons au pouvoir des alliances. Ensemble, nous allons plus loin que seuls.",
-    'valor.colaboracion.icono':       'C',
 
     'valor.excelencia.titulo':      'Excellence',
     'valor.excelencia.descripcion': "Nous ne nous contentons pas du minimum. Nous recherchons la plus haute qualité et rigueur dans chaque initiative.",
-    'valor.excelencia.icono':       'E',
 
     'valor.sostenibilidad.titulo':      'Durabilité',
     'valor.sostenibilidad.descripcion': "Des projets qui perdurent dans le temps, générant de l'autonomie plutôt que de la dépendance.",
-    'valor.sostenibilidad.icono':       'D',
 
     'valor.anticorrupcion.titulo':      'Zéro Corruption',
     'valor.anticorrupcion.descripcion': "Nous maintenons une position ferme de tolérance zéro envers tout acte malhonnête.",
-    'valor.anticorrupcion.icono':       'Z',
 
     'actividades.label':       'Activités',
     'actividades.titulo':      "Engagés dans la formation et le partage des connaissances.",
@@ -513,12 +470,6 @@ export const ui = {
     'actividad3.titulo':      "Rencontres d'experts",
     'actividad3.etiqueta':    'Réseautage',
     'actividad3.descripcion': "Nous facilitons des réunions et séminaires avec des spécialistes de divers domaines (économie, éducation, santé, politiques publiques, etc.) qui apportent des idées novatrices pour le développement durable.",
-
-    'trabajo.label':       'Notre Travail',
-    'trabajo.titulo':      'Des projets qui transforment.',
-    'trabajo.descripcion': "Des initiatives concrètes où nous appliquons notre méthodologie pour générer un changement réel et durable.",
-    'trabajo.verTodos':    'Voir toutes les initiatives',
-    'trabajo.desliza':     'Glissez',
 
     'beneficiarte.label':       'Opportunités',
     'beneficiarte.titulo':      'Comment pouvez-vous en bénéficier?',
@@ -561,15 +512,12 @@ export const ui = {
 
     'avisoLegal.title':       'Mentions légales',
     'avisoLegal.description': 'Informations légales et conditions d\'utilisation du site web.',
-    'avisoLegal.subtitle':    'Légal',
 
     'privacidad.title':       'Politique de confidentialité',
     'privacidad.description': 'Informations sur le traitement des données personnelles.',
-    'privacidad.subtitle':    'Légal',
 
     'cookies.title':       'Politique de cookies',
     'cookies.description': 'Informations sur l\'utilisation des cookies sur notre site web.',
-    'cookies.subtitle':    'Légal',
   },
 } as const;
 

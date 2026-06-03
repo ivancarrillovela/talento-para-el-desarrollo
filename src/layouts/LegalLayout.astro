@@ -27,7 +27,7 @@ const localeMap: Record<string, string> = { es: 'es-ES', en: 'en-GB', fr: 'fr-FR
 const dateLocale = localeMap[lang] || 'es-ES';
 ---
 
-<Layout title={fullTitle}>
+<Layout title={fullTitle} description={description}>
   <Navbar />
   <main class="bg-zinc-100 min-h-screen flex flex-col relative pt-20">
     <PageHeader title={title} subtitle={subtitle} description={description} />

@@ -110,143 +110,144 @@ const carouselPeople = [
   </div>
 
   <!-- Modal de estudiante -->
-  <div 
+  <dialog
     id="student-modal"
-    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
-    style="animation: fadeIn 0.3s ease-out;"
+    class="p-0 bg-transparent backdrop:bg-zinc-950/70 backdrop:backdrop-blur-xl focus:outline-none"
   >
-    <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden flex flex-col animate-fade-in-up">
-      <!-- Modal Header con gradiente -->
-      <div class="relative bg-gradient-to-r from-terracotta-500 to-terracotta-900 px-8 py-6 text-white flex items-start justify-between">
-        <!-- Elemento decorativo de fondo -->
-        <div class="absolute inset-0 opacity-10">
-          <div class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full filter blur-3xl"></div>
-        </div>
-        <div class="relative flex-1">
-          <h3 class="text-3xl font-bold text-white modal-title leading-tight"></h3>
-        </div>
-        <button 
-          class="relative text-white/80 hover:text-white transition-colors flex-shrink-0 ml-4 p-2 hover:bg-white/20 rounded-full"
-          data-close-modal="true"
-          aria-label="Cerrar modal"
+    <div class="bg-white max-w-xl w-[90vw] rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl border border-zinc-100 overflow-hidden">
+      <!-- Cabecera con botón cerrar -->
+      <div class="flex items-center justify-between px-6 sm:px-8 pt-6 sm:pt-8 pb-0">
+        <span class="text-terracotta-500 font-bold tracking-[0.35em] uppercase text-[9px] sm:text-[10px] opacity-60">
+          {t('hero.label')}
+        </span>
+        <button
+          id="close-student-modal"
+          class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200 transition-all duration-500 hover:rotate-90"
+          aria-label="Cerrar"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+            <path d="M18 6L6 18M6 6l12 12"></path>
           </svg>
         </button>
       </div>
 
-      <!-- Modal Content -->
-      <div class="flex-1 overflow-y-auto">
-        <div class="px-8 py-8">
-          <!-- Línea decorativa -->
-          <div class="w-12 h-1 bg-terracotta-500 mb-6 rounded-full"></div>
-          
-          <p class="text-zinc-700 text-lg leading-relaxed modal-content font-light">
-          </p>
+      <!-- Cuerpo: foto carnet + datos -->
+      <div class="flex items-stretch gap-5 sm:gap-8 px-6 sm:px-8 pt-5 sm:pt-6 pb-6 sm:pb-8">
+        <!-- Foto tipo carnet -->
+        <div class="shrink-0 self-stretch">
+          <div class="w-24 sm:w-32 h-full min-h-[8rem] rounded-xl sm:rounded-2xl overflow-hidden border border-zinc-100 shadow-md bg-zinc-50">
+            <img
+              id="modal-image"
+              src=""
+              alt=""
+              aria-hidden="true"
+              class="w-full h-full object-cover object-top"
+              onerror="this.onerror=null;this.src='/images/no_image.jpg';"
+            />
+          </div>
+        </div>
 
-          <!-- Elemento decorativo de cierre -->
-          <div class="mt-10 pt-6 border-t border-zinc-100">
-            <div class="flex items-center gap-2 text-terracotta-500">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <!-- Información -->
+        <div class="flex-1 min-w-0 flex flex-col justify-between gap-4">
+          <div class="space-y-1">
+            <h3 id="modal-name" class="text-lg sm:text-2xl font-bold text-zinc-900 tracking-tight leading-tight"></h3>
+            <div class="flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 h-3 text-terracotta-500 shrink-0">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+                <circle cx="12" cy="9" r="2.5"></circle>
               </svg>
-              <span class="text-sm font-semibold">Talento para el Desarrollo</span>
+              <span id="modal-location" class="text-[11px] sm:text-xs text-zinc-400 font-medium truncate tracking-wide"></span>
             </div>
+          </div>
+
+          <!-- Testimonio -->
+          <div class="relative flex-1">
+            <span class="absolute -top-2 -left-1 text-4xl sm:text-5xl font-serif text-terracotta-500 leading-none select-none opacity-40">"</span>
+            <p id="modal-bio" class="text-zinc-500 text-xs sm:text-sm leading-relaxed font-light italic pt-3 pl-3"></p>
+          </div>
+
+          <div class="pt-3 border-t border-zinc-100 flex items-center gap-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-terracotta-500 shrink-0"></div>
+            <span class="text-[10px] font-semibold text-zinc-400 tracking-widest uppercase">Talento para el Desarrollo</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </dialog>
 </section>
 
 <style>
+  dialog::backdrop {
+    animation: fadeIn 0.4s ease-out;
+  }
+
   @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  dialog[open] > div {
+    animation: slideInUpPremium 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes slideInUpPremium {
     from {
+      transform: scale(0.97) translateY(40px);
       opacity: 0;
     }
     to {
+      transform: scale(1) translateY(0);
       opacity: 1;
     }
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.4s ease-out;
-  }
-
-  #student-modal.flex .bg-gradient-to-r {
-    animation: fadeInUp 0.4s ease-out;
   }
 </style>
 
-<script define:vars={{ carouselPeople }}>
-  // Modal functionality
+<script define:vars={{ carouselPeople, carouselImages }}>
   const modal = document.getElementById("student-modal");
   const openModalBtn = document.querySelector("[data-open-modal='true']");
-  const closeModalBtn = document.querySelector("[data-close-modal='true']");
-  const modalTitle = document.querySelector(".modal-title");
-  const modalContent = document.querySelector(".modal-content");
+  const closeModalBtn = document.getElementById("close-student-modal");
+  const modalImage = document.getElementById("modal-image");
+  const modalName = document.getElementById("modal-name");
+  const modalLocation = document.getElementById("modal-location");
+  const modalBio = document.getElementById("modal-bio");
 
   let currentStudentIndex = 0;
 
   function openModal() {
-    // Update modal content with current student
-    if (carouselPeople && carouselPeople[currentStudentIndex]) {
-      if (modalTitle) modalTitle.textContent = carouselPeople[currentStudentIndex].name;
-      if (modalContent) modalContent.textContent = carouselPeople[currentStudentIndex].bio || 'Información próximamente...';
+    const student = carouselPeople?.[currentStudentIndex];
+    if (student) {
+      if (modalName) modalName.textContent = student.name;
+      if (modalLocation) modalLocation.textContent = student.location;
+      if (modalBio) modalBio.textContent = student.bio || 'Información próximamente...';
     }
-    modal?.classList.remove("hidden");
-    modal?.classList.add("flex");
-    document.body.style.overflow = "hidden";
+    if (modalImage) {
+      modalImage.src = carouselImages?.[currentStudentIndex] || '';
+      modalImage.alt = student?.name || '';
+    }
+    modal?.showModal();
   }
 
   function closeModal() {
-    modal?.classList.add("hidden");
-    modal?.classList.remove("flex");
-    document.body.style.overflow = "";
+    modal?.close();
   }
 
   openModalBtn?.addEventListener("click", openModal);
   closeModalBtn?.addEventListener("click", closeModal);
 
-  // Close modal on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
-  });
-
-  // Close modal when clicking outside
   modal?.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
 
-  // Listen for carousel changes
   window.addEventListener("carouselIndexChange", (event) => {
-    const { index, people } = event.detail;
+    const { index } = event.detail;
     const badge = document.querySelector('[data-hero-badge="true"]');
     currentStudentIndex = index;
-    
-    if (badge && carouselPeople && carouselPeople[index]) {
+
+    if (badge && carouselPeople?.[index]) {
       const badgeName = badge.querySelector(".badge-name");
       const badgeLocation = badge.querySelector(".badge-location");
-      
       if (badgeName) badgeName.textContent = carouselPeople[index].name;
       if (badgeLocation) badgeLocation.textContent = carouselPeople[index].location;
-      
-      // Update modal content
-      if (modalTitle) modalTitle.textContent = carouselPeople[index].name;
-      if (modalContent) modalContent.textContent = carouselPeople[index].bio || 'Información próximamente...';
     }
   });
 </script>
-</style>

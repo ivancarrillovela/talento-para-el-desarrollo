@@ -1,23 +1,74 @@
 ---
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/800.css";
+import { SITE_INFO } from "../constants";
 
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
 }
 
-const { title = "Talento para el Desarrollo" } = Astro.props;
+const {
+  title = SITE_INFO.name,
+  description = SITE_INFO.description,
+  image = "/favicon.svg",
+} = Astro.props;
+
+const lang = Astro.currentLocale ?? "es";
+
+// URLs absolutas (requieren `site` en astro.config.mjs)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+
+// Alternativas hreflang: quitamos el prefijo de idioma y reconstruimos por locale
+const pathWithoutLocale =
+  Astro.url.pathname.replace(/^\/(en|fr)(?=\/|$)/, "") || "/";
+const localePath = (locale: string) =>
+  locale === "es"
+    ? pathWithoutLocale
+    : `/${locale}${pathWithoutLocale === "/" ? "" : pathWithoutLocale}`;
+const alternates = [
+  { hreflang: "es", href: new URL(localePath("es"), Astro.site).href },
+  { hreflang: "en", href: new URL(localePath("en"), Astro.site).href },
+  { hreflang: "fr", href: new URL(localePath("fr"), Astro.site).href },
+  { hreflang: "x-default", href: new URL(localePath("es"), Astro.site).href },
+];
 ---
 
 <!doctype html>
-<html lang={Astro.currentLocale ?? "es"}>
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    {
+      alternates.map((alt) => (
+        <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />
+      ))
+    }
+
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_INFO.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content={lang} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
   </head>
   <body>
     <slot />

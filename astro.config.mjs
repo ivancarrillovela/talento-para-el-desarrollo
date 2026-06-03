@@ -1,12 +1,11 @@
-// astro.config.mjs
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
-import react from "@astrojs/react";
-import keystatic from '@keystatic/astro';
 import vercel from "@astrojs/vercel";
 
 export default defineConfig({
-  
+
+  // TODO: confirmar el dominio real de producción (usado para canonical/OG/hreflang)
+  site: 'https://talentoparaeldesarrollo.org',
   output: 'static',
   adapter: vercel(),
 
@@ -20,8 +19,6 @@ export default defineConfig({
 
   integrations: [
     tailwind(),
-    react(),
-    keystatic()
   ],
 
 });

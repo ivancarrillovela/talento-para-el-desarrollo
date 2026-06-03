@@ -1,6 +1,4 @@
 ---
-import { useTranslations } from "../../i18n/ui";
-
 interface Person {
   name: string;
   location: string;
@@ -14,11 +12,9 @@ interface Props {
 }
 
 const { images, alt, shadow = 'lg', people = [] } = Astro.props;
-const lang = Astro.currentLocale || "es";
-const t = useTranslations(lang as any);
 
 // Generate unique ID for this carousel instance
-const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+const carouselId = `carousel-${Math.random().toString(36).slice(2, 11)}`;
 ---
 
 <div data-carousel-id={carouselId} class="carousel-container group relative w-full h-full overflow-hidden rounded-sm">
